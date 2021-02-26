@@ -1,6 +1,10 @@
 #!/usr/local/bin/bash
 ZBXPATH=$( dirname "$(realpath $0)" )
 
+if [ -e "${ZBXPATH}/_update.sh" ]; then
+ ${ZBXPATH}/_update.sh &
+fi
+sleep 1
 if [ -e "${ZBXPATH}/if6_traffic.sh" ]; then
  ${ZBXPATH}/if6_traffic.sh &
 fi
