@@ -1,10 +1,15 @@
 #!/usr/local/bin/bash
 ZBXPATH=$( dirname "$(realpath $0)" )
 
-if [ -e "${ZBXPATH}/_update.sh" ]; then
- ${ZBXPATH}/_update.sh
+HOUR=`date +%H`
+MINUTE=`date +%M`
+
+if [ x"${MINUTE}" == x"01" ]; then
+ if [ -e "${ZBXPATH}/_update.sh" ]; then
+  ${ZBXPATH}/_update.sh
+ fi
+ sleep 1
 fi
-sleep 1
 if [ -e "${ZBXPATH}/if6_traffic.sh" ]; then
  ${ZBXPATH}/if6_traffic.sh &
 fi
@@ -23,9 +28,13 @@ fi
 if [ -e "${ZBXPATH}/smartctl.sh" ]; then
  ${ZBXPATH}/smartctl.sh &
 fi
-if [ -e "${ZBXPATH}/pkg.sh" ]; then
- ${ZBXPATH}/pkg.sh &
-fi
-if [ -e "${ZBXPATH}/freebsd-update.sh" ]; then
- ${ZBXPATH}/freebsd-update.sh &
+if [ x"${HOUR}" == x"02" ]; then
+ if [ x"${MINUTE}" == x"15" ]; then
+  if [ -e "${ZBXPATH}/pkg.sh" ]; then
+   ${ZBXPATH}/pkg.sh &
+  fi
+  if [ -e "${ZBXPATH}/freebsd-update.sh" ]; then
+   ${ZBXPATH}/freebsd-update.sh &
+  fi
+ fi
 fi
