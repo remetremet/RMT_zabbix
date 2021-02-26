@@ -7,7 +7,10 @@ ZBXPATH=$( dirname "$(realpath $0)" )
 #FILE="https://api.github.com/repos/${github_owner}/${github_repo}/contents/${github_file}"
 #/usr/local/bin/curl -v --header "Authorization: token ${github_token}" --header "Accept: application/vnd.github.v3.raw" --remote-name --location $FILE
 
+# Synchronize scripts from github to local repo
 cd ${ZBXPATH}/github
 git pull origin master
+
+# Copy scripts from local repo to working directory
 cp -R ${ZBXPATH}/github/*.sh ${ZBXPATH}/
 chmod 775 ${ZBXPATH}/*.sh
