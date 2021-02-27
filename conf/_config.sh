@@ -39,7 +39,6 @@ MFI_SESSIONID="1234567890ABCDEF1234567890ABCDEF"
 MFI_USERNAME="ubnt"
 MFI_PASSWORD="ubnt"
 MFI_KEYS="output voltage power powerfactor current"
-MFI_SOCKETS=3;
 unset MFI_IP; declare -A MFI_IP;
 unset MFI_ID; declare -A MFI_ID;
 unset MFI_PORTS; declare -A MFI_PORTS;
