@@ -2,6 +2,10 @@
 ZBXPATH=$( dirname "$(realpath $0)" )
 . ${ZBXPATH}/_database.sh
 
+if [ x"${MFI_ENABLE}" == x"no" ]; then
+ exit;
+fi
+
 TEMPFILE="${TEMPDIR}/mfi"
 ZBXFILE="${ZBXDIR}/mfi"
 MFI_SESSIONID="1234567890ABCDEF1234567890ABCDEF"
