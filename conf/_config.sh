@@ -4,6 +4,10 @@
 ZBXDIR="/var/zabbix"
 TEMPDIR="${ZBXDIR}/temp"
 
+# Optional modules (on/off)
+MFI_ENABLE="no"
+SPEEDTEST_ENABLE="yes"
+
 # IPv4 addresses of default gateway and it's possible to add few next hops too
 unset GW_ADDRS4; declare -A GW_ADDRS4;
 GW_ADDRS4["0"]="0.0.0.0"
