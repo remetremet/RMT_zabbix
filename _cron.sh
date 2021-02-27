@@ -6,7 +6,7 @@ MINUTE=`date +%M`
 
 if [ x"${MINUTE}" == x"01" ]; then
  if [ -e "${ZBXPATH}/_update.sh" ]; then
-  ${ZBXPATH}/_update.sh
+  ${ZBXPATH}/_update.sh > /dev/null 2>&1 &
  fi
  sleep 1
 fi
@@ -23,7 +23,7 @@ if [ -e "${ZBXPATH}/rping.sh" ]; then
  ${ZBXPATH}/rping.sh &
 fi
 if [ -e "${ZBXPATH}/speedtest.sh" ]; then
- ${ZBXPATH}/speedtest.sh >> /dev/null 2>&1 &
+ ${ZBXPATH}/speedtest.sh > /dev/null 2>&1 &
 fi
 if [ -e "${ZBXPATH}/smartctl.sh" ]; then
  ${ZBXPATH}/smartctl.sh &
