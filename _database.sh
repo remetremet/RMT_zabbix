@@ -1,6 +1,6 @@
 #!/usr/local/bin/bash
 ZBXPATH=$( dirname "$(realpath $0)" )
-. ${ZBXPATH}/_config.conf
+. ${ZBXPATH}/_config.sh
 
 # Human readable names for IP addresses
 unset ADDR_NAMES; declare -A ADDR_NAMES;
