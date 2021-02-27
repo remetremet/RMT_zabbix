@@ -1,5 +1,8 @@
 #!/usr/local/bin/bash
 
+# Software requirements
+pkg install git
+
 # Setup directories
 if [ ! -d /var/zabbix ]; then
  mkdir /var/zabbix
