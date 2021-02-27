@@ -3,6 +3,10 @@
 ZBXPATH=$( dirname "$(realpath $0)" )
 . ${ZBXPATH}/_database.sh
 
+if [ x"${SPEEDTEST_ENABLE}" == x"no" ]; then
+ exit;
+fi
+
 TEMPFILE="${TEMPDIR}/zabbix_speedtest"
 SEMAPHOREFILE="${TEMPDIR}/.zabbix_speedtest"
 ZBXFILE="${ZBXDIR}/speedtest"
