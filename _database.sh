@@ -1,32 +1,27 @@
 #!/usr/local/bin/bash
 ZBXPATH=$( dirname "$(realpath $0)" )
-. ${ZBXPATH}/_config.sh
+. ${ZBXPATH}/_config.conf
 
+# Human readable names for IP addresses
 unset ADDR_NAMES; declare -A ADDR_NAMES;
 ADDR_NAMES["127.0.0.1"]="Localhost"
 ADDR_NAMES["::1"]="Localhost (IPv6)"
-
 ADDR_NAMES["91.210.16.190"]="NIX"
 ADDR_NAMES["2001:7f8:14::1:1"]="NIX (IPv6)"
-
 ADDR_NAMES["8.8.8.8"]="Google DNS"
 ADDR_NAMES["8.8.4.4"]="Google DNS"
 ADDR_NAMES["2001:4860:4860::8844"]="Google DNS (IPv6)"
 ADDR_NAMES["2001:4860:4860::8888"]="Google DNS (IPv6)"
-
 ADDR_NAMES["9.9.9.9"]="Quad9 DNS"
 ADDR_NAMES["2620:fe::fe"]="Quad9 DNS (IPv6)"
-
 ADDR_NAMES["1.1.1.1"]="Cloudflare DNS"
 ADDR_NAMES["2606:4700:4700::1111"]="Cloudflare DNS (IPv6)"
-
 ADDR_NAMES["217.31.204.130"]="CZNIC"
 ADDR_NAMES["2001:678:1::206"]="CZNIC (IPv6)"
 ADDR_NAMES["193.17.47.1"]="CZNIC"
 ADDR_NAMES["185.43.135.1"]="CZNIC"
 ADDR_NAMES["2001:148f:fffe::1"]="CZNIC (IPv6)"
 ADDR_NAMES["2001:148f:ffff::1"]="CZNIC (IPv6)"
-
 ADDR_NAMES["81.90.244.209"]="Abak GW"
 ADDR_NAMES["10.11.227.1"]="Abak GW"
 ADDR_NAMES["10.62.14.1"]="Abak GW"
@@ -36,17 +31,14 @@ ADDR_NAMES["2a00:1268:10:18f0::1"]="Abak GW (IPv6)"
 ADDR_NAMES["2a00:1268:15:13f0::1"]="Abak GW (IPv6)"
 ADDR_NAMES["2a00:1268:16:10f0::1"]="Abak GW (IPv6)"
 ADDR_NAMES["2a00:1268:16:13f0::1"]="Abak GW (IPv6)"
-
 ADDR_NAMES["80.250.15.1"]="WIA Strahov GW"
 ADDR_NAMES["80.250.15.126"]="WIA Nagano GW"
 ADDR_NAMES["80.250.24.254"]="WIA Nagano GW"
 ADDR_NAMES["2a01:6400:0109::1"]="WIA Strahov GW (IPv6)"
 ADDR_NAMES["2a01:6400:1091::1"]="WIA Nagano GW (IPv6)"
-
 ADDR_NAMES["109.107.223.3"]="Vodafone GW"
 ADDR_NAMES["91.210.16.96"]="Tmobile GW"
 ADDR_NAMES["194.228.190.157"]="O2 GW"
-
 ADDR_NAMES["192.168.255.254"]="Remet GW"
 ADDR_NAMES["2a00:1268:10:1800::254"]="Remet GW (IPv6)"
 ADDR_NAMES["192.168.11.254"]="Radiomed GW"
@@ -55,13 +47,11 @@ ADDR_NAMES["192.168.1.254"]="EPMS GW"
 ADDR_NAMES["2a00:1268:16:1000:ffff:ffff:ffff:fffe"]="EPMS GW (IPv6)"
 ADDR_NAMES["192.168.123.254"]="Garaz GW"
 ADDR_NAMES["2a00:1268:16:1300:ffff:ffff:ffff:fffe"]="Garaz GW (IPv6)"
-
 ADDR_NAMES["10.10.10.254"]="MGMT GW"
 ADDR_NAMES["10.11.12.254"]="VPN GW"
 ADDR_NAMES["10.21.22.254"]="VPS GW"
 
-
-
+# Directory for "size of" checks definitions
 unset DIRS; declare -A DIRS;
 DIRS["varlog"]="/var/log"
 DIRS["varmail"]="/var/mail"
@@ -99,8 +89,7 @@ DIRcriticals["data"]=536870912000
 DIRcriticals["vardbmysql"]=64424509440
 DIRcriticals["vardbmysql2"]=102005473280
 
-
-
+# IPFW2 count rules numbers (3x WAN, 3x LAN, IPv4/6)
 IPFW_LAN1_6OUT="01000"
 IPFW_LAN1_6IN="03000"
 IPFW_LAN1_4OUT="05000"
@@ -113,7 +102,6 @@ IPFW_LAN3_6OUT="01200"
 IPFW_LAN3_6IN="03200"
 IPFW_LAN3_4OUT="05200"
 IPFW_LAN3_4IN="07200"
-
 IPFW_WAN1_6IN="09000"
 IPFW_WAN1_6OUT="11000"
 IPFW_WAN1_4IN="13000"
