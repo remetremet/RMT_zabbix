@@ -6,6 +6,7 @@ TEMPDIR="${ZBXDIR}/temp"
 
 # Optional modules (on/off)
 MFI_ENABLE="no"
+IPFW_ENABLE="yes"
 SPEEDTEST_ENABLE="yes"
 
 # IPv4 addresses of default gateway and it's possible to add few next hops too
