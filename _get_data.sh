@@ -8,9 +8,7 @@ fi
 . "${ZBXPATH}/_config.sh"
 . "${ZBXPATH}/_database.sh"
 
-echo "P1: $1"
-echo "P2: $2"
-
+FUNCTION=$1
 case ${FUNCTION} in
         pkg)
          echo "1"
@@ -18,13 +16,17 @@ case ${FUNCTION} in
         freebsd_update)
          echo "2"
         ;;
-        network.discovery)
-         echo "3"
+        network_discovery)
+         cat "${DATAPATH}/network_discovery"
         ;;
-        speedtest.discovery)
+        network_mac.*)
+         INDEX="${FUNCTION:12}"
+         cat "${DATAPATH}/network_discovery.${INDEX}.mac"
+        ;;
+        speedtest_discovery)
          echo "4"
         ;;
-        speedtest.extip)
+        speedtest.*.extip)
          echo "5"
         ;;
         speedtest.*.down)
