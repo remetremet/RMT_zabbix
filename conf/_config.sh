@@ -34,6 +34,12 @@ IFNAMES["bce1"]="LAN"
 unset FIB_NAMES; declare -A FIB_NAMES;
 FIB_NAMES["0"]="ISP"
 
+### FreeBSD OS updates check period in seconds 
+FREEBSD_UPDATE_PERIOD=86400
+
+### FreeBSD packages check period in seconds 
+PKG_PERIOD=86400
+
 ### Ubiquiti mFI sockets
 MFI_SESSIONID="1234567890ABCDEF1234567890ABCDEF"
 MFI_USERNAME="ubnt"
