@@ -6,6 +6,9 @@ ZBXPATH=$( dirname "$(realpath $0)" )
 cd ${ZBXPATH}/github
 git pull origin master
 
-# Copy scripts from local repo to working directory
-cp -R ${ZBXPATH}/github/*.sh ${ZBXPATH}/
-chmod 775 ${ZBXPATH}/*.sh
+# Copy scripts to working directory
+cp -R ${ZBXPATH}/github/_*.sh ${ZBXPATH}/
+chmod 755 ${ZBXPATH}/_*.sh
+cp -R ${ZBXPATH}/github/*.sh ${ZBXPATH}/scripts/
+rm -f ${ZBXPATH}/scripts/_*.sh
+chmod 755 ${ZBXPATH}/scripts/*.sh
