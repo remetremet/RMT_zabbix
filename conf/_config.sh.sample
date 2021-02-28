@@ -82,7 +82,7 @@ MFI_IP["2"]="192.168.250.2"
 MFI_ID["2"]="2"
 MFI_PORTS["2"]="1 2 3 4 5 6"
 MFI_IP["3"]="192.168.250.4"
-MFI_ID["3"]="4"
+MFI_ID["3"]="3"
 MFI_PORTS["3"]="1 2 3"
 
 ### SMART monitoring of HDD/SSD
