@@ -16,8 +16,8 @@ TEMPFILE="${TEMPPATH}/mfi"
 ZBXFILE="${DATAPATH}/mfi"
 
 for ID in ${MFI_IDS}; do
- IP="${MFI_IPS[${ID}]}"
- PORTS="${MFI_PORTS[${ID}]}"
+ IP="${MFI_IPS[$ID]}"
+ PORTS="${MFI_PORTS[$ID]}"
  XYZ=""
  curl -s -X POST -d "username=${MFI_USERNAME}&password=${MFI_PASSWORD}" -b "AIROS_SESSIONID=${MFI_SESSIONID}" ${IP}/login.cgi
  for PORT in ${PORTS}; do
