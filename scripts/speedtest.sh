@@ -12,10 +12,10 @@ if [ x"${SPEEDTEST_ENABLE}" == x"no" ]; then
  exit;
 fi
 
-TEMPFILE="${TEMPDIR}/zabbix_speedtest"
-SEMAPHOREFILE="${TEMPDIR}/.zabbix_speedtest"
-ZBXFILE="${ZBXDIR}/speedtest"
-DISCOVERYFILE="${ZBXDIR}/speedtest_discovery"
+TEMPFILE="${TEMPPATH}/zabbix_speedtest"
+SEMAPHOREFILE="${TEMPPATH}/.zabbix_speedtest"
+ZBXFILE="${DATAPATH}/speedtest"
+DISCOVERYFILE="${DATAPATH}/speedtest_discovery"
 
 FIBS4="${FIBS4:-0}"
 FIBS6="${FIBS6:-0}"
