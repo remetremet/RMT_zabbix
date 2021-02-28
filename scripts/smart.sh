@@ -12,13 +12,10 @@ if [ x"${SMART_ENABLE}" == x"no" ]; then
  exit;
 fi
 
-TEMPFILE="${TEMPDIR}/zabbix_smartctl"
-SEMAPHOREFILE="${TEMPDIR}/.zabbix_smartctl"
-ZBXFILE="${ZBXDIR}/smartctl"
-DISCOVERYFILE="${ZBXDIR}/smartctl_discovery"
-
-CAMCONTROL_PROG="/sbin/camcontrol"
-SMARTCTL_PROG="/usr/local/sbin/smartctl"
+TEMPFILE="${TEMPPATH}/zabbix_smartctl"
+SEMAPHOREFILE="${TEMPPATH}/.zabbix_smartctl"
+ZBXFILE="${DATAPATH}/smartctl"
+DISCOVERYFILE="${DATAPATH}/smartctl_discovery"
 
 SMART_PERIOD="${SMART_PERIOD:-60}"
 SMART_FORCE_PERIOD="${SMART_FORCE_PERIOD:-86400}"
