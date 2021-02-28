@@ -6,6 +6,7 @@ else
  ZBXPATH="${ZBXPATH}"
 fi
 
+
 ###
 ### Basic functions definition
 ###
@@ -22,6 +23,7 @@ PKG_ENABLE="yes"
 RPING_ENABLE="yes"
 SMART_ENABLE="yes"
 SPEEDTEST_ENABLE="yes"
+
 
 ###
 ### IP addresses definitions
@@ -52,6 +54,7 @@ IFNAMES["bce1"]="LAN"
 # Human readable name of WANs
 unset FIB_NAMES; declare -A FIB_NAMES;
 FIB_NAMES["0"]="ISP"
+
 
 ###
 ### Script specific settings
@@ -96,6 +99,7 @@ unset SPEEDTEST_PERIOD; declare -A SPEEDTEST_PERIOD;
 SPEEDTEST_PERIOD["0"]="86400"
 SPEEDTEST_PERIOD["1"]="86400"
 SPEEDTEST_PERIOD["2"]="86400"
+
 
 ###
 ### Additional path definitions
