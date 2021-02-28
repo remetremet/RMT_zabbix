@@ -9,13 +9,13 @@ Scripts
 - **_database.sh** - (used by other scripts) - default definitions
 - **_setup.sh** - this script is used for easy setup and first clone of this repo
 - **_update.sh** - (called from _cron.sh) - do the automatic sync from this Github repo
-- **freebsd-update.sh** - (called from _cron.sh) - check for FreeBSD OS updates
-- **if6_traffic.sh** - (called from _cron.sh) - get IPFW2 traffic counts
+- **freebsd_update.sh** - (called from _cron.sh) - check for FreeBSD OS updates
+- **ipfw_traffic.sh** - (called from _cron.sh) - get IPFW2 traffic counts
 - **mfi_get.sh** - (called from _cron.sh) - get state of Ubiquiti mFI sockets
 - **network_discovery.sh** - (called from _cron.sh) - get network interface state
 - **pkg.sh** - (called from _cron.sh) - check for FreeBSD packages updates
 - **rping.sh** - (called from _cron.sh) - ping predefined IP addresses and save results
-- **smartctl.sh** - (called from _cron.sh) - get SMART info from drives
+- **smart.sh** - (called from _cron.sh) - get SMART info from drives
 - **speedtest.sh** - (called from _cron.sh) - check WANs speed by Ookla's Speedtest.Net and save results
 
 Requirements
