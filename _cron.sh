@@ -12,14 +12,16 @@ if [ x"${MINUTE}" == x"01" ]; then
  sleep 1
 fi
 # Run all the scripts
-if [ -e "${ZBXPATH}/if6_traffic.sh" ]; then
- ${ZBXPATH}/if6_traffic.sh &
+if [ -e "${ZBXPATH}/ipfw_traffic.sh" ]; then
+ ${ZBXPATH}/ipfw_traffic.sh &
 fi
 if [ -e "${ZBXPATH}/mfi_get.sh" ]; then
  ${ZBXPATH}/mfi_get.sh &
 fi
-if [ -e "${ZBXPATH}/network_discovery.sh" ]; then
- ${ZBXPATH}/network_discovery.sh &
+if [ x"${MINUTE}" == x"01" ]; then
+ if [ -e "${ZBXPATH}/network_discovery.sh" ]; then
+  ${ZBXPATH}/network_discovery.sh &
+ fi
 fi
 if [ -e "${ZBXPATH}/rping.sh" ]; then
  ${ZBXPATH}/rping.sh &
@@ -27,8 +29,8 @@ fi
 if [ -e "${ZBXPATH}/speedtest.sh" ]; then
  ${ZBXPATH}/speedtest.sh > /dev/null 2>&1 &
 fi
-if [ -e "${ZBXPATH}/smartctl.sh" ]; then
- ${ZBXPATH}/smartctl.sh &
+if [ -e "${ZBXPATH}/smart.sh" ]; then
+ ${ZBXPATH}/smart.sh &
 fi
 if [ x"${HOUR}" == x"02" ]; then
  if [ x"${MINUTE}" == x"15" ]; then

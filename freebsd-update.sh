@@ -2,6 +2,10 @@
 ZBXPATH=$( dirname "$(realpath $0)" )
 . ${ZBXPATH}/_database.sh
 
+if [ x"${FREEBSD_UPDATE_ENABLE}" == x"no" ]; then
+ exit;
+fi
+
 SEMAPHOREFILE="${TEMPDIR}/.zabbix_freebsd_update"
 ZBXFILE="${ZBXDIR}/freebsd_update"
 

@@ -2,12 +2,14 @@
 ZBXPATH=$( dirname "$(realpath $0)" )
 . ${ZBXPATH}/_database.sh
 
-ZBXFILE="${ZBXDIR}/network_discovery"
-
+if [ x"${NETWORK_DISCOVERY_ENABLE}" == x"no" ]; then
+ exit;
+fi
 if [ ! -e "/etc/rc.firewall.config" ]; then
  exit;
 fi
 
+ZBXFILE="${ZBXDIR}/network_discovery"
 unset IFACES; declare -A IFACES;
 
 XYZ="info"

@@ -4,7 +4,7 @@
 ZBXDIR="/var/zabbix"
 
 # Software requirements
-pkg install git
+pkg -y install git fping curl smartmontools
 
 # Setup directories
 if [ ! -d "${ZBXDIR}" ]; then

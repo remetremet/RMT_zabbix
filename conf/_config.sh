@@ -8,8 +8,9 @@ TEMPDIR="${ZBXDIR}/temp"
 FREEBSD_UPDATE_ENABLE="yes"
 IPFW_ENABLE="yes"
 MFI_ENABLE="no"
-NETOWRK_DISCOVERY_ENABLE="yes"
+NETWORK_DISCOVERY_ENABLE="yes"
 PKG_ENABLE="yes"
+RPING_ENABLE="yes"
 SMART_ENABLE="yes"
 SPEEDTEST_ENABLE="yes"
 
@@ -64,11 +65,13 @@ MFI_IP["3"]="192.168.250.4"
 MFI_ID["3"]="4"
 MFI_PORTS["3"]="1 2 3"
 
-### Ookla Speedtest.Net settings
+### SMART monitoring of HDD/SSD
 # SMART check period in seconds
-SMARTCTL_PERIOD="${SMARTCTL_PERIOD:-60}"
+SMART_PERIOD="60"
 # Timeout to wake up sleeing disk to get SMART data (by default it's gathered from ACTIVE/SPINNING drive only
-SMARTCTL_FORCE_PERIOD="${SMARTCTL_FORCE_PERIOD:-86400}"
+SMART_FORCE_PERIOD="86400"
+
+### Ookla Speedtest.Net settings
 # Selected servers (leave blank if you want autoselect)
 SPEEDTEST_SERVERS="--server=21975 --server=21429 --server=16913 --server=4162 --server=4010 --server=30620 --server=18718 --server=5094"
 # Proceed speedtest once a period (in seconds), 86400 (1 day) is default
