@@ -1,13 +1,19 @@
 #!/usr/local/bin/bash
 ZBXPATH=$( dirname "$(realpath $0)" )
+if [[ -e "${ZBXPATH}/../_config.sh" ]]; then
+ ZBXPATH="${ZBXPATH}/.."
+else
+ ZBXPATH="${ZBXPATH}"
+fi
+. ${ZBXPATH}/_config.sh
 . ${ZBXPATH}/_database.sh
 
 if [ x"${MFI_ENABLE}" == x"no" ]; then
  exit;
 fi
 
-TEMPFILE="${TEMPDIR}/mfi"
-ZBXFILE="${ZBXDIR}/mfi"
+TEMPFILE="${TEMPPATH}/mfi"
+ZBXFILE="${DATAPATH}/mfi"
 
 for ID in ${MFI_ID}; do
  IP="${MFI_IP[${ID}]}"

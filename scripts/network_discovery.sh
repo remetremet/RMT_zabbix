@@ -1,5 +1,11 @@
 #!/usr/local/bin/bash
 ZBXPATH=$( dirname "$(realpath $0)" )
+if [[ -e "${ZBXPATH}/../_config.sh" ]]; then
+ ZBXPATH="${ZBXPATH}/.."
+else
+ ZBXPATH="${ZBXPATH}"
+fi
+. ${ZBXPATH}/_config.sh
 . ${ZBXPATH}/_database.sh
 
 if [ x"${NETWORK_DISCOVERY_ENABLE}" == x"no" ]; then
@@ -9,7 +15,7 @@ if [ ! -e "/etc/rc.firewall.config" ]; then
  exit;
 fi
 
-ZBXFILE="${ZBXDIR}/network_discovery"
+ZBXFILE="${DATAPATH}/network_discovery"
 unset IFACES; declare -A IFACES;
 
 XYZ="info"
