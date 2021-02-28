@@ -1,5 +1,6 @@
 #!/usr/local/bin/bash
 ZBXPATH=$( dirname "$(realpath $0)" )
+SCRIPTSPATH="${ZBXPATH}/scripts"
 
 HOUR=`date +%H`
 MINUTE=`date +%M`
@@ -12,33 +13,33 @@ if [ x"${MINUTE}" == x"01" ]; then
  sleep 1
 fi
 # Run all the scripts
-if [ -e "${ZBXPATH}/ipfw_traffic.sh" ]; then
- ${ZBXPATH}/ipfw_traffic.sh &
+if [ -e "${SCRIPTSPATH}/ipfw_traffic.sh" ]; then
+ ${SCRIPTSPATH}/ipfw_traffic.sh &
 fi
-if [ -e "${ZBXPATH}/mfi_get.sh" ]; then
- ${ZBXPATH}/mfi_get.sh &
+if [ -e "${SCRIPTSPATH}/mfi_get.sh" ]; then
+ ${SCRIPTSPATH}/mfi_get.sh &
 fi
 if [ x"${MINUTE}" == x"01" ]; then
- if [ -e "${ZBXPATH}/network_discovery.sh" ]; then
-  ${ZBXPATH}/network_discovery.sh &
+ if [ -e "${SCRIPTSPATH}/network_discovery.sh" ]; then
+  ${SCRIPTSPATH}/network_discovery.sh &
  fi
 fi
-if [ -e "${ZBXPATH}/rping.sh" ]; then
- ${ZBXPATH}/rping.sh &
+if [ -e "${SCRIPTSPATH}/rping.sh" ]; then
+ ${SCRIPTSPATH}/rping.sh &
 fi
-if [ -e "${ZBXPATH}/speedtest.sh" ]; then
- ${ZBXPATH}/speedtest.sh > /dev/null 2>&1 &
+if [ -e "${SCRIPTSPATH}/speedtest.sh" ]; then
+ ${SCRIPTSPATH}/speedtest.sh > /dev/null 2>&1 &
 fi
-if [ -e "${ZBXPATH}/smart.sh" ]; then
- ${ZBXPATH}/smart.sh &
+if [ -e "${SCRIPTSPATH}/smart.sh" ]; then
+ ${SCRIPTSPATH}/smart.sh &
 fi
 if [ x"${HOUR}" == x"02" ]; then
  if [ x"${MINUTE}" == x"15" ]; then
-  if [ -e "${ZBXPATH}/pkg.sh" ]; then
-   ${ZBXPATH}/pkg.sh &
+  if [ -e "${SCRIPTSPATH}/pkg.sh" ]; then
+   ${SCRIPTSPATH}/pkg.sh &
   fi
-  if [ -e "${ZBXPATH}/freebsd_update.sh" ]; then
-   ${ZBXPATH}/freebsd_update.sh &
+  if [ -e "${SCRIPTSPATH}/freebsd_update.sh" ]; then
+   ${SCRIPTSPATH}/freebsd_update.sh &
   fi
  fi
 fi
