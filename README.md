@@ -1,5 +1,5 @@
 # RMT_zabbix
-Zabbix plugins and serverside crons (FreeBSD tested)
+Zabbix plugins and serverside crons (FreeBSD needed and tested)
 
 These scripts are here mainly for my personal use. They monitor FreeBSD server functions and prepare data for Zabbix templates.
 
@@ -18,6 +18,14 @@ Scripts
 - **smartctl.sh** - (called from _cron.sh) - get SMART info from drives
 - **speedtest.sh** - (called from _cron.sh) - check WANs speed by Ookla's Speedtest.Net and save results
 
+Requirements
+----
+ - git ;-)
+ - fping
+ - smartmontools
+ - curl
+ - py-speedtest-cli
+ - RMT_ipfw (https://github.com/remetremet/RMT_ipfw)
 
 
 Use it if like it.
