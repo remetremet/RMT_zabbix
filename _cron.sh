@@ -37,8 +37,8 @@ if [ x"${HOUR}" == x"02" ]; then
   if [ -e "${ZBXPATH}/pkg.sh" ]; then
    ${ZBXPATH}/pkg.sh &
   fi
-  if [ -e "${ZBXPATH}/freebsd-update.sh" ]; then
-   ${ZBXPATH}/freebsd-update.sh &
+  if [ -e "${ZBXPATH}/freebsd_update.sh" ]; then
+   ${ZBXPATH}/freebsd_update.sh &
   fi
  fi
 fi
