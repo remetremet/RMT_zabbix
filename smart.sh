@@ -2,6 +2,10 @@
 ZBXPATH=$( dirname "$(realpath $0)" )
 . ${ZBXPATH}/_database.sh
 
+if [ x"${SMART_ENABLE}" == x"no" ]; then
+ exit;
+fi
+
 TEMPFILE="${TEMPDIR}/zabbix_smartctl"
 SEMAPHOREFILE="${TEMPDIR}/.zabbix_smartctl"
 ZBXFILE="${ZBXDIR}/smartctl"
@@ -10,8 +14,8 @@ DISCOVERYFILE="${ZBXDIR}/smartctl_discovery"
 CAMCONTROL_PROG="/sbin/camcontrol"
 SMARTCTL_PROG="/usr/local/sbin/smartctl"
 
-SMARTCTL_PERIOD="${SMARTCTL_PERIOD:-60}"
-SMARTCTL_FORCE_PERIOD="${SMARTCTL_FORCE_PERIOD:-86400}"
+SMART_PERIOD="${SMART_PERIOD:-60}"
+SMART_FORCE_PERIOD="${SMART_FORCE_PERIOD:-86400}"
 
 if [ -e "${SEMAPHOREFILE}" ]; then
  fts=`stat -f %m "${SEMAPHOREFILE}"`
@@ -27,12 +31,12 @@ now=`date +%s`
 D=""
 DISCOVERY=""
 if [ ! -e "${TEMPFILE}" ]; then
- temptime=$(( ${now} - ${SMARTCTL_PERIOD} - 100 ))
+ temptime=$(( ${now} - ${SMART_PERIOD} - 100 ))
 else
  temptime=`stat -f %m "${TEMPFILE}"`
 fi
 temptime=$(( ${now} - ${temptime} ))
-if [[ "${temptime}" -gt "${SMARTCTL_PERIOD}" ]]; then
+if [[ "${temptime}" -gt "${SMART_PERIOD}" ]]; then
  echo -n > "${TEMPFILE}"
  ${CAMCONTROL_PROG} devlist | sort | grep -vE "(cd.|ses.)" | awk -F "(" '{ print $2; }' | sed 's/)//g' | sed 's/,/ /g' > "${TEMPFILE}"
  while read fl; do
@@ -74,12 +78,12 @@ if [[ "${temptime}" -gt "${SMARTCTL_PERIOD}" ]]; then
     SPINUP=1
    else
     if [ ! -e "${TEMPFILE}.${DEVICE_PARENT}.full" ]; then
-     fulltime=$(( ${now} - ${SMARTCTL_FORCE_PERIOD} - 100 ))
+     fulltime=$(( ${now} - ${SMART_FORCE_PERIOD} - 100 ))
     else
      fulltime=`stat -f %m "${TEMPFILE}.${DEVICE_PARENT}.full"`
     fi
     fulltime=$(( ${now} - ${fulltime} ))
-    if [[ "${fulltime}" -gt "${SMARTCTL_FORCE_PERIOD}" ]]; then
+    if [[ "${fulltime}" -gt "${SMART_FORCE_PERIOD}" ]]; then
      SPINUP=1
     fi
    fi
