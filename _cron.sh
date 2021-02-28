@@ -18,8 +18,10 @@ fi
 if [ -e "${ZBXPATH}/mfi_get.sh" ]; then
  ${ZBXPATH}/mfi_get.sh &
 fi
-if [ -e "${ZBXPATH}/network_discovery.sh" ]; then
- ${ZBXPATH}/network_discovery.sh &
+if [ x"${MINUTE}" == x"01" ]; then
+ if [ -e "${ZBXPATH}/network_discovery.sh" ]; then
+  ${ZBXPATH}/network_discovery.sh &
+ fi
 fi
 if [ -e "${ZBXPATH}/rping.sh" ]; then
  ${ZBXPATH}/rping.sh &
