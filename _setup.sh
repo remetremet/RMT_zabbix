@@ -2,6 +2,7 @@
 
 # Define base directory
 ZBXPATH="/var/zabbix"
+SCRIPTSPATH="${ZBXPATH}/scripts"
 
 # Software requirements
 pkg -y install git fping curl smartmontools
@@ -19,9 +20,9 @@ if [ ! -d "${ZBXPATH}/data" ]; then
  mkdir "${ZBXPATH}/data"
  chmod 777 "${ZBXPATH}/data"
 fi
-if [ ! -d "${ZBXPATH}/scripts" ]; then
- mkdir "${ZBXPATH}/scripts"
- chmod 777 "${ZBXPATH}/scripts"
+if [ ! -d "${SCRIPTSPATH}" ]; then
+ mkdir "${SCRIPTSPATH}"
+ chmod 777 "${SCRIPTSPATH}"
 fi
 
 # Setup GITHUB / local repo
@@ -33,6 +34,6 @@ git clone https://github.com/remetremet/RMT_zabbix.git ${ZBXPATH}/github
 # Copy scripts to working directory
 cp -R ${ZBXPATH}/github/_*.sh ${ZBXPATH}/
 chmod 755 ${ZBXPATH}/_*.sh
-cp -R ${ZBXPATH}/github/*.sh ${ZBXPATH}/scripts/
-rm -f ${ZBXPATH}/scripts/_*.sh
-chmod 755 ${ZBXPATH}/scripts/*.sh
+cp -R ${ZBXPATH}/github/*.sh ${SCRIPTSPATH}/
+rm -f ${SCRIPTSPATH}/_*.sh
+chmod 755 ${SCRIPTSPATH}/*.sh
