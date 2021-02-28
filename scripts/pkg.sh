@@ -12,8 +12,8 @@ if [ x"${PKG_ENABLE}" == x"no" ]; then
  exit;
 fi
 
-SEMAPHOREFILE="${TEMPDIR}/.zabbix_pkg"
-ZBXFILE="${ZBXDIR}/pkg"
+SEMAPHOREFILE="${TEMPPATH}/.zabbix_pkg"
+ZBXFILE="${DATAPATH}/pkg"
 
 PKG_PERIOD="${PKG_PERIOD:-86400}"
 
@@ -38,7 +38,10 @@ fi
 ftime=$(( ${now} - ${ftime} ))
 if [[ "${ftime}" -gt "${PKG_PERIOD}" ]]; then
  echo -n > "${ZBXFILE}"
+
+# Get the number of available FreeBSD packages to upgrade
  pkg upgrade -n | grep "Number of packages to be upgraded" | awk '{print $7}' > "${ZBXFILE}"
+
 fi
 
  /bin/rm -f "${SEMAPHOREFILE}" >> /dev/null 2>&1
