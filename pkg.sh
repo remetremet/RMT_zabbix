@@ -5,7 +5,7 @@ ZBXPATH=$( dirname "$(realpath $0)" )
 SEMAPHOREFILE="${TEMPDIR}/.zabbix_pkg"
 ZBXFILE="${ZBXDIR}/pkg"
 
-PKG_PERIOD=${PKG_PERIOD:-86400}
+PKG_PERIOD="${PKG_PERIOD:-86400}"
 
 # Check for one running instance only (with override after 24 hours)
 if [[ -e "${SEMAPHOREFILE}" ]]; then
