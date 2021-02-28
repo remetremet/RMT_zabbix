@@ -1,8 +1,11 @@
 #!/usr/local/bin/bash
 
 # Used program paths
+SETFIB_PROG="setfib"
+RM_PROG="/bin/rm"
 CAMCONTROL_PROG="/sbin/camcontrol"
 SMARTCTL_PROG="/usr/local/sbin/smartctl"
+SPEEDTEST_PROG="speedtest-cli"
 
 # Human readable names for IP addresses
 unset ADDR_NAMES; declare -A ADDR_NAMES;
