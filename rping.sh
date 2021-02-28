@@ -11,8 +11,6 @@ RPLFILE="${ZBXDIR}/rpl"
 
 FIBS4="${FIBS4:-0)"
 FIBS6="${FIBS6:-0)"
-ADDRS4="${ADDRS4:-0)"
-ADDRS6="${ADDRS6:-0)"
 
 # Check for one running instance only (with override after 24 hours)
 if [[ -e "${SEMAPHOREFILE}" ]]; then
