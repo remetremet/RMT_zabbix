@@ -12,8 +12,8 @@ if [ x"${IPFW_ENABLE}" == x"no" ]; then
  exit;
 fi
 
-TEMPFILE="${TEMPPATH}/if6_traffic"
-ZBXFILE="${DATAPATH}/if6_traffic"
+TEMPFILE="${TEMPPATH}/ipfw_traffic"
+ZBXFILE="${DATAPATH}/ipfw_traffic"
 
 IPV4=0
 IPV4IN=0
