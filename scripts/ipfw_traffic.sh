@@ -12,7 +12,7 @@ if [ x"${IPFW_ENABLE}" == x"no" ]; then
  exit;
 fi
 
-TEMPFILE="${ZBXDIR}/if6_traffic"
+TEMPFILE="${DATAPATH}/if6_traffic"
 
 IPV4=0
 IPV4IN=0
