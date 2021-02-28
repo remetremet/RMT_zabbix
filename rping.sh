@@ -2,6 +2,10 @@
 ZBXPATH=$( dirname "$(realpath $0)" )
 . ${ZBXPATH}/_database.sh
 
+if [ x"${RPING_ENABLE}" == x"no" ]; then
+ exit;
+fi
+
 TEMPFILE="${TEMPDIR}/zabbix_rping_addr"
 RESFILE="${TEMPDIR}/zabbix_rping_results"
 SEMAPHOREFILE="${TEMPDIR}/.zabbix_rping"
