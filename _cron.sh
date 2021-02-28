@@ -29,8 +29,8 @@ fi
 if [ -e "${ZBXPATH}/speedtest.sh" ]; then
  ${ZBXPATH}/speedtest.sh > /dev/null 2>&1 &
 fi
-if [ -e "${ZBXPATH}/smartctl.sh" ]; then
- ${ZBXPATH}/smartctl.sh &
+if [ -e "${ZBXPATH}/smart.sh" ]; then
+ ${ZBXPATH}/smart.sh &
 fi
 if [ x"${HOUR}" == x"02" ]; then
  if [ x"${MINUTE}" == x"15" ]; then
