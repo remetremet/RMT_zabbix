@@ -19,8 +19,8 @@ DISCOVERYFILE="${DATAPATH}/rping_discovery"
 RPINGFILE="${DATAPATH}/rping"
 RPLFILE="${DATAPATH}/rpl"
 
-FIBS4="${FIBS4:-0)"
-FIBS6="${FIBS6:-0)"
+FIBS4="${FIBS4:-0}"
+FIBS6="${FIBS6:-0}"
 
 # Check for one running instance only (with override after 24 hours)
 if [[ -e "${SEMAPHOREFILE}" ]]; then
