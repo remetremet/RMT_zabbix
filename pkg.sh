@@ -2,6 +2,10 @@
 ZBXPATH=$( dirname "$(realpath $0)" )
 . ${ZBXPATH}/_database.sh
 
+if [ x"${PKG_ENABLE}" == x"no" ]; then
+ exit;
+fi
+
 SEMAPHOREFILE="${TEMPDIR}/.zabbix_pkg"
 ZBXFILE="${ZBXDIR}/pkg"
 
