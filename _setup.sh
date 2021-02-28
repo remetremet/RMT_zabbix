@@ -7,13 +7,13 @@ ZBXDIR="/var/zabbix"
 pkg install git
 
 # Setup directories
-if [ ! -d ${ZBXDIR} ]; then
- mkdir ${ZBXDIR}
- chmod 777 ${ZBXDIR}
+if [ ! -d "${ZBXDIR}" ]; then
+ mkdir "${ZBXDIR}"
+ chmod 777 "${ZBXDIR}"
 fi
-if [ ! -d ${ZBXDIR}/temp ]; then
- mkdir ${ZBXDIR}/temp
- chmod 777 ${ZBXDIR}/temp
+if [ ! -d "${ZBXDIR}/temp" ]; then
+ mkdir "${ZBXDIR}/temp"
+ chmod 777 "${ZBXDIR}/temp"
 fi
 
 # Setup GITHUB / local repo
