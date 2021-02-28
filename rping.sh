@@ -1,5 +1,4 @@
 #!/usr/local/bin/bash
-
 ZBXPATH=$( dirname "$(realpath $0)" )
 . ${ZBXPATH}/_database.sh
 
@@ -10,6 +9,12 @@ DISCOVERYFILE="${ZBXDIR}/rping_discovery"
 RPINGFILE="${ZBXDIR}/rping"
 RPLFILE="${ZBXDIR}/rpl"
 
+FIBS4="${FIBS4:-0)"
+FIBS6="${FIBS6:-0)"
+ADDRS4="${ADDRS4:-0)"
+ADDRS6="${ADDRS6:-0)"
+
+# Check for one running instance only (with override after 24 hours)
 if [[ -e "${SEMAPHOREFILE}" ]]; then
  fts=`stat -f %m ${SEMAPHOREFILE}`
  fts=$((${fts}+85500))
@@ -17,7 +22,6 @@ if [[ -e "${SEMAPHOREFILE}" ]]; then
   /bin/rm -f "${SEMAPHOREFILE}" >> /dev/null 2>&1
  fi
 fi
-
 if [[ ! -e "${SEMAPHOREFILE}" ]]; then
  touch "${SEMAPHOREFILE}"
 

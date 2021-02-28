@@ -6,6 +6,7 @@ TEMPDIR="${ZBXDIR}/temp"
 
 # Optional modules (on/off)
 MFI_ENABLE="no"
+IPFW_ENABLE="yes"
 SPEEDTEST_ENABLE="yes"
 
 # IPv4 addresses of default gateway and it's possible to add few next hops too
@@ -34,6 +35,13 @@ IFNAMES["bce1"]="LAN"
 unset FIB_NAMES; declare -A FIB_NAMES;
 FIB_NAMES["0"]="ISP"
 
+### FreeBSD OS updates check period in seconds 
+FREEBSD_UPDATE_PERIOD=86400
+FREEBSD_UPDATE_CONF="/etc/freebsd-update.conf"
+
+### FreeBSD packages check period in seconds 
+PKG_PERIOD=86400
+
 ### Ubiquiti mFI sockets
 MFI_SESSIONID="1234567890ABCDEF1234567890ABCDEF"
 MFI_USERNAME="ubnt"
@@ -53,6 +61,10 @@ MFI_ID["3"]="4"
 MFI_PORTS["3"]="1 2 3"
 
 ### Ookla Speedtest.Net settings
+# SMART check period in seconds
+SMARTCTL_PERIOD="${SMARTCTL_PERIOD:-60}"
+# Timeout to wake up sleeing disk to get SMART data (by default it's gathered from ACTIVE/SPINNING drive only
+SMARTCTL_FORCE_PERIOD="${SMARTCTL_FORCE_PERIOD:-86400}"
 # Selected servers (leave blank if you want autoselect)
 SPEEDTEST_SERVERS="--server=21975 --server=21429 --server=16913 --server=4162 --server=4010 --server=30620 --server=18718 --server=5094"
 # Proceed speedtest once a period (in seconds), 86400 (1 day) is default

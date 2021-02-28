@@ -1,9 +1,12 @@
 #!/usr/local/bin/bash
-
 ZBXPATH=$( dirname "$(realpath $0)" )
 . ${ZBXPATH}/_database.sh
 
 ZBXFILE="${ZBXDIR}/network_discovery"
+
+if [ ! -e "/etc/rc.firewall.config" ]; then
+ exit;
+fi
 
 unset IFACES; declare -A IFACES;
 

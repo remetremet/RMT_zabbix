@@ -4,12 +4,14 @@ ZBXPATH=$( dirname "$(realpath $0)" )
 HOUR=`date +%H`
 MINUTE=`date +%M`
 
+# Get updates from Github repo every hour
 if [ x"${MINUTE}" == x"01" ]; then
  if [ -e "${ZBXPATH}/_update.sh" ]; then
   ${ZBXPATH}/_update.sh > /dev/null 2>&1 &
  fi
  sleep 1
 fi
+# Run all the scripts
 if [ -e "${ZBXPATH}/if6_traffic.sh" ]; then
  ${ZBXPATH}/if6_traffic.sh &
 fi

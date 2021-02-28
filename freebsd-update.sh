@@ -1,13 +1,13 @@
 #!/usr/local/bin/bash -
-
 ZBXPATH=$( dirname "$(realpath $0)" )
 . ${ZBXPATH}/_database.sh
 
 SEMAPHOREFILE="${TEMPDIR}/.zabbix_freebsd_update"
 ZBXFILE="${ZBXDIR}/freebsd_update"
 
-FREEBSD_UPDATE_CONF="/etc/freebsd-update.conf"
-FREEBSD_UPDATE_PUB_SSL="${FREEBSD_UPDATE_PUB_SSL:-/var/zabbix/freebsd-update-pub.ssl}"
+FREEBSD_UPDATE_PERIOD="${FREEBSD_UPDATE_PERIOD:-86400}"
+FREEBSD_UPDATE_CONF="${FREEBSD_UPDATE_CONF:-/etc/freebsd-update.conf}"
+FREEBSD_UPDATE_PUB_SSL="${FREEBSD_UPDATE_PUB_SSL:-${ZBXPATH}/freebsd-update-pub.ssl}"
 
 if [[ -e "${SEMAPHOREFILE}" ]]; then
  fts=`stat -f %m "${SEMAPHOREFILE}"`
@@ -21,12 +21,12 @@ if [[ ! -e "${SEMAPHOREFILE}" ]]; then
 
 now=`date +%s`
 if [ ! -e "${ZBXFILE}.running" ]; then
- ftime=$(( ${now} - 86500 ))
+ ftime=$(( ${now} - ${FREEBSD_UPDATE_PERIOD} - 100 ))
 else
  ftime=`stat -f %m "${ZBXFILE}.running"`
 fi
 ftime=$(( ${now} - ${ftime} ))
-if [[ "${ftime}" -gt "86400" ]]; then
+if [[ "${ftime}" -gt "${FREEBSD_UPDATE_PERIOD}" ]]; then
 
 DONE=0
 #set -o pipefail

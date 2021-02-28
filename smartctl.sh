@@ -1,5 +1,4 @@
 #!/usr/local/bin/bash -
-
 ZBXPATH=$( dirname "$(realpath $0)" )
 . ${ZBXPATH}/_database.sh
 
@@ -11,8 +10,8 @@ DISCOVERYFILE="${ZBXDIR}/smartctl_discovery"
 CAMCONTROL_PROG="/sbin/camcontrol"
 SMARTCTL_PROG="/usr/local/sbin/smartctl"
 
-SMARTCTL_PERIOD=${SMARTCTL_PERIOD:-60}
-SLEEP_FORCE_PERIOD=${SLEEP_FORCE_PERIOD:-86400}
+SMARTCTL_PERIOD="${SMARTCTL_PERIOD:-60}"
+SMARTCTL_FORCE_PERIOD="${SMARTCTL_FORCE_PERIOD:-86400}"
 
 if [ -e "${SEMAPHOREFILE}" ]; then
  fts=`stat -f %m "${SEMAPHOREFILE}"`
@@ -75,12 +74,12 @@ if [[ "${temptime}" -gt "${SMARTCTL_PERIOD}" ]]; then
     SPINUP=1
    else
     if [ ! -e "${TEMPFILE}.${DEVICE_PARENT}.full" ]; then
-     fulltime=$(( ${now} - ${SLEEP_FORCE_PERIOD} - 100 ))
+     fulltime=$(( ${now} - ${SMARTCTL_FORCE_PERIOD} - 100 ))
     else
      fulltime=`stat -f %m "${TEMPFILE}.${DEVICE_PARENT}.full"`
     fi
     fulltime=$(( ${now} - ${fulltime} ))
-    if [[ "${fulltime}" -gt "${SLEEP_FORCE_PERIOD}" ]]; then
+    if [[ "${fulltime}" -gt "${SMARTCTL_FORCE_PERIOD}" ]]; then
      SPINUP=1
     fi
    fi
