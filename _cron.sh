@@ -12,8 +12,8 @@ if [ x"${MINUTE}" == x"01" ]; then
  sleep 1
 fi
 # Run all the scripts
-if [ -e "${ZBXPATH}/if6_traffic.sh" ]; then
- ${ZBXPATH}/if6_traffic.sh &
+if [ -e "${ZBXPATH}/ipfw_traffic.sh" ]; then
+ ${ZBXPATH}/ipfw_traffic.sh &
 fi
 if [ -e "${ZBXPATH}/mfi_get.sh" ]; then
  ${ZBXPATH}/mfi_get.sh &
