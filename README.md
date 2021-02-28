@@ -24,6 +24,12 @@ Scripts (called from _cron.sh)
 - **speedtest.sh** - check WANs speed by Ookla's Speedtest.Net and save results
 
 
+Templates
+----
+- **userparameter_rmt_zabbix.conf** - file to be placed info /usr/local/etc/zabbix/zabbix_agentd.conf.d/
+- **RMT_zabbix.xml** - template to be imported to Zabbix Server 
+
+
 Requirements
 ----
  - git ;-)
