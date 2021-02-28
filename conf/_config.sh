@@ -36,6 +36,7 @@ FIB_NAMES["0"]="ISP"
 
 ### FreeBSD OS updates check period in seconds 
 FREEBSD_UPDATE_PERIOD=86400
+FREEBSD_UPDATE_CONF="/etc/freebsd-update.conf"
 
 ### FreeBSD packages check period in seconds 
 PKG_PERIOD=86400
