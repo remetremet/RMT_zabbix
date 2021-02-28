@@ -5,8 +5,12 @@ ZBXDIR="/var/zabbix"
 TEMPDIR="${ZBXDIR}/temp"
 
 # Optional modules (on/off)
-MFI_ENABLE="no"
+FREEBSD_UPDATE_ENABLE="yes"
 IPFW_ENABLE="yes"
+MFI_ENABLE="no"
+NETOWRK_DISCOVERY_ENABLE="yes"
+PKG_ENABLE="yes"
+SMART_ENABLE="yes"
 SPEEDTEST_ENABLE="yes"
 
 # IPv4 addresses of default gateway and it's possible to add few next hops too
