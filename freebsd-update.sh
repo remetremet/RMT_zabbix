@@ -5,8 +5,8 @@ ZBXPATH=$( dirname "$(realpath $0)" )
 SEMAPHOREFILE="${TEMPDIR}/.zabbix_freebsd_update"
 ZBXFILE="${ZBXDIR}/freebsd_update"
 
-FREEBSD_UPDATE_PERIOD=${FREEBSD_UPDATE_PERIOD:-86400}
-FREEBSD_UPDATE_CONF=${FREEBSD_UPDATE_CONF:-/etc/freebsd-update.conf}
+FREEBSD_UPDATE_PERIOD="${FREEBSD_UPDATE_PERIOD:-86400}"
+FREEBSD_UPDATE_CONF="${FREEBSD_UPDATE_CONF:-/etc/freebsd-update.conf}"
 FREEBSD_UPDATE_PUB_SSL="${FREEBSD_UPDATE_PUB_SSL:-${ZBXPATH}/freebsd-update-pub.ssl}"
 
 if [[ -e "${SEMAPHOREFILE}" ]]; then
