@@ -21,5 +21,7 @@ git config --global pull.rebase false
 git config --global user.email "remet@remet.cz"
 git config --global credential.helper store
 git clone https://github.com/remetremet/RMT_zabbix.git ${ZBXDIR}/github
+
+# Copy scripts to working directory
 cp -R ${ZBXDIR}/github/*.sh ${ZBXDIR}/
 chmod 755 ${ZBXDIR}/*.sh
