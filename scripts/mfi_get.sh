@@ -12,8 +12,8 @@ if [ x"${MFI_ENABLE}" == x"no" ]; then
  exit;
 fi
 
-TEMPFILE="${TEMPDIR}/mfi"
-ZBXFILE="${ZBXDIR}/mfi"
+TEMPFILE="${TEMPPATH}/mfi"
+ZBXFILE="${DATAPATH}/mfi"
 
 for ID in ${MFI_ID}; do
  IP="${MFI_IP[${ID}]}"
