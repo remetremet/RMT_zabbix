@@ -15,7 +15,7 @@ if [ ! -e "/etc/rc.firewall.config" ]; then
  exit;
 fi
 
-ZBXFILE="${ZBXDIR}/network_discovery"
+ZBXFILE="${DATAPATH}/network_discovery"
 unset IFACES; declare -A IFACES;
 
 XYZ="info"
