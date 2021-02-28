@@ -6,6 +6,10 @@ else
  ZBXPATH="${ZBXPATH}"
 fi
 
+###
+### Basic functions definition
+###
+
 # Automaticly update from Github repo
 AUTOUPDATE="yes"
 
@@ -18,6 +22,10 @@ PKG_ENABLE="yes"
 RPING_ENABLE="yes"
 SMART_ENABLE="yes"
 SPEEDTEST_ENABLE="yes"
+
+###
+### IP addresses definitions
+###
 
 # IPv4 addresses of default gateway and it's possible to add few next hops too
 unset GW_ADDRS4; declare -A GW_ADDRS4;
@@ -44,6 +52,10 @@ IFNAMES["bce1"]="LAN"
 # Human readable name of WANs
 unset FIB_NAMES; declare -A FIB_NAMES;
 FIB_NAMES["0"]="ISP"
+
+###
+### Script specific settings
+###
 
 ### FreeBSD OS updates check period in seconds 
 FREEBSD_UPDATE_PERIOD=86400
@@ -85,8 +97,9 @@ SPEEDTEST_PERIOD["0"]="86400"
 SPEEDTEST_PERIOD["1"]="86400"
 SPEEDTEST_PERIOD["2"]="86400"
 
-
-
+###
+### Additional path definitions
+###
 TEMPPATH="${ZBXPATH}/temp"
 SCRIPTSPATH="${ZBXPATH}/scripts"
 DATAPATH="${ZBXPATH}/data"
