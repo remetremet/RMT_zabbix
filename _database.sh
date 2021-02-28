@@ -1,5 +1,9 @@
 #!/usr/local/bin/bash
 
+# Used program paths
+CAMCONTROL_PROG="/sbin/camcontrol"
+SMARTCTL_PROG="/usr/local/sbin/smartctl"
+
 # Human readable names for IP addresses
 unset ADDR_NAMES; declare -A ADDR_NAMES;
 ADDR_NAMES["127.0.0.1"]="Localhost"
