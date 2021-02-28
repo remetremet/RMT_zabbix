@@ -2,7 +2,6 @@
 
 # Base directory of scripts and all the stuff
 ZBXDIR="/var/zabbix"
-TEMPDIR="${ZBXDIR}/temp"
 
 # Automaticly update from Github repo
 AUTOUPDATE="yes"
@@ -82,3 +81,9 @@ unset SPEEDTEST_PERIOD; declare -A SPEEDTEST_PERIOD;
 SPEEDTEST_PERIOD["0"]="86400"
 SPEEDTEST_PERIOD["1"]="86400"
 SPEEDTEST_PERIOD["2"]="86400"
+
+
+
+TEMPDIR="${ZBXDIR}/temp"
+SCRIPTSDIR="${ZBXDIR}/scripts"
+DATADIR="${ZBXDIR}/data"
