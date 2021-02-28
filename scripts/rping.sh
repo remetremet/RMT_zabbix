@@ -12,12 +12,12 @@ if [ x"${RPING_ENABLE}" == x"no" ]; then
  exit;
 fi
 
-TEMPFILE="${TEMPDIR}/zabbix_rping_addr"
-RESFILE="${TEMPDIR}/zabbix_rping_results"
-SEMAPHOREFILE="${TEMPDIR}/.zabbix_rping"
-DISCOVERYFILE="${ZBXDIR}/rping_discovery"
-RPINGFILE="${ZBXDIR}/rping"
-RPLFILE="${ZBXDIR}/rpl"
+TEMPFILE="${TEMPPATH}/zabbix_rping_addr"
+RESFILE="${TEMPPATH}/zabbix_rping_results"
+SEMAPHOREFILE="${TEMPPATH}/.zabbix_rping"
+DISCOVERYFILE="${DATAPATH}/rping_discovery"
+RPINGFILE="${DATAPATH}/rping"
+RPLFILE="${DATAPATH}/rpl"
 
 FIBS4="${FIBS4:-0)"
 FIBS6="${FIBS6:-0)"
