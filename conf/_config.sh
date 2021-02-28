@@ -4,6 +4,9 @@
 ZBXDIR="/var/zabbix"
 TEMPDIR="${ZBXDIR}/temp"
 
+# Automaticly update from Github repo
+AUTOUPDATE="yes"
+
 # Optional modules (on/off)
 FREEBSD_UPDATE_ENABLE="yes"
 IPFW_ENABLE="yes"
