@@ -1,7 +1,10 @@
 #!/usr/local/bin/bash
-
-# Base directory of scripts and all the stuff
-ZBXDIR="/var/zabbix"
+ZBXPATH=$( dirname "$(realpath $0)" )
+if [[ -e "${ZBXPATH}/../_config.sh" ]]; then
+ ZBXPATH="${ZBXPATH}/.."
+else
+ ZBXPATH="${ZBXPATH}"
+fi
 
 # Automaticly update from Github repo
 AUTOUPDATE="yes"
@@ -84,6 +87,6 @@ SPEEDTEST_PERIOD["2"]="86400"
 
 
 
-TEMPDIR="${ZBXDIR}/temp"
-SCRIPTSDIR="${ZBXDIR}/scripts"
-DATADIR="${ZBXDIR}/data"
+TEMPPATH="${ZBXPATH}/temp"
+SCRIPTSPATH="${ZBXPATH}/scripts"
+DATAPATH="${ZBXPATH}/data"
