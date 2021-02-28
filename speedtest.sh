@@ -1,5 +1,4 @@
 #!/usr/local/bin/bash -
-
 ZBXPATH=$( dirname "$(realpath $0)" )
 . ${ZBXPATH}/_database.sh
 
