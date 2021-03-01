@@ -31,6 +31,15 @@ Templates
 - **RMT_zabbix.xml** - template to be imported to Zabbix Server 
 
 
+Setup
+----
+To download and install use these commands:
+```
+fetch https://raw.githubusercontent.com/remetremet/RMT_zabbix/master/_setup.sh
+_setup.sh
+```
+
+
 Requirements
 ----
  - git ;-)
