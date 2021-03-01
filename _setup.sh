@@ -5,7 +5,9 @@ ZBXPATH="/var/zabbix"
 SCRIPTSPATH="${ZBXPATH}/scripts"
 
 # Software requirements
-pkg -y install git fping curl smartmontools
+pkg install -y git fping curl smartmontools
+pwd_mkdb /etc/master.passwd
+pkg install -y git fping curl smartmontools
 
 # Setup directories
 if [ ! -d "${ZBXPATH}" ]; then

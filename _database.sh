@@ -7,12 +7,19 @@ CAMCONTROL_PROG="/sbin/camcontrol"
 SMARTCTL_PROG="/usr/local/sbin/smartctl"
 SPEEDTEST_PROG="speedtest-cli"
 
+# IP addresses to ping check (by default its public DNS and peering ports)
+ADDRS4="${ADDRS4} 8.8.8.8 1.1.1.1 9.9.9.9 185.43.135.1 91.210.16.190"
+ADDRS6="${ADDRS6} 2001:4860:4860::8844 2606:4700:4700::1111 2620:fe::fe 2001:148f:ffff::1 2001:7f8:14::1:1"
+
+# Selected servers
+SPEEDTEST_SERVERS="--server=21975 --server=21429 --server=16913 --server=4162 --server=4010 --server=30620 --server=18718 --server=5094"
+
 # Human readable names for IP addresses
 unset ADDR_NAMES; declare -A ADDR_NAMES;
 ADDR_NAMES["127.0.0.1"]="Localhost"
 ADDR_NAMES["::1"]="Localhost (IPv6)"
-ADDR_NAMES["91.210.16.190"]="NIX"
-ADDR_NAMES["2001:7f8:14::1:1"]="NIX (IPv6)"
+ADDR_NAMES["91.210.16.190"]="NIX.CZ"
+ADDR_NAMES["2001:7f8:14::1:1"]="NIX.CZ (IPv6)"
 ADDR_NAMES["8.8.8.8"]="Google DNS"
 ADDR_NAMES["8.8.4.4"]="Google DNS"
 ADDR_NAMES["2001:4860:4860::8844"]="Google DNS (IPv6)"
