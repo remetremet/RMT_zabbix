@@ -5,7 +5,7 @@ These scripts are here mainly for my personal use. They monitor FreeBSD server f
 
 Files
 ----
-- **_config.sh** - local server configuration (distributed in /conf/ directory)
+- **_config.sh** - local server configuration (distributed in /conf/ directory as a sample)
 - **_cron.sh** - this script is called as a cron job and it call all other scripts
 - **_database.sh** - (used by other scripts) - default definitions
 - **_get_data.sh** - (caller by zabbix_agent) - sends data to Zabbix Server/Proxy
@@ -27,7 +27,7 @@ Scripts (called by _cron.sh)
 
 Templates
 ----
-- **userparameter_rmt_zabbix.conf** - file to be placed info /usr/local/etc/zabbix/zabbix_agentd.conf.d/
+- **userparameter_rmtzabbix.conf** - file to be placed info ".../zabbix_agentd.conf.d/"
 - **RMT_zabbix.xml** - template to be imported to Zabbix Server 
 
 

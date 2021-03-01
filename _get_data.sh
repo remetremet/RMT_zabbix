@@ -10,9 +10,7 @@ fi
 
 FUNCTION=$1
 case ${FUNCTION} in
-        pkg)
-         cat "${DATAPATH}/pkg"
-        ;;
+# FREEBSD_UPDATE
         freebsd_update.*)
          INDEX="${FUNCTION:15}"
          case ${INDEX} in
@@ -30,13 +28,7 @@ case ${FUNCTION} in
                  ;;
          esac
         ;;
-        discovery_network)
-         cat "${DATAPATH}/network_discovery"
-        ;;
-        network_mac.*)
-         INDEX="${FUNCTION:12}"
-         cat "${DATAPATH}/network_discovery.${INDEX}.mac"
-        ;;
+# IPFW_TRAFFIC
         ipfw_traffic.*)
          INDEX="${FUNCTION:13}"
          case ${INDEX} in
@@ -63,6 +55,19 @@ case ${FUNCTION} in
                  ;;
          esac
         ;;
+# NETWORK_DISCOVERY
+        discovery_network)
+         cat "${DATAPATH}/network_discovery"
+        ;;
+        network_mac.*)
+         INDEX="${FUNCTION:12}"
+         cat "${DATAPATH}/network_discovery.${INDEX}.mac"
+        ;;
+# PKG
+        pkg)
+         cat "${DATAPATH}/pkg"
+        ;;
+# RPING
         discovery_rping)
          cat "${DATAPATH}/rping_discovery"
         ;;
@@ -74,6 +79,7 @@ case ${FUNCTION} in
          INDEX="${FUNCTION:4}"
          cat "${DATAPATH}/rpl_${INDEX}"
         ;;
+# SMART
         discovery_smartctl)
          cat "${DATAPATH}/smartctl_discovery"
         ;;
@@ -81,6 +87,7 @@ case ${FUNCTION} in
          INDEX="${FUNCTION:9}"
          cat "${DATAPATH}/smartctl.${INDEX}"
         ;;
+# SPEEDTEST
         discovery_speedtest)
          cat "${DATAPATH}/speedtest_discovery"
         ;;
