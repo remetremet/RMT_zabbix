@@ -30,7 +30,7 @@ case ${FUNCTION} in
                  ;;
          esac
         ;;
-        network_discovery)
+        discovery_network)
          cat "${DATAPATH}/network_discovery"
         ;;
         network_mac.*)
@@ -63,7 +63,7 @@ case ${FUNCTION} in
                  ;;
          esac
         ;;
-        rping_discovery)
+        discovery_rping)
          cat "${DATAPATH}/rping_discovery"
         ;;
         rping.*)
@@ -74,14 +74,14 @@ case ${FUNCTION} in
          INDEX="${FUNCTION:4}"
          cat "${DATAPATH}/rpl_${INDEX}"
         ;;
-        smartctl_discovery)
+        discovery_smartctl)
          cat "${DATAPATH}/smartctl_discovery"
         ;;
         smartctl.*)
          INDEX="${FUNCTION:9}"
          cat "${DATAPATH}/smartctl.${INDEX}"
         ;;
-        speedtest_discovery)
+        discovery_speedtest)
          cat "${DATAPATH}/speedtest_discovery"
         ;;
         speedtest.*.extip)
