@@ -5,7 +5,13 @@ if [[ -e "${ZBXPATH}/../_config.sh" ]]; then
 else
  ZBXPATH="${ZBXPATH}"
 fi
+if [[ ! -e "${ZBXPATH}/_config.sh" ]]; then
+ exit;
+fi
 . "${ZBXPATH}/_config.sh"
+if [[ ! -e "${ZBXPATH}/_database.sh" ]]; then
+ exit;
+fi
 . "${ZBXPATH}/_database.sh"
 
 FUNCTION=$1

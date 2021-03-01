@@ -1,5 +1,5 @@
 # RMT_zabbix
-Zabbix plugins and serverside crons (FreeBSD needed and tested)
+Zabbix plugins and serverside crons (FreeBSD specific and tested)
 
 These scripts are here mainly for my personal use. They monitor FreeBSD server functions and prepare data for Zabbix templates.
 
