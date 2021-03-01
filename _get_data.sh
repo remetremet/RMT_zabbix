@@ -71,11 +71,11 @@ case ${FUNCTION} in
         discovery_rping)
          cat "${DATAPATH}/rping_discovery"
         ;;
-        rping.*)
+        rping_*)
          INDEX="${FUNCTION:6}"
          cat "${DATAPATH}/rping_${INDEX}"
         ;;
-        rpl.*)
+        rpl_*)
          INDEX="${FUNCTION:4}"
          cat "${DATAPATH}/rpl_${INDEX}"
         ;;
