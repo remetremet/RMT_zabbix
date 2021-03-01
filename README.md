@@ -27,7 +27,7 @@ Scripts (called by _cron.sh)
 
 Templates
 ----
-- **userparameter_rmt_zabbix.conf** - file to be placed info /usr/local/etc/zabbix/zabbix_agentd.conf.d/
+- **userparameter_rmtzabbix.conf** - file to be placed info ".../zabbix_agentd.conf.d/"
 - **RMT_zabbix.xml** - template to be imported to Zabbix Server 
 
 
