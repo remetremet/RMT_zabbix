@@ -40,7 +40,8 @@ cp -R ${ZBXPATH}/github/scripts/*.sh ${SCRIPTSPATH}/
 chmod 755 ${SCRIPTSPATH}/*.sh
 
 # Modify Zabbix Agent configuration and restart Zabbix Agent
-for ZV in "40 41 42 43 44 50 51 52 53 60"; do
+ZVS="30 40 41 42 43 44 50 51 52 53 54 60"
+for ZV in ${ZVS}; do
  if [ -d "/usr/local/etc/zabbix${ZV}/zabbix_agentd.conf.d" ]; then
   ZBXCONFDIR="/usr/local/etc/zabbix${ZV}/zabbix_agentd.conf.d"
  fi
@@ -48,6 +49,6 @@ done
 if [ -d "/usr/local/etc/zabbix/zabbix_agentd.conf.d" ]; then
  ZBXCONFDIR="/usr/local/etc/zabbix/zabbix_agentd.conf.d"
 fi
-cp -f ${ZBXPATH}/github/templates/userparameter_rmtzabbix.conf ${ZBXCONFDIR}/userparameter_rmtzabbix.conf
+cp -f ${ZBXPATH}/github/templates/userparameter_rmtzabbix.conf ${ZBXCONFDIR}/
 /usr/local/etc/rc.d/zabbix_agentd restart
 

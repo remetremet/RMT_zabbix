@@ -10,7 +10,6 @@ fi
 ###
 ### Basic functions definition
 ###
-
 # Automaticly update from Github repo
 AUTOUPDATE="yes"
 
@@ -28,7 +27,6 @@ SPEEDTEST_ENABLE="yes"
 ###
 ### IP addresses definitions
 ###
-
 # IPv4 addresses of default gateway and it's possible to add few next hops too
 unset GW_ADDRS4; declare -A GW_ADDRS4;
 GW_ADDRS4["0"]="127.0.0.1"
@@ -61,7 +59,6 @@ FIB_NAMES["2"]="ISP 3"
 ###
 ### Script specific settings
 ###
-
 ### FreeBSD OS updates check period in seconds 
 FREEBSD_UPDATE_PERIOD=86400
 FREEBSD_UPDATE_CONF="/etc/freebsd-update.conf"
