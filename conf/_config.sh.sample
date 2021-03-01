@@ -74,16 +74,12 @@ MFI_PASSWORD="ubnt"
 MFI_KEYS="output voltage power powerfactor current"
 MFI_IDS="1 2 3"
 unset MFI_IP; declare -A MFI_IP;
-unset MFI_ID; declare -A MFI_ID;
 unset MFI_PORT; declare -A MFI_PORT;
 MFI_IP["1"]="192.168.250.1"
-MFI_ID["1"]="1"
 MFI_PORT["1"]="1 2 3"
 MFI_IP["2"]="192.168.250.2"
-MFI_ID["2"]="2"
 MFI_PORT["2"]="1 2 3 4 5 6"
 MFI_IP["3"]="192.168.250.4"
-MFI_ID["3"]="3"
 MFI_PORT["3"]="1 2 3"
 
 ### SMART monitoring of HDD/SSD
