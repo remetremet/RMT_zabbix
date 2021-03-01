@@ -72,18 +72,19 @@ MFI_SESSIONID="1234567890ABCDEF1234567890ABCDEF"
 MFI_USERNAME="ubnt"
 MFI_PASSWORD="ubnt"
 MFI_KEYS="output voltage power powerfactor current"
-unset MFI_IPS; declare -A MFI_IPS;
-unset MFI_IDS; declare -A MFI_IDS;
-unset MFI_PORTS; declare -A MFI_PORTS;
-MFI_IPS["1"]="192.168.250.1"
-MFI_IDS["1"]="1"
-MFI_PORTS["1"]="1 2 3"
-MFI_IPS["2"]="192.168.250.2"
-MFI_IDS["2"]="2"
-MFI_PORTS["2"]="1 2 3 4 5 6"
-MFI_IPS["3"]="192.168.250.4"
-MFI_IDS["3"]="3"
-MFI_PORTS["3"]="1 2 3"
+MFI_IDS="1 2 3"
+unset MFI_IP; declare -A MFI_IP;
+unset MFI_ID; declare -A MFI_ID;
+unset MFI_PORT; declare -A MFI_PORT;
+MFI_IP["1"]="192.168.250.1"
+MFI_ID["1"]="1"
+MFI_PORT["1"]="1 2 3"
+MFI_IP["2"]="192.168.250.2"
+MFI_ID["2"]="2"
+MFI_PORT["2"]="1 2 3 4 5 6"
+MFI_IP["3"]="192.168.250.4"
+MFI_ID["3"]="3"
+MFI_PORT["3"]="1 2 3"
 
 ### SMART monitoring of HDD/SSD
 # SMART check period in seconds
