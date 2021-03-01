@@ -40,21 +40,11 @@ cp -R ${ZBXPATH}/github/scripts/*.sh ${SCRIPTSPATH}/
 chmod 755 ${SCRIPTSPATH}/*.sh
 
 # Modify Zabbix Agent configuration and restart Zabbix Agent
-if [ -d "/usr/local/etc/zabbix43/zabbix_agentd.conf.d" ]; then
- ZBXCONFDIR="/usr/local/etc/zabbix43/zabbix_agentd.conf.d"
-fi
-if [ -d "/usr/local/etc/zabbix44/zabbix_agentd.conf.d" ]; then
- ZBXCONFDIR="/usr/local/etc/zabbix44/zabbix_agentd.conf.d"
-fi
-if [ -d "/usr/local/etc/zabbix50/zabbix_agentd.conf.d" ]; then
- ZBXCONFDIR="/usr/local/etc/zabbix50/zabbix_agentd.conf.d"
-fi
-if [ -d "/usr/local/etc/zabbix51/zabbix_agentd.conf.d" ]; then
- ZBXCONFDIR="/usr/local/etc/zabbix51/zabbix_agentd.conf.d"
-fi
-if [ -d "/usr/local/etc/zabbix52/zabbix_agentd.conf.d" ]; then
- ZBXCONFDIR="/usr/local/etc/zabbix52/zabbix_agentd.conf.d"
-fi
+for ZV in "40 41 42 43 44 50 51 52 53 60"; do
+ if [ -d "/usr/local/etc/zabbix${ZV}/zabbix_agentd.conf.d" ]; then
+  ZBXCONFDIR="/usr/local/etc/zabbix${ZV}/zabbix_agentd.conf.d"
+ fi
+done
 if [ -d "/usr/local/etc/zabbix/zabbix_agentd.conf.d" ]; then
  ZBXCONFDIR="/usr/local/etc/zabbix/zabbix_agentd.conf.d"
 fi
