@@ -12,7 +12,7 @@ ADDRS4="${ADDRS4} 8.8.8.8 1.1.1.1 9.9.9.9 185.43.135.1 91.210.16.190"
 ADDRS6="${ADDRS6} 2001:4860:4860::8844 2606:4700:4700::1111 2620:fe::fe 2001:148f:ffff::1 2001:7f8:14::1:1"
 
 # Selected servers
-SPEEDTEST_SERVERS="--server=21975 --server=21429 --server=16913 --server=4162 --server=4010 --server=30620 --server=18718 --server=5094"
+SPEEDTEST_SERVERS="--server=21975 --server=21429 --server=16913 --server=4162 --server=4010 --server=30620 --server=18718 --server=5094 --server=30193 --server=16745"
 
 # Human readable names for IP addresses
 unset ADDR_NAMES; declare -A ADDR_NAMES;
