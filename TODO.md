@@ -21,3 +21,4 @@ ICMP monitoring|latency, packet loss|done
 Speedtest|WAN uplink monitoring|done
 Running processes|SSH, Rsync, Apache, ...|done (directly in Zabbix Server)
 Config files monitoring|checksum of OS files monitoring|done (directly in Zabbix Server)
+IoT temperature monitoring|Arduino(ESP8266 and ESP32) and modules monitoring|waiting
