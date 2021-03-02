@@ -97,6 +97,10 @@ case ${FUNCTION} in
         discovery_speedtest)
          cat "${DATAPATH}/speedtest_discovery"
         ;;
+        speedtest.*.server)
+         INDEX="${FUNCTION:10:1}"
+         cat "${DATAPATH}/speedtest_${INDEX}.server"
+        ;;
         speedtest.*.extip)
          INDEX="${FUNCTION:10:1}"
          cat "${DATAPATH}/speedtest_${INDEX}.extip"
