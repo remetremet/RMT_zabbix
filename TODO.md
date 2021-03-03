@@ -5,11 +5,14 @@ List of functions, scripts and templates to include:
 
 | Name | Description | Parts | Status |
 |---|---|:---:|--:|
-**FreeBSD OS updates**|available updates|script+template|almost done
-**FreeBSD packages updates**|available pkg updates|script+template|almost done
+**FreeBSD OS updates**|available updates|script|**done**
+**FreeBSD OS updates**|available updates|template|waiting
+**FreeBSD packages updates**|available pkg updates|script|**done**
+**FreeBSD packages updates**|available pkg updates|template|waiting
 **HDD traffic**|iostat or similar monitoring|script+template|waiting
 **Sendmail**|queue and messages in/out|script+template|waiting
 **Network discovery**|better network discovery incl. external IPs|script+template|**done**
+**Network traffic**|IPFW2 monitoring count rules|script+template|**done**
 **Network traffic**|FUP counting and reseting|script+template|working on
 **IPFW blacklist**|item count, denied packets|script+template|working on
 **Spam stats**|Spamassassin and Clamd monitoring|script+template|waiting
