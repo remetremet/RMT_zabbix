@@ -42,12 +42,12 @@ _setup.sh
 
 Requirements
 ----
- - git ;-)
- - fping
- - smartmontools
- - curl
- - py-speedtest-cli
- - RMT_ipfw (https://github.com/remetremet/RMT_ipfw)
+ - git - ***;-)***
+ - fping - (for **rping.sh** function)
+ - smartmontools - (for **smart.sh** function)
+ - curl - (for **network_discovery.sh** and **mfi_get.sh** function)
+ - py-speedtest-cli - (for **speedtest.sh** function)
+ - RMT_ipfw (https://github.com/remetremet/RMT_ipfw) - (for **ipfw_traffic.sh** function)
 
 
 Use it if like it.
