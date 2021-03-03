@@ -11,7 +11,7 @@ These scripts are here mainly for my personal use. They monitor FreeBSD server f
 - **_setup.sh** - this script is used for easy setup and first clone of this repo
 - **_update.sh** - (called by [_cron.sh](_cron.sh)) - do the automatic sync from this Github repo
 
-+
+<br/>
 ## Scripts (called by [_cron.sh](_cron.sh))
 - **freebsd_update.sh** - check for FreeBSD OS updates
 - **ipfw_traffic.sh** - get IPFW2 traffic counts
@@ -22,16 +22,16 @@ These scripts are here mainly for my personal use. They monitor FreeBSD server f
 - **smart.sh** - get SMART info from drives
 - **speedtest.sh** - check WANs speed by Ookla's Speedtest.Net and save results
 
-+
+<br/>
 ## Templates
 - **userparameter_rmtzabbix.conf** - file to be placed info ".../zabbix_agentd.conf.d/"
 - **RMT_zabbix.xml** - template to be imported to Zabbix Server 
 
-+
+<br/>
 ## Setup
 To download use `fetch https://raw.githubusercontent.com/remetremet/RMT_zabbix/master/_setup.sh` and to install afterwards `_setup.sh`.
 
-+
+<br/>
 ## Requirements
  - git - :wink:
  - fping - (for **rping.sh** function)
@@ -40,5 +40,5 @@ To download use `fetch https://raw.githubusercontent.com/remetremet/RMT_zabbix/m
  - py-speedtest-cli - (for **speedtest.sh** function)
  - [RMT_ipfw](https://github.com/remetremet/RMT_ipfw) - (for **ipfw_traffic.sh** function)
 
-+
+<br/>
 Use it if like it.
