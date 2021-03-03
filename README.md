@@ -33,7 +33,7 @@ To download use `fetch https://raw.githubusercontent.com/remetremet/RMT_zabbix/m
 
 
 ## Requirements
- - git - ***;-)***
+ - git - :wink:
  - fping - (for **rping.sh** function)
  - smartmontools - (for **smart.sh** function)
  - curl - (for **network_discovery.sh** and **mfi_get.sh** function)
