@@ -19,8 +19,9 @@ mFI monitoring|bonsumption per month|script+template|working on
 UPS monitoring|USB connected UPS via NUT|script+template|waiting
 ACPI battery|syslog gathering|script+template|waiting
 CPU frequency|syslog gathering|script+template|waiting
-SMART monitoring|hours, temperatures, cycles, errors, SSD state|script+template|almost done
+SMART monitoring|hours, temperatures, cycles, errors, SSD state|template|waiting
 SMART monitoring|fix Speedtest.Net bug with geolocation|script+template|done
+SMART monitoring|basic HDD and SSD monitoring|script+template|done
 Directory sizes|logs, mails|template|done
 ICMP monitoring|latency, packet loss|script+template|done
 Speedtest|WAN uplink monitoring|script+template|done
