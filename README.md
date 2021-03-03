@@ -13,7 +13,7 @@ Files
 - **_update.sh** - (called by [_cron.sh](_cron.sh)) - do the automatic sync from this Github repo
 
 
-Scripts (called by _cron.sh)
+Scripts (called by [_cron.sh](_cron.sh))
 ----
 - **freebsd_update.sh** - check for FreeBSD OS updates
 - **ipfw_traffic.sh** - get IPFW2 traffic counts
