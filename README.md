@@ -3,8 +3,7 @@ Zabbix plugins and serverside crons (FreeBSD specific and tested)
 
 These scripts are here mainly for my personal use. They monitor FreeBSD server functions and prepare data for Zabbix templates.
 
-Files
-----
+## Files
 - **_config.sh** - local server configuration (distributed in [conf](conf) directory as a sample)
 - **_cron.sh** - this script is called as a cron job and it call all other scripts
 - **_database.sh** - (used by other scripts as library) - default definitions
@@ -13,8 +12,7 @@ Files
 - **_update.sh** - (called by [_cron.sh](_cron.sh)) - do the automatic sync from this Github repo
 
 
-Scripts (called by [_cron.sh](_cron.sh))
-----
+## Scripts (called by [_cron.sh](_cron.sh))
 - **freebsd_update.sh** - check for FreeBSD OS updates
 - **ipfw_traffic.sh** - get IPFW2 traffic counts
 - **mfi_get.sh** - get state of Ubiquiti mFI sockets
@@ -25,23 +23,16 @@ Scripts (called by [_cron.sh](_cron.sh))
 - **speedtest.sh** - check WANs speed by Ookla's Speedtest.Net and save results
 
 
-Templates
-----
+## Templates
 - **userparameter_rmtzabbix.conf** - file to be placed info ".../zabbix_agentd.conf.d/"
 - **RMT_zabbix.xml** - template to be imported to Zabbix Server 
 
 
-Setup
-----
-To download and install use these commands:
-```
-fetch https://raw.githubusercontent.com/remetremet/RMT_zabbix/master/_setup.sh
-_setup.sh
-```
+## Setup
+To download use `fetch https://raw.githubusercontent.com/remetremet/RMT_zabbix/master/_setup.sh` and to install afterwards `_setup.sh`.
 
 
-Requirements
-----
+## Requirements
  - git - ***;-)***
  - fping - (for **rping.sh** function)
  - smartmontools - (for **smart.sh** function)
