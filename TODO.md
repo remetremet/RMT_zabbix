@@ -7,6 +7,7 @@ List of functions, scripts and templates to include:
 |---|---|---|--:|
 HDD traffic|iostat or similar monitoring|script+template|waiting
 Sendmail|queue and messages in/out|script+template|waiting
+Network discovery|better network discovery incl. external IPs|script+template|done
 Network traffic|FUP counting and reseting|script+template|working on
 IPFW blacklist|item count, denied packets|script+template|working on
 Spam stats|Spamassassin and Clamd monitoring|script+template|waiting
