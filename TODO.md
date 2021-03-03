@@ -5,7 +5,7 @@ List of functions, scripts and templates to include:
 
 | Name | Description | Parts | Status |
 |---|---|---|--:|
-[ ] FreeBSD OS updates|available updates|script+template|almost done
+- [ ] FreeBSD OS updates|available updates|script+template|almost done
 [ ] FreeBSD packages updates|available pkg updates|script+template|almost done
 [ ] HDD traffic|iostat or similar monitoring|script+template|waiting
 [ ] Sendmail|queue and messages in/out|script+template|waiting
