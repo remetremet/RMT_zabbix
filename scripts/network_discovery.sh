@@ -34,9 +34,9 @@ if [ -n "${IPFW_oif}" ]; then
   XYZ="${XYZ}{\"{#IFNAME}\":\"${IPFW_oif}\",\"{#IFALIAS}\":\"WAN1\",\"{#IFDESCR}\":\"${IFNAMES[${IPFW_oif}]}\",\"{#IFMAC}\":\"${MAC}\"},"
   IFACES[${IPFW_oif}]="1"
   IP4=`setfib 0 curl -s ipv4.icanhazip.com | xargs echo -n`
-  echo "${IP6}" > "${ZBXFILE}.${IPFW_oif}.ipv6"
+  echo "${IP4}" > "${ZBXFILE}.${IPFW_oif}.ipv4"
   IP6=`setfib 0 curl -s ipv6.icanhazip.com | xargs echo -n`
-  echo "${IP6}" > "${ZBXFILE}.${IPFW_oif}.ipv4"
+  echo "${IP6}" > "${ZBXFILE}.${IPFW_oif}.ipv6"
 fi
 fi
 if [ -n "${IPFW_oif2}" ]; then
@@ -46,9 +46,9 @@ if [ -n "${IPFW_oif2}" ]; then
   XYZ="${XYZ}{\"{#IFNAME}\":\"${IPFW_oif2}\",\"{#IFALIAS}\":\"WAN2\",\"{#IFDESCR}\":\"${IFNAMES[${IPFW_oif2}]}\",\"{#IFMAC}\":\"${MAC}\"},"
   IFACES[${IPFW_oif2}]="1"
   IP4=`setfib 1 curl -s ipv4.icanhazip.com | xargs echo -n`
-  echo "${IP6}" > "${ZBXFILE}.${IPFW_oif}.ipv6"
+  echo "${IP4}" > "${ZBXFILE}.${IPFW_oif2}.ipv4"
   IP6=`setfib 1 curl -s ipv6.icanhazip.com | xargs echo -n`
-  echo "${IP6}" > "${ZBXFILE}.${IPFW_oif}.ipv4"
+  echo "${IP6}" > "${ZBXFILE}.${IPFW_oif2}.ipv6"
  fi
 fi
 if [ -n "${IPFW_oif3}" ]; then
@@ -58,9 +58,9 @@ if [ -n "${IPFW_oif3}" ]; then
   XYZ="${XYZ}{\"{#IFNAME}\":\"${IPFW_oif3}\",\"{#IFALIAS}\":\"WAN3\",\"{#IFDESCR}\":\"${IFNAMES[${IPFW_oif3}]}\",\"{#IFMAC}\":\"${MAC}\"},"
   IFACES[${IPFW_oif3}]="1"
   IP4=`setfib 2 curl -s ipv4.icanhazip.com | xargs echo -n`
-  echo "${IP6}" > "${ZBXFILE}.${IPFW_oif}.ipv6"
+  echo "${IP4}" > "${ZBXFILE}.${IPFW_oif3}.ipv4"
   IP6=`setfib 2 curl -s ipv6.icanhazip.com | xargs echo -n`
-  echo "${IP6}" > "${ZBXFILE}.${IPFW_oif}.ipv4"
+  echo "${IP6}" > "${ZBXFILE}.${IPFW_oif3}.ipv6"
  fi
 fi
 if [ -n "${IPFW_iif}" ]; then
