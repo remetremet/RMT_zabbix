@@ -16,9 +16,10 @@ UPS monitoring|USB connected UPS via NUT|script+template|waiting
 ACPI battery|syslog gathering|script+template|waiting
 CPU frequency|syslog gathering|script+template|waiting
 SMART monitoring|hours, temperatures, cycles, errors, SSD state|script+template|almost done
-Directory sizes|logs, mails|template|done (directly in Zabbix Server)
+Directory sizes|logs, mails|template|done
 ICMP monitoring|latency, packet loss|script+template|done
 Speedtest|WAN uplink monitoring|script+template|done
-Running processes|SSH, Rsync, Apache, ...|template|done (directly in Zabbix Server)
-Config files monitoring|checksum of OS files monitoring|template|done (directly in Zabbix Server)
+Running processes|SSH, Rsync, Apache, ...|template|done
+Running processes|milter filters|template|waiting
+Config files monitoring|checksum of OS files monitoring|template|done
 IoT temperature monitoring|Arduino(ESP8266 and ESP32) and modules monitoring|script+template|waiting
