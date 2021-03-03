@@ -11,7 +11,7 @@ fi
 ### Basic functions definition
 ###
 # Automaticly update from Github repo
-AUTOUPDATE="yes"
+AUTOUPDATE="no"
 
 # Optional modules (on/off)
 FREEBSD_UPDATE_ENABLE="yes"

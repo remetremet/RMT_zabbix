@@ -48,6 +48,7 @@ for FIB in ${FIBS4}; do
  fibtime=$(( ${now} - ${fibtime} ))
  if [[ "${fibtime}" -gt "${SPEEDTEST_PERIOD[$FIB]}" ]]; then
   echo -n > "${TEMPFILE}.${FIB}"
+  setfib ${FIB} speedtest-cli --list > "${TEMPFILE}.${FIB}.serverlist"
   setfib ${FIB} speedtest-cli --csv --csv-delimiter ";" --timeout 15 ${SPEEDTEST_SERVERS} > "${TEMPFILE}.${FIB}"
   err=$?
   if [[ "${err}" -gt "0" ]]; then
