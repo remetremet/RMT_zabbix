@@ -7,10 +7,10 @@ Files
 ----
 - **_config.sh** - local server configuration (distributed in /conf/ directory as a sample)
 - **_cron.sh** - this script is called as a cron job and it call all other scripts
-- **_database.sh** - (used by other scripts) - default definitions
-- **_get_data.sh** - (caller by zabbix_agent) - sends data to Zabbix Server/Proxy
+- **_database.sh** - (used by other scripts as library) - default definitions
+- **_get_data.sh** - (caller by [zabbix_agent]) - sends data to Zabbix Server/Proxy
 - **_setup.sh** - this script is used for easy setup and first clone of this repo
-- **_update.sh** - (called by _cron.sh) - do the automatic sync from this Github repo
+- **_update.sh** - (called by [_cron.sh]) - do the automatic sync from this Github repo
 
 
 Scripts (called by _cron.sh)
