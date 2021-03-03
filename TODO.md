@@ -14,7 +14,8 @@ Network traffic|FUP counting and reseting|script+template|working on
 IPFW blacklist|item count, denied packets|script+template|working on
 Spam stats|Spamassassin and Clamd monitoring|script+template|waiting
 DNS queries|Bind and Unbound monitoring|script+template|waiting
-mFI monitoring|Consumption per month|script+template|working on
+mFI monitoring|basic monitoring|script+template|done
+mFI monitoring|bonsumption per month|script+template|working on
 UPS monitoring|USB connected UPS via NUT|script+template|waiting
 ACPI battery|syslog gathering|script+template|waiting
 CPU frequency|syslog gathering|script+template|waiting
