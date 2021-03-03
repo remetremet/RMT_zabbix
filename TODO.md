@@ -29,6 +29,6 @@ List of functions, scripts and templates to include:
 **ICMP monitoring**|latency, packet loss|script+template|**done**
 **Speedtest**|WAN uplink monitoring|script+template|**done**
 **Running processes**|SSH, Rsync, Apache, ...|template|**done**
-**Running processes**|milter filters|template|waiting
+**Running processes**|milter filters|template|**done**
 **Config files monitoring**|checksum of OS files monitoring|template|**done**
 **IoT temperature monitoring**|Arduino(ESP8266 and ESP32) and modules monitoring|script+template|waiting
