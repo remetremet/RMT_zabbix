@@ -18,14 +18,15 @@ List of functions, scripts and templates to include:
 **FreeBSD OS updates**|available updates|script|**done**
 **FreeBSD packages updates**|available pkg updates|template|waiting
 **FreeBSD packages updates**|available pkg updates|script|**done**
-**Network traffic**|FUP counting and reseting|script+template|waiting
+**Network traffic**|FUP counting and reseting|script|waiting
 **Network traffic**|IPFW2 monitoring count rules|script+template|**done**
 **mFI monitoring**|consumption per month|script+template|waiting
 **mFI monitoring**|basic monitoring|script+template|**done**
 **SMART monitoring**|hours, temperatures, cycles, errors, SSD state|template|waiting
 **SMART monitoring**|fix Speedtest.Net bug with geolocation|script+template|**done**
 **SMART monitoring**|basic HDD and SSD monitoring|script+template|**done**
-**Network discovery**|better network discovery incl. external IPs|script+template|**done**
+**Network discovery**|better network discovery|script+template|**done**
+**Network discovery**|external IPs|script+template|**done**
 **Directory sizes**|logs, mails|template|**done**
 **ICMP monitoring**|latency, packet loss|script+template|**done**
 **Speedtest**|WAN uplink monitoring|script+template|**done**
