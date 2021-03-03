@@ -21,13 +21,25 @@ case ${FUNCTION} in
          INDEX="${FUNCTION:15}"
          case ${INDEX} in
                  latest)
-                  cat "${DATAPATH}/freebsd_update.latest"
+                  if [ -e "${DATAPATH}/freebsd_update.latest" ]; then
+                   cat "${DATAPATH}/freebsd_update.latest"
+                  else
+                   echo ""
+                  fi
                  ;;
                  running)
-                  cat "${DATAPATH}/freebsd_update.running"
+                  if [ -e "${DATAPATH}/freebsd_update.running" ]; then
+                   cat "${DATAPATH}/freebsd_update.running"
+                  else
+                   echo ""
+                  fi
                  ;;
                  EOL)
-                  cat "${DATAPATH}/freebsd_update.EOL"
+                  if [ -e "${DATAPATH}/freebsd_update.EOL" ]; then
+                   cat "${DATAPATH}/freebsd_update.EOL"
+                  else
+                   echo "0"
+                  fi
                  ;;
                  *)
                   echo 0
@@ -39,87 +51,171 @@ case ${FUNCTION} in
          INDEX="${FUNCTION:13}"
          case ${INDEX} in
                  ipv4)
-                  cat "${DATAPATH}/ipfw_traffic.ipv4"
+                  if [ -e "${DATAPATH}/ipfw_traffic.ipv4" ]; then
+                   cat "${DATAPATH}/ipfw_traffic.ipv4"
+                  else
+                   echo "0"
+                  fi
                  ;;
                  ipv6)
-                  cat "${DATAPATH}/ipfw_traffic.ipv6"
+                  if [ -e "${DATAPATH}/ipfw_traffic.ipv6" ]; then
+                   cat "${DATAPATH}/ipfw_traffic.ipv6"
+                  else
+                   echo "0"
+                  fi
                  ;;
                  ipv4_in)
-                  cat "${DATAPATH}/ipfw_traffic.ipv4_in"
+                  if [ -e "${DATAPATH}/ipfw_traffic.ipv4_in" ]; then
+                   cat "${DATAPATH}/ipfw_traffic.ipv4_in"
+                  else
+                   echo "0"
+                  fi
                  ;;
                  ipv6_in)
-                  cat "${DATAPATH}/ipfw_traffic.ipv6_in"
+                  if [ -e "${DATAPATH}/ipfw_traffic.ipv6_in" ]; then
+                   cat "${DATAPATH}/ipfw_traffic.ipv6_in"
+                  else
+                   echo "0"
+                  fi
                  ;;
                  ipv4_out)
-                  cat "${DATAPATH}/ipfw_traffic.ipv4_out"
+                  if [ -e "${DATAPATH}/ipfw_traffic.ipv4_out" ]; then
+                   cat "${DATAPATH}/ipfw_traffic.ipv4_out"
+                  else
+                   echo "0"
+                  fi
                  ;;
                  ipv6_out)
-                  cat "${DATAPATH}/ipfw_traffic.ipv6_out"
+                  if [ -e "${DATAPATH}/ipfw_traffic.ipv6_out" ]; then
+                   cat "${DATAPATH}/ipfw_traffic.ipv6_out"
+                  else
+                   echo "0"
+                  fi
                  ;;
                  *)
-                  echo 0
+                  echo "0"
                  ;;
          esac
         ;;
 # NETWORK_DISCOVERY
         discovery_network)
-         cat "${DATAPATH}/network_discovery"
+         if [ -e "${DATAPATH}/network_discovery" ]; then
+          cat "${DATAPATH}/network_discovery"
+         else
+          echo ""
+         fi
         ;;
         network_mac.*)
          INDEX="${FUNCTION:12}"
-         cat "${DATAPATH}/network_discovery.${INDEX}.mac"
+         if [ -e "${DATAPATH}/network_discovery.${INDEX}.mac" ]; then
+          cat "${DATAPATH}/network_discovery.${INDEX}.mac"
+         else
+          echo ""
+         fi
         ;;
         network_ipv4.*)
          INDEX="${FUNCTION:13}"
-         cat "${DATAPATH}/network_discovery.${INDEX}.ipv4"
+         if [ -e "${DATAPATH}/network_discovery.${INDEX}.ipv4" ]; then
+          cat "${DATAPATH}/network_discovery.${INDEX}.ipv4"
+         else
+          echo ""
+         fi
         ;;
         network_ipv6.*)
          INDEX="${FUNCTION:13}"
-         cat "${DATAPATH}/network_discovery.${INDEX}.ipv6"
+         if [ -e "${DATAPATH}/network_discovery.${INDEX}.ipv6" ]; then
+          cat "${DATAPATH}/network_discovery.${INDEX}.ipv6"
+         else
+          echo ""
+         fi
         ;;
 # PKG
         pkg)
-         cat "${DATAPATH}/pkg"
+         if [ -e "${DATAPATH}/pkg" ]; then
+          cat "${DATAPATH}/pkg"
+         else
+          echo "0"
+         fi
         ;;
 # RPING
         discovery_rping)
-         cat "${DATAPATH}/rping_discovery"
+         if [ -e "${DATAPATH}/rping_discovery" ]; then
+          cat "${DATAPATH}/rping_discovery"
+         else
+          echo ""
+         fi
         ;;
         rping_*)
          INDEX="${FUNCTION:6}"
-         cat "${DATAPATH}/rping_${INDEX}"
+         if [ -e "${DATAPATH}/rping_${INDEX}" ]; then
+          cat "${DATAPATH}/rping_${INDEX}"
+         else
+          echo "0"
+         fi
         ;;
         rpl_*)
          INDEX="${FUNCTION:4}"
-         cat "${DATAPATH}/rpl_${INDEX}"
+         if [ -e "${DATAPATH}/rpl_${INDEX}" ]; then
+          cat "${DATAPATH}/rpl_${INDEX}"
+         else
+          echo "100"
+         fi
         ;;
 # SMART
         discovery_smartctl)
-         cat "${DATAPATH}/smartctl_discovery"
+         if [ -e "${DATAPATH}/smartctl_discovery" ]; then
+          cat "${DATAPATH}/smartctl_discovery"
+         else
+          echo ""
+         fi
         ;;
         smartctl.*)
          INDEX="${FUNCTION:9}"
-         cat "${DATAPATH}/smartctl.${INDEX}"
+         if [ -e "${DATAPATH}/smartctl.${INDEX}" ]; then
+          cat "${DATAPATH}/smartctl.${INDEX}"
+         else
+          echo "0"
+         fi
         ;;
 # SPEEDTEST
         discovery_speedtest)
-         cat "${DATAPATH}/speedtest_discovery"
+         if [ -e "${DATAPATH}/speedtest_discovery" ]; then
+          cat "${DATAPATH}/speedtest_discovery"
+         else
+          echo ""
+         fi
         ;;
         speedtest.*.server)
          INDEX="${FUNCTION:10:1}"
-         cat "${DATAPATH}/speedtest_${INDEX}.server"
+         if [ -e "${DATAPATH}/speedtest_${INDEX}.server" ]; then
+          cat "${DATAPATH}/speedtest_${INDEX}.server"
+         else
+          echo ""
+         fi
         ;;
         speedtest.*.extip)
          INDEX="${FUNCTION:10:1}"
-         cat "${DATAPATH}/speedtest_${INDEX}.extip"
+         if [ -e "${DATAPATH}/speedtest_${INDEX}.extip" ]; then
+          cat "${DATAPATH}/speedtest_${INDEX}.extip"
+         else
+          echo ""
+         fi
         ;;
         speedtest.*.down)
          INDEX="${FUNCTION:10:1}"
-         cat "${DATAPATH}/speedtest_${INDEX}.down"
+         if [ -e "${DATAPATH}/speedtest_${INDEX}.down" ]; then
+          cat "${DATAPATH}/speedtest_${INDEX}.down"
+         else
+          echo "0"
+         fi
         ;;
         speedtest.*.up)
          INDEX="${FUNCTION:10:1}"
-         cat "${DATAPATH}/speedtest_${INDEX}.up"
+         if [ -e "${DATAPATH}/speedtest_${INDEX}.up" ]; then
+          cat "${DATAPATH}/speedtest_${INDEX}.up"
+         else
+          echo "0"
+         fi
         ;;
 # other/unknown function request
         *)
