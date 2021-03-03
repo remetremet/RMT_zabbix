@@ -69,6 +69,14 @@ case ${FUNCTION} in
          INDEX="${FUNCTION:12}"
          cat "${DATAPATH}/network_discovery.${INDEX}.mac"
         ;;
+        network_ipv4.*)
+         INDEX="${FUNCTION:13}"
+         cat "${DATAPATH}/network_discovery.${INDEX}.ipv4"
+        ;;
+        network_ipv6.*)
+         INDEX="${FUNCTION:13}"
+         cat "${DATAPATH}/network_discovery.${INDEX}.ipv6"
+        ;;
 # PKG
         pkg)
          cat "${DATAPATH}/pkg"
