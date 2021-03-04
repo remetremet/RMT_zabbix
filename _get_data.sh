@@ -121,6 +121,14 @@ case ${FUNCTION} in
           echo ""
          fi
         ;;
+        network_ipv4ext.*)
+         INDEX="${FUNCTION:13}"
+         if [ -e "${DATAPATH}/network_discovery.${INDEX}.ipv4" ]; then
+          cat "${DATAPATH}/network_discovery.${INDEX}.ipv4"
+         else
+          echo ""
+         fi
+        ;;
         network_ipv6.*)
          INDEX="${FUNCTION:13}"
          if [ -e "${DATAPATH}/network_discovery.${INDEX}.ipv6" ]; then
