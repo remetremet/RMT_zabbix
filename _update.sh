@@ -14,8 +14,10 @@ if [[ ! -e "${ZBXPATH}/_database.sh" ]]; then
 fi
 . "${ZBXPATH}/_database.sh"
 
-if [ x"${AUTOUPDATE}" == x"no" ]; then
- exit;
+if [ x"$1" == x"auto" ]; then
+ if [ x"${AUTOUPDATE}" == x"no" ]; then
+  exit;
+ fi
 fi
 
 if [ ! -d "${ZBXPATH}" ]; then
