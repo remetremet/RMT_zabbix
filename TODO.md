@@ -14,6 +14,7 @@ List of functions, scripts and templates to include:
 **ACPI battery**|syslog gathering|script+template|waiting
 **CPU frequency**|syslog gathering|script+template|waiting
 **IoT temperature monitoring**|Arduino(ESP8266 and ESP32) and modules monitoring|script+template|waiting
+**SNMP iLO/DRAC/RSA monitoring**|different brands|template|waiting
 **FreeBSD OS updates**|available updates|template|waiting
 **FreeBSD OS updates**|available updates|script|**done**
 **FreeBSD packages updates**|available pkg updates|template|waiting
@@ -25,6 +26,8 @@ List of functions, scripts and templates to include:
 **SMART monitoring**|hours, temperatures, cycles, errors, SSD state|template|waiting
 **SMART monitoring**|fix Speedtest.Net bug with geolocation|script+template|**done**
 **SMART monitoring**|basic HDD and SSD monitoring|script+template|**done**
+**FreeBSD open ports**||template|**done**
+**FreeBSD running processes**||template|**done**
 **Network discovery**|better network discovery|script+template|**done**
 **Network discovery**|external IPs|script+template|**done**
 **Directory sizes**|logs, mails|template|**done**
@@ -33,3 +36,7 @@ List of functions, scripts and templates to include:
 **Running processes**|SSH, Rsync, Apache, ...|template|**done**
 **Running processes**|milter filters|template|**done**
 **Config files monitoring**|checksum of OS files monitoring|template|**done**
+**SNMP Mikrotik routers monitoring**|incl. LTE signal quality|template|**done**
+**SNMP UniFi AP monitoring**|different models|template|**done**
+**SNMP Switch monitoring**|different brands|template|**done**
+**SNMP Printer monitoring**|BW and color, different brands|template|**done**
