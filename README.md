@@ -33,6 +33,8 @@ To download use `fetch https://raw.githubusercontent.com/remetremet/RMT_zabbix/m
 
 
 ## Requirements
+ Almost all the scripts needs to be run as a root.
+ 
  - git - :wink:
  - fping - (for **rping.sh** function)
  - smartmontools - (for **smart.sh** function)
