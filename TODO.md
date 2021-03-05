@@ -5,7 +5,6 @@ List of functions, scripts and templates to include:
 
 | Name | Description | Parts | Status |
 |---|---|:---:|--:|
-**HDD traffic**|iostat or similar monitoring|script+template|waiting
 **Sendmail**|queue and messages in/out|script+template|waiting
 **IPFW blacklist**|item count, denied packets|script+template|waiting
 **Spam stats**|Spamassassin and Clamd monitoring|script+template|waiting
@@ -15,6 +14,8 @@ List of functions, scripts and templates to include:
 **CPU frequency**|syslog gathering|script+template|waiting
 **IoT temperature monitoring**|Arduino(ESP8266 and ESP32) and modules monitoring|script+template|waiting
 **SNMP iLO/DRAC/RSA monitoring**|different brands|template|waiting
+**HDD traffic**|iostat or similar monitoring|template|waiting
+**HDD traffic**|iostat or similar monitoring|script|**done**
 **FreeBSD OS updates**|available updates|template|waiting
 **FreeBSD OS updates**|available updates|script|**done**
 **FreeBSD packages updates**|available pkg updates|template|waiting
