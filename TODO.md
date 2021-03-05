@@ -14,8 +14,8 @@ List of functions, scripts and templates to include:
 **CPU frequency**|syslog gathering|script+template|waiting
 **IoT temperature monitoring**|Arduino(ESP8266 and ESP32) and modules monitoring|script+template|waiting
 **SNMP iLO/DRAC/RSA monitoring**|different brands|template|waiting
-**HDD traffic**|iostat or similar monitoring|template|waiting
-**HDD traffic**|iostat or similar monitoring|script|**done**
+**HDD traffic**|iostat monitoring|template|waiting
+**HDD traffic**|iostat monitoring|script|**done**
 **FreeBSD OS updates**|available updates|template|waiting
 **FreeBSD OS updates**|available updates|script|**done**
 **FreeBSD packages updates**|available pkg updates|template|waiting
