@@ -1,10 +1,11 @@
 Scripts (called by _cron.sh)
 ----
 - **freebsd_update.sh** - check for FreeBSD OS updates
-- **ipfw_traffic.sh** - get IPFW2 traffic counts
-- **mfi_get.sh** - get state of Ubiquiti mFI sockets
+- **hdd_traffic.sh** - get HDD operations counts (via iostat)
+- **ipfw_traffic.sh** - get IPFW2 traffic counts (via ipfw)
+- **mfi_get.sh** - get state of Ubiquiti mFI sockets (via curl)
 - **network_discovery.sh** - get network interface state
 - **pkg.sh** - check for FreeBSD packages updates
-- **rping.sh** - ping predefined IP addresses and save results
-- **smart.sh** - get SMART info from drives
+- **rping.sh** - ping predefined IP addresses and save results (via fping)
+- **smart.sh** - get SMART info from drives (via smartctl)
 - **speedtest.sh** - check WANs speed by Ookla's Speedtest.Net and save results
