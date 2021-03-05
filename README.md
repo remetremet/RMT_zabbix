@@ -13,10 +13,12 @@ These scripts are here mainly for my personal use. They monitor FreeBSD server f
 
 
 ## Scripts (called by [_cron.sh](_cron.sh))
+Server side scripts for asynchronous gathering of data.
 See [scripts/README.md](scripts/README.md)
 
 
 ## Templates
+Zabbix templates and configuration plugin.
 See [templates/README.md](templates/README.md)
 
 
