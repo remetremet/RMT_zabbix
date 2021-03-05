@@ -13,19 +13,11 @@ These scripts are here mainly for my personal use. They monitor FreeBSD server f
 
 
 ## Scripts (called by [_cron.sh](_cron.sh))
-- **freebsd_update.sh** - check for FreeBSD OS updates
-- **ipfw_traffic.sh** - get IPFW2 traffic counts
-- **mfi_get.sh** - get state of Ubiquiti mFI sockets
-- **network_discovery.sh** - get network interface state
-- **pkg.sh** - check for FreeBSD packages updates
-- **rping.sh** - ping predefined IP addresses and save results
-- **smart.sh** - get SMART info from drives
-- **speedtest.sh** - check WANs speed by Ookla's Speedtest.Net and save results
+See [scripts/README.md](scripts/README.md)
 
 
 ## Templates
-- **userparameter_rmtzabbix.conf** - file to be placed info ".../zabbix_agentd.conf.d/"
-- **RMT_zabbix.xml** - template to be imported to Zabbix Server 
+See [templates/README.md](templates/README.md)
 
 
 ## Setup
