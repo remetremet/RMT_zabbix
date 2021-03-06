@@ -46,6 +46,46 @@ case ${FUNCTION} in
                  ;;
          esac
         ;;
+# HDD_TRAFFIC
+        discovery_hdd)
+         if [ -e "${DATAPATH}/hdd_discovery" ]; then
+          cat "${DATAPATH}/hdd_discovery"
+         else
+          echo ""
+         fi
+        ;;
+        hdd_traffic_rps.*)
+         INDEX="${FUNCTION:16}"
+         if [ -e "${DATAPATH}/hdd_traffic.${INDEX}.rps" ]; then
+          cat "${DATAPATH}/hdd_traffic.${INDEX}.rps"
+         else
+          echo "0"
+         fi
+        ;;
+        hdd_traffic_wps.*)
+         INDEX="${FUNCTION:16}"
+         if [ -e "${DATAPATH}/hdd_traffic.${INDEX}.wps" ]; then
+          cat "${DATAPATH}/hdd_traffic.${INDEX}.wps"
+         else
+          echo "0"
+         fi
+        ;;
+        hdd_traffic_rkb.*)
+         INDEX="${FUNCTION:16}"
+         if [ -e "${DATAPATH}/hdd_traffic.${INDEX}.rkb" ]; then
+          cat "${DATAPATH}/hdd_traffic.${INDEX}.rkb"
+         else
+          echo "0"
+         fi
+        ;;
+        hdd_traffic_wkb.*)
+         INDEX="${FUNCTION:16}"
+         if [ -e "${DATAPATH}/hdd_traffic.${INDEX}.wkb" ]; then
+          cat "${DATAPATH}/hdd_traffic.${INDEX}.wkb"
+         else
+          echo "0"
+         fi
+        ;;
 # IPFW_TRAFFIC
         ipfw_traffic.*)
          INDEX="${FUNCTION:13}"
