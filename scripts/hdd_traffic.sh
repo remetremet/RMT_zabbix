@@ -21,12 +21,16 @@ TEMPFILE="${TEMPPATH}/hdd_traffic"
 ZBXFILE="${DATAPATH}/hdd_traffic"
 DISCOVERYFILE="${DATAPATH}/hdd_discovery"
 
-iostat  -x -w 57 -t da -c 2 | grep -v "device" > "${TEMPFILE}"
+iostat  -x -w 50 -t da -c 2 | grep -v "device" > "${TEMPFILE}"
 DISKS=`/sbin/sysctl -n kern.disks`
 XYZ=""
 for DISK in ${DISKS}; do
  XYZ="${XYZ}{\"{#HDDNAME}\":\"${DISK}\"},"
  cat "${TEMPFILE}" | grep "${DISK}" | tail -n 1 > "${TEMPFILE}.${DISK}"
+ read_per_sec=0;
+ write_per_sec=0;
+ read_kb_per_sec=0;
+ write_kb_per_sec=0;
  read_per_sec=`cat "${TEMPFILE}.${DISK}" | awk '{print $2}'`
  write_per_sec=`cat "${TEMPFILE}.${DISK}" | awk '{print $3}'`
  read_kb_per_sec=`cat "${TEMPFILE}.${DISK}" | awk '{print $4}'`
