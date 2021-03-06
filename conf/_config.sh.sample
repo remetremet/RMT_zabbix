@@ -15,6 +15,7 @@ AUTOUPDATE="no"
 
 # Optional modules (on/off)
 FREEBSD_UPDATE_ENABLE="yes"
+HDD_ENABLE="yes"
 IPFW_ENABLE="yes"
 MFI_ENABLE="no"
 NETWORK_DISCOVERY_ENABLE="yes"
