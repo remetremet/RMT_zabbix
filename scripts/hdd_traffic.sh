@@ -26,7 +26,7 @@ DISKS=`/sbin/sysctl -n kern.disks`
 XYZ=""
 for DISK in ${DISKS}; do
  XYZ="${XYZ}{\"{#HDDNAME}\":\"${DISK}\"},"
- cat "${TEMPFILE}" | grep "${DISK}" | tail -n 1 > "${TEMPFILE}.${DISK}"
+ cat "${TEMPFILE}" | grep "^${DISK}" | tail -n 1 > "${TEMPFILE}.${DISK}"
  read_per_sec=0;
  write_per_sec=0;
  read_kb_per_sec=0;
