@@ -19,10 +19,13 @@ if [ x"${HDD_TRAFFIC_ENABLE}" == x"no" ]; then
 fi
 TEMPFILE="${TEMPPATH}/hdd_traffic"
 ZBXFILE="${DATAPATH}/hdd_traffic"
+DISCOVERYFILE="${DATAPATH}/hdd_discovery"
 
 iostat  -x -w 57 -t da -c 2 | grep -v "device" > "${TEMPFILE}"
-DISKS=`sysctl kern.disks`
+DISKS=`/sbin/sysctl -n kern.disks`
+XYZ=""
 for DISK in ${DISKS}; do
+ XYZ="${XYZ}{\"{#HDDNAME}\":\"${DISK}\"},"
  cat "${TEMPFILE}" | grep "${DISK}" | tail -n 1 > "${TEMPFILE}.${DISK}"
  read_per_sec=`cat "${TEMPFILE}.${DISK}" | awk '{print $2}'`
  write_per_sec=`cat "${TEMPFILE}.${DISK}" | awk '{print $3}'`
@@ -33,5 +36,7 @@ for DISK in ${DISKS}; do
  echo "${read_kb_per_sec}" > "${ZBXFILE}.${DISK}.rkb"
  echo "${write_kb_per_sec}" > "${ZBXFILE}.${DISK}.wkb"
 done
-
+XYZ="[${XYZ::(-1)}]"
+echo "${XYZ}" > "${DISCOVERYFILE}"
 chmod 666 "${ZBXFILE}.*"
+chmod 666 "${DISCOVERYFILE}"

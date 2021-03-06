@@ -14,6 +14,9 @@ if [ x"${MINUTE}" == x"01" ]; then
 fi
 
 ### Run all the scripts
+if [ -e "${SCRIPTSPATH}/hdd_traffic.sh" ]; then
+ ${SCRIPTSPATH}/hdd_traffic.sh &
+fi
 if [ -e "${SCRIPTSPATH}/ipfw_traffic.sh" ]; then
  ${SCRIPTSPATH}/ipfw_traffic.sh &
 fi
