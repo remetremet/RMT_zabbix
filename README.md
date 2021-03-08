@@ -36,6 +36,9 @@ To download use `fetch https://raw.githubusercontent.com/remetremet/RMT_zabbix/m
  - py-speedtest-cli - (for **speedtest.sh** function)
  - [RMT_ipfw](https://github.com/remetremet/RMT_ipfw) - (for **ipfw_traffic.sh** function)
 
-![repo-size-image](https://img.shields.io/github/repo-size/remetremet/RMT_zabbix)
+
+![license-image](https://img.shields.io/github/license/remetremet/RMT_zabbix?style=plastic)
+![last-commit-image](https://img.shields.io/github/last-commit/remetremet/RMT_zabbix?style=plastic)
+![repo-size-image](https://img.shields.io/github/repo-size/remetremet/RMT_zabbix?style=plastic)
 
 Use it if like it.
