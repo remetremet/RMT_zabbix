@@ -1,16 +1,98 @@
 #!/usr/local/bin/bash
 
 ### DEFAULT SETTINGS
+# IPv4 addresses of default gateway or a few next hops (default settings can be override in _config.sh)
+if [ x"${GW_ADDRS6['0']}" == x"" ]; then
+ GW_ADDRS4["0"]=$( /usr/bin/netstat -nr4 | /usr/bin/grep "default" | /usr/bin/awk ' { print $2; } ' )
+fi
+
+# IPv6 addresses of default gateway or a few next hops (default settings can be override in _config.sh)
+if [ x"${GW_ADDRS6['0']}" == x"" ]; then
+ GW_ADDRS6["0"]=$( /usr/bin/netstat -nr6 | /usr/bin/grep "default" | /usr/bin/awk ' { print $2; } ' )
+fi
+
 # IP addresses to ping check (default settings can be override in _config.sh)
-if [ x"ADDRS4" == x"" ]; then
+if [ x"${ADDRS4}" == x"" ]; then
  ADDRS4="8.8.8.8 1.1.1.1 9.9.9.9 185.43.135.1 91.210.16.190"
 fi
-if [ x"ADDRS6" == x"" ]; then
+if [ x"${ADDRS6}" == x"" ]; then
  ADDRS6="2001:4860:4860::8844 2606:4700:4700::1111 2620:fe::fe 2001:148f:ffff::1 2001:7f8:14::1:1"
 fi
 
+# Human readable name of network interfaces (default settings can be override in _config.sh)
+if [ x"${IFNAMES['lo0']}" == x"" ]; then
+ IFNAMES["lo0"]="Loopback"
+fi
+IFNAMES_NAME="lagg wlan igb em bce bge bnxt bxe cxgb cxgbe fxp gem ixgbe ixl mlx4en mlx5en ue re ice"
+IFNAMES_CNT="0 1 2 3 4 5 6 7"
+for IN in ${IFNAMES_NAME}; do
+ for IC in ${IFNAMES_CNT}; do
+  IFN="${IN}${IC}"
+  if [ x"${IFNAMES[${IFN}]}" == x"" ]; then
+   IFNAMES[${IFN}]="${IFN}"
+  fi
+ done
+done
+
+# Human readable name of WANs (default settings can be override in _config.sh)
+if [ x"${FIB_NAMES['0']}" == x"" ]; then
+ FIB_NAMES["0"]="ISP 1"
+fi
+if [ x"${FIB_NAMES['1']}" == x"" ]; then
+ FIB_NAMES["1"]="ISP 2"
+fi
+if [ x"${FIB_NAMES['2']}" == x"" ]; then
+ FIB_NAMES["2"]="ISP 3"
+fi
+
+### FreeBSD OS updates check period in seconds (default settings can be override in _config.sh)
+if [ x"${FREEBSD_UPDATE_PERIOD}" == x"" ]; then
+ FREEBSD_UPDATE_PERIOD=86400
+fi
+if [ x"${FREEBSD_UPDATE_CONF}" == x"" ]; then
+ FREEBSD_UPDATE_CONF="/etc/freebsd-update.conf"
+fi
+
+### FreeBSD packages check period in seconds (default settings can be override in _config.sh)
+if [ x"${PKG_PERIOD}" == x"" ]; then
+ PKG_PERIOD=86400
+fi
+
+### Ubiquiti mFI sockets (default settings can be override in _config.sh)
+if [ x"${MFI_SESSIONID}" == x"" ]; then
+ MFI_SESSIONID="00000000000000000000000000000000"
+fi
+if [ x"${MFI_USERNAME}" == x"" ]; then
+ MFI_USERNAME="username"
+fi
+if [ x"${MFI_PASSWORD}" == x"" ]; then
+ MFI_PASSWORD="password"
+fi
+if [ x"${MFI_KEYS}" == x"" ]; then
+ MFI_KEYS="output voltage power powerfactor current"
+fi
+if [ x"${MFI_IDS}" == x"" ]; then
+ MFI_IDS=""
+fi
+if [ x"${MFI_IP['1']}" == x"" ]; then
+ MFI_IP["1"]="0.0.0.0"
+fi
+if [ x"${MFI_PORT['1']}" == x"" ]; then
+ MFI_PORT["1"]="1 2 3 4 5 6"
+fi
+
+### SMART monitoring of HDD/SSD
+# SMART check period in seconds
+if [ x"${SMART_PERIOD}" == x"" ]; then
+ SMART_PERIOD="3600"
+fi
+# Timeout to wake up sleeing disk to get SMART data
+if [ x"${SMART_FORCE_PERIOD}" == x"" ]; then
+ SMART_FORCE_PERIOD="86400"
+fi
+
 # Speedtest.Net selected servers (default settings can be override in _config.sh)
-if [ x"SPEEDTEST_SERVERS" == x"" ]; then
+if [ x"${SPEEDTEST_SERVERS}" == x"" ]; then
  SPEEDTEST_SERVERS=""
  SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=21975"
  SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=21429"
@@ -24,6 +106,17 @@ if [ x"SPEEDTEST_SERVERS" == x"" ]; then
  SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=30193"
  SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=16745"
 fi
+# Proceed speedtest once a period (in seconds) (default settings can be override in _config.sh)
+if [ x"${SPEEDTEST_PERIOD['0']}" == x"" ]; then
+ SPEEDTEST_PERIOD["0"]="86400"
+fi
+if [ x"${SPEEDTEST_PERIOD['1']}" == x"" ]; then
+ SPEEDTEST_PERIOD["1"]="86400"
+fi
+if [ x"${SPEEDTEST_PERIOD['2']}" == x"" ]; then
+ SPEEDTEST_PERIOD["2"]="86400"
+fi
+
 
 
 ### LOOKUP ARRAYS
@@ -149,3 +242,7 @@ CP_PROG="/bin/cp"
 CAMCONTROL_PROG="/sbin/camcontrol"
 SMARTCTL_PROG="/usr/local/sbin/smartctl"
 SPEEDTEST_PROG="/usr/local/bin/speedtest-cli"
+FPING_PROG="/usr/local/sbin/fping"
+NETSTAT_PROG="/usr/bin/netstat"
+AWK_PROG="/usr/bin/awk"
+GREP_PROG="/usr/bin/grep"
