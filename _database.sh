@@ -11,7 +11,7 @@ SPEEDTEST_PROG="speedtest-cli"
 ADDRS4="${ADDRS4} 8.8.8.8 1.1.1.1 9.9.9.9 185.43.135.1 91.210.16.190"
 ADDRS6="${ADDRS6} 2001:4860:4860::8844 2606:4700:4700::1111 2620:fe::fe 2001:148f:ffff::1 2001:7f8:14::1:1"
 
-# Selected servers
+# Speedtest.Net selected servers
 if [ x"SPEEDTEST_SERVERS" == x"" ]; then
  SPEEDTEST_SERVERS=""
  SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=21975"
