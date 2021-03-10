@@ -1,7 +1,7 @@
 #!/usr/local/bin/bash -
 ZBXPATH=$( dirname "$(realpath $0)" )
 if [[ -e "${ZBXPATH}/../_config.sh" ]]; then
- ZBXPATH="${ZBXPATH}/.."
+ ZBXPATH=$( dirname "${ZBXPATH}" )
 else
  ZBXPATH="${ZBXPATH}"
 fi
@@ -263,6 +263,22 @@ case ${FUNCTION} in
           cat "${DATAPATH}/speedtest_${INDEX}.up"
          else
           echo "0"
+         fi
+        ;;
+# SSL_CERT
+        discovery_ssl)
+         if [ -e "${DATAPATH}/ssl_discovery" ]; then
+          cat "${DATAPATH}/ssl_discovery"
+         else
+          echo ""
+         fi
+        ;;
+        ssl.*)
+         INDEX="${FUNCTION:4}"
+         if [ -e "${DATAPATH}/ssl_${INDEX}" ]; then
+          cat "${DATAPATH}/ssl_${INDEX}"
+         else
+          echo ""
          fi
         ;;
 # other/unknown function request
