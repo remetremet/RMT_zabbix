@@ -1,7 +1,7 @@
 #!/usr/local/bin/bash -
 ZBXPATH=$( dirname "$(realpath $0)" )
 if [[ -e "${ZBXPATH}/../_config.sh" ]]; then
- ZBXPATH="${ZBXPATH}/.."
+ ZBXPATH=$( dirname "${ZBXPATH}" )
 else
  ZBXPATH="${ZBXPATH}"
 fi
