@@ -9,3 +9,4 @@ Scripts (called by _cron.sh)
 - **rping.sh** - ping predefined IP addresses and save results (via fping)
 - **smart.sh** - get SMART info from drives (via smartctl)
 - **speedtest.sh** - check WANs speed by Ookla's Speedtest.Net and save results
+- **ssl_cert.sh** - check SSL certificate expiration date
