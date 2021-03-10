@@ -1,12 +1,17 @@
 #!/usr/local/bin/bash
 ZBXPATH=$( dirname "$(realpath $0)" )
+if [[ -e "${ZBXPATH}/../_config.sh" ]]; then
+ ZBXPATH=$( dirname "${ZBXPATH}" )
+else
+ ZBXPATH="${ZBXPATH}"
+fi
 SCRIPTSPATH="${ZBXPATH}/scripts"
 
 HOUR=`date +%H`
 MINUTE=`date +%M`
 
 ### Get updates from Github repo every hour
-if [ x"${MINUTE}" == x"01" ]; then
+if [ x"${MINUTE}" == x"00" ]; then
  if [ -e "${ZBXPATH}/_update.sh" ]; then
   ${ZBXPATH}/_update.sh auto > /dev/null 2>&1 &
  fi
