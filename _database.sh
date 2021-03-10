@@ -1,17 +1,15 @@
 #!/usr/local/bin/bash
 
-# Used program paths
-SETFIB_PROG="setfib"
-RM_PROG="/bin/rm"
-CAMCONTROL_PROG="/sbin/camcontrol"
-SMARTCTL_PROG="/usr/local/sbin/smartctl"
-SPEEDTEST_PROG="speedtest-cli"
+### DEFAULT SETTINGS
+# IP addresses to ping check (default settings can be override in _config.sh)
+if [ x"ADDRS4" == x"" ]; then
+ ADDRS4="8.8.8.8 1.1.1.1 9.9.9.9 185.43.135.1 91.210.16.190"
+fi
+if [ x"ADDRS6" == x"" ]; then
+ ADDRS6="2001:4860:4860::8844 2606:4700:4700::1111 2620:fe::fe 2001:148f:ffff::1 2001:7f8:14::1:1"
+fi
 
-# IP addresses to ping check (by default its public DNS and peering ports)
-ADDRS4="${ADDRS4} 8.8.8.8 1.1.1.1 9.9.9.9 185.43.135.1 91.210.16.190"
-ADDRS6="${ADDRS6} 2001:4860:4860::8844 2606:4700:4700::1111 2620:fe::fe 2001:148f:ffff::1 2001:7f8:14::1:1"
-
-# Speedtest.Net selected servers
+# Speedtest.Net selected servers (default settings can be override in _config.sh)
 if [ x"SPEEDTEST_SERVERS" == x"" ]; then
  SPEEDTEST_SERVERS=""
  SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=21975"
@@ -27,6 +25,8 @@ if [ x"SPEEDTEST_SERVERS" == x"" ]; then
  SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=16745"
 fi
 
+
+### LOOKUP ARRAYS
 # Human readable names for IP addresses
 unset ADDR_NAMES; declare -A ADDR_NAMES;
 ADDR_NAMES["127.0.0.1"]="Localhost"
@@ -111,10 +111,11 @@ DIRcriticals["md"]=3758096384
 DIRcriticals["dataSQL"]=64424509440
 DIRcriticals["dataSQL2"]=64424509440
 DIRcriticals["data"]=536870912000
-DIRcriticals["vardbmysql"]=64424509440
+DIRcriticals["vardbmysql"]=102005473280
 DIRcriticals["vardbmysql2"]=102005473280
 
-# IPFW2 count rules numbers (3x WAN, 3x LAN, IPv4/6)
+### FIREWALL SETTINGS
+# IPFW2 count rules numbers (3x WAN, 3x LAN, IPv4/6, in + out)
 IPFW_LAN1_6OUT="01000"
 IPFW_LAN1_6IN="03000"
 IPFW_LAN1_4OUT="05000"
@@ -139,3 +140,12 @@ IPFW_WAN3_6IN="09200"
 IPFW_WAN3_6OUT="11200"
 IPFW_WAN3_4IN="13200"
 IPFW_WAN3_4OUT="15200"
+
+### PROGRAM PATHS
+# Used program paths
+SETFIB_PROG="/usr/sbin/setfib"
+RM_PROG="/bin/rm"
+CP_PROG="/bin/cp"
+CAMCONTROL_PROG="/sbin/camcontrol"
+SMARTCTL_PROG="/usr/local/sbin/smartctl"
+SPEEDTEST_PROG="/usr/local/bin/speedtest-cli"
