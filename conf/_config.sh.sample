@@ -1,14 +1,14 @@
 #!/usr/local/bin/bash
 ZBXPATH=$( dirname "$(realpath $0)" )
 if [[ -e "${ZBXPATH}/../_config.sh" ]]; then
- ZBXPATH="${ZBXPATH}/.."
+ ZBXPATH=$( dirname "${ZBXPATH}" )
 else
  ZBXPATH="${ZBXPATH}"
 fi
 
 
 ###
-### Basic functions definition
+### Basic definition
 ###
 # Automaticly update from Github repo
 AUTOUPDATE="no"
@@ -17,79 +17,85 @@ AUTOUPDATE="no"
 FREEBSD_UPDATE_ENABLE="yes"
 HDD_ENABLE="yes"
 IPFW_ENABLE="yes"
-MFI_ENABLE="no"
+MFI_ENABLE="yes"
 NETWORK_DISCOVERY_ENABLE="yes"
 PKG_ENABLE="yes"
 RPING_ENABLE="yes"
 SMART_ENABLE="yes"
 SPEEDTEST_ENABLE="yes"
+SSL_ENABLE="yes"
 
 
 ###
 ### IP addresses definitions
 ###
-# IPv4 addresses of default gateway and it's possible to add few next hops too
-unset GW_ADDRS4; declare -A GW_ADDRS4;
-GW_ADDRS4["0"]="127.0.0.1"
-
-# IPv6 addresses of default gateway and it's possible to add few next hops too
-unset GW_ADDRS6; declare -A GW_ADDRS6;
-GW_ADDRS6["0"]="::1"
-
 # Multiple WANs supported in both stacks (IPv4/6)
 FIBS4="0"
 FIBS6="0"
 
-# IP addresses to ping check (by default its public DNS and peering ports)
-ADDRS4=""
-ADDRS6=""
+# IPv4 addresses of default gateway or a few next hops (leave empty for default - server GW)
+unset GW_ADDRS4; declare -A GW_ADDRS4;
+#GW_ADDRS4["0"]=""
+#GW_ADDRS4["0"]=$( netstat -nr4 | grep "default" | awk ' { print $2; } ' )
 
-# Human readable name of network interfaces
+# IPv6 addresses of default gateway or a few next hops (leave empty for default - server GW)
+unset GW_ADDRS6; declare -A GW_ADDRS6;
+#GW_ADDRS6["0"]=""
+#GW_ADDRS6["0"]=$( netstat -nr6 | grep "default" | awk ' { print $2; } ' )
+
+# IP addresses to ping check (leave empty for default - public DNS and peering ports)
+#ADDRS4=""
+#ADDRS6=""
+
+# Human readable name of network interfaces (leave empty for default)
 unset IFNAMES; declare -A IFNAMES;
-IFNAMES["lo0"]="Loopback"
-IFNAMES["bce0"]="ISP"
-IFNAMES["bce1"]="LAN"
+#IFNAMES["lo0"]="Loopback"
+#IFNAMES["bce0"]="ISP"
+#IFNAMES["bce1"]="LAN"
 
-# Human readable name of WANs
+# Human readable name of WANs (leave empty for default)
 unset FIB_NAMES; declare -A FIB_NAMES;
-FIB_NAMES["0"]="ISP 1"
-FIB_NAMES["1"]="ISP 2"
-FIB_NAMES["2"]="ISP 3"
+#FIB_NAMES["0"]="ISP 1"
+#FIB_NAMES["1"]="ISP 2"
+#FIB_NAMES["2"]="ISP 3"
 
 
 ###
 ### Script specific settings
 ###
-### FreeBSD OS updates check period in seconds 
-FREEBSD_UPDATE_PERIOD=86400
-FREEBSD_UPDATE_CONF="/etc/freebsd-update.conf"
+### FreeBSD OS updates check period in seconds (leave empty for default)
+#FREEBSD_UPDATE_PERIOD=""
+#FREEBSD_UPDATE_CONF=""
 
-### FreeBSD packages check period in seconds 
-PKG_PERIOD=86400
+### FreeBSD packages check period in seconds (leave empty for default)
+#PKG_PERIOD=""
 
-### Ubiquiti mFI sockets
-MFI_SESSIONID="00000000000000000000000000000000"
-MFI_USERNAME="username"
-MFI_PASSWORD="password"
-MFI_KEYS="output voltage power powerfactor current"
-MFI_IDS=""
+
+### Ubiquiti mFI sockets (leave empty for default)
 unset MFI_IP; declare -A MFI_IP;
 unset MFI_PORT; declare -A MFI_PORT;
-MFI_IP["1"]="0.0.0.0"
-MFI_PORT["1"]="1 2 3"
+#MFI_SESSIONID="00000000000000000000000000000000"
+#MFI_USERNAME="username"
+#MFI_PASSWORD="password"
+#MFI_KEYS="output voltage power powerfactor current"
+#MFI_IDS=""
+#MFI_IP["1"]="0.0.0.0"
+#MFI_PORT["1"]="1 2 3"
 
 ### SMART monitoring of HDD/SSD
-# SMART check period in seconds
-SMART_PERIOD="3600"
-# Timeout to wake up sleeing disk to get SMART data (by default it's gathered from ACTIVE/SPINNING drive only
-SMART_FORCE_PERIOD="86400"
+# SMART check period in seconds (leave empty for default)
+#SMART_PERIOD="3600"
+# Timeout to wake up sleeing disk to get SMART data (leave empty for default)
+#SMART_FORCE_PERIOD="86400"
 
-### Ookla Speedtest.Net settings
-# Proceed speedtest once a period (in seconds), for each WAN, 86400 (=1 day) is default
+### Speedtest.Net settings
+# Speedtest.Net selected servers (leave empty for default = public DNS and peering ports)
+#SPEEDTEST_SERVERS=""
+# Proceed speedtest once a period (in seconds) (leave empty for default = 86400 seconds)
 unset SPEEDTEST_PERIOD; declare -A SPEEDTEST_PERIOD;
-SPEEDTEST_PERIOD["0"]="86400"
-SPEEDTEST_PERIOD["1"]="86400"
-SPEEDTEST_PERIOD["2"]="86400"
+#SPEEDTEST_PERIOD["0"]=""
+#SPEEDTEST_PERIOD["1"]=""
+#PEEDTEST_PERIOD["2"]=""
 
 
 ###
