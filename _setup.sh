@@ -55,3 +55,9 @@ fi
 cp -f ${ZBXPATH}/github/templates/userparameter_rmtzabbix.conf ${ZBXCONFDIR}/
 /usr/local/etc/rc.d/zabbix_agentd restart
 
+echo <<EOF
+-----
+ Do not forget to add cron job via "crontab -e":
+ *       *       *       *       *       ${ZBXPATH}/_cron.sh
+-----
+EOF
