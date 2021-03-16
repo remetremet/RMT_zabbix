@@ -13,16 +13,22 @@ fi
 
 # Multiple WANs supported in both stacks (IPv4/6) (default settings can be override in _config.sh)
 if [ x"${FIBS4}" == x"" ]; then
+ maxfibs=$(( $( sysctl -n net.fibs ) - 1 ))
  FIBS4="0"
- for FI in {1..$(( $( sysctl -n net.fibs ) - 1 ))}; do
-  FIBS4="${FIBS4} ${FI}"
- done
+ if [ "${maxfibs}" > "0" ]; then
+  for FI in $( seq 1 ${maxfivs} ); do
+   FIBS4="${FIBS4} ${FI}"
+  done
+ fi
 fi
 if [ x"${FIBS6}" == x"" ]; then
+ maxfibs=$(( $( sysctl -n net.fibs ) - 1 ))
  FIBS6="0"
- for FI in {1..$(( $( sysctl -n net.fibs ) - 1 ))}; do
-  FIBS6="${FIBS4} ${FI}"
- done
+ if [ "${maxfibs}" > "0" ]; then
+  for FI in $( seq 1 ${maxfivs} ); do
+   FIBS6="${FIBS4} ${FI}"
+  done
+ fi
 fi
 
 # IP addresses to ping check (default settings can be override in _config.sh)
