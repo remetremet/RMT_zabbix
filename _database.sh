@@ -14,9 +14,15 @@ fi
 # Multiple WANs supported in both stacks (IPv4/6) (default settings can be override in _config.sh)
 if [ x"${FIBS4}" == x"" ]; then
  FIBS4="0"
+ for FI in {1..$(( $( sysctl -n net.fibs ) - 1 ))}; do
+  FIBS4="${FIBS4} ${FI}"
+ done
 fi
 if [ x"${FIBS6}" == x"" ]; then
  FIBS6="0"
+ for FI in {1..$(( $( sysctl -n net.fibs ) - 1 ))}; do
+  FIBS6="${FIBS4} ${FI}"
+ done
 fi
 
 # IP addresses to ping check (default settings can be override in _config.sh)
