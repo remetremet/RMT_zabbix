@@ -11,6 +11,14 @@ if [ x"${GW_ADDRS6['0']}" == x"" ]; then
  GW_ADDRS6["0"]=$( /usr/bin/netstat -nr6 | /usr/bin/grep "default" | /usr/bin/awk ' { print $2; } ' )
 fi
 
+# Multiple WANs supported in both stacks (IPv4/6) (default settings can be override in _config.sh)
+if [ x"${FIBS4}" == x"" ]; then
+ FIBS4="0"
+fi
+if [ x"${FIBS6}" == x"" ]; then
+ FIBS6="0"
+fi
+
 # IP addresses to ping check (default settings can be override in _config.sh)
 if [ x"${ADDRS4}" == x"" ]; then
  ADDRS4="8.8.8.8 1.1.1.1 9.9.9.9 185.43.135.1 91.210.16.190"
