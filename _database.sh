@@ -2,12 +2,14 @@
 
 ### DEFAULT SETTINGS
 # IPv4 addresses of default gateway or a few next hops (default settings can be override in _config.sh)
-if [ x"${GW_ADDRS6['0']}" == x"" ]; then
+TEST=${GW_ADDRS4["0"]}
+if [ x"${TEST}" == x"" ]; then
  GW_ADDRS4["0"]=$( /usr/bin/netstat -nr4 | /usr/bin/grep "default" | /usr/bin/awk ' { print $2; } ' )
 fi
 
 # IPv6 addresses of default gateway or a few next hops (default settings can be override in _config.sh)
-if [ x"${GW_ADDRS6['0']}" == x"" ]; then
+TEST=${GW_ADDRS6["0"]}
+if [ x"${TEST}" == x"" ]; then
  GW_ADDRS6["0"]=$( /usr/bin/netstat -nr6 | /usr/bin/grep "default" | /usr/bin/awk ' { print $2; } ' )
 fi
 
@@ -40,7 +42,8 @@ if [ x"${ADDRS6}" == x"" ]; then
 fi
 
 # Human readable name of network interfaces (default settings can be override in _config.sh)
-if [ x"${IFNAMES['lo0']}" == x"" ]; then
+TEST=${IFNAMES["lo0"]}
+if [ x"${TEST}" == x"" ]; then
  IFNAMES["lo0"]="Loopback"
 fi
 IFNAMES_NAME="lagg wlan igb em bce bge bnxt bxe cxgb cxgbe fxp gem ixgbe ixl mlx4en mlx5en ue re ice"
@@ -48,21 +51,29 @@ IFNAMES_CNT="0 1 2 3 4 5 6 7"
 for IN in ${IFNAMES_NAME}; do
  for IC in ${IFNAMES_CNT}; do
   IFN="${IN}${IC}"
-  if [ x"${IFNAMES[${IFN}]}" == x"" ]; then
+  TEST=${IFNAMES["${IFN}"]}
+  if [ x"${TEST}" == x"" ]; then
    IFNAMES[${IFN}]="${IFN}"
   fi
  done
 done
 
 # Human readable name of WANs (default settings can be override in _config.sh)
-if [ x"${FIB_NAMES['0']}" == x"" ]; then
+TEST=${FIB_NAMES["0"]}
+if [ x"${TEST}" == x"" ]; then
  FIB_NAMES["0"]="ISP 1"
 fi
-if [ x"${FIB_NAMES['1']}" == x"" ]; then
+TEST=${FIB_NAMES["1"]}
+if [ x"${TEST}" == x"" ]; then
  FIB_NAMES["1"]="ISP 2"
 fi
-if [ x"${FIB_NAMES['2']}" == x"" ]; then
+TEST=${FIB_NAMES["2"]}
+if [ x"${TEST}" == x"" ]; then
  FIB_NAMES["2"]="ISP 3"
+fi
+TEST=${FIB_NAMES["3"]}
+if [ x"${TEST}" == x"" ]; then
+ FIB_NAMES["3"]="ISP 4"
 fi
 
 ### FreeBSD OS updates check period in seconds (default settings can be override in _config.sh)
@@ -94,10 +105,12 @@ fi
 if [ x"${MFI_IDS}" == x"" ]; then
  MFI_IDS=""
 fi
-if [ x"${MFI_IP['1']}" == x"" ]; then
+TEST=${MFI_IP["1"]}
+if [ x"${TEST}" == x"" ]; then
  MFI_IP["1"]="0.0.0.0"
 fi
-if [ x"${MFI_PORT['1']}" == x"" ]; then
+TEST=${MFI_PORT["1"]}
+if [ x"${TEST}" == x"" ]; then
  MFI_PORT["1"]="1 2 3 4 5 6"
 fi
 
@@ -127,14 +140,21 @@ if [ x"${SPEEDTEST_SERVERS}" == x"" ]; then
  SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=16745"
 fi
 # Proceed speedtest once a period (in seconds) (default settings can be override in _config.sh)
-if [ x"${SPEEDTEST_PERIOD['0']}" == x"" ]; then
+TEST=${SPEEDTEST_PERIOD["0"]}
+if [ x"${TEST}" == x"" ]; then
  SPEEDTEST_PERIOD["0"]="86400"
 fi
-if [ x"${SPEEDTEST_PERIOD['1']}" == x"" ]; then
+TEST=${SPEEDTEST_PERIOD["1"]}
+if [ x"${TEST}" == x"" ]; then
  SPEEDTEST_PERIOD["1"]="86400"
 fi
-if [ x"${SPEEDTEST_PERIOD['2']}" == x"" ]; then
+TEST=${SPEEDTEST_PERIOD["2"]}
+if [ x"${TEST}" == x"" ]; then
  SPEEDTEST_PERIOD["2"]="86400"
+fi
+TEST=${SPEEDTEST_PERIOD["3"]}
+if [ x"${TEST}" == x"" ]; then
+ SPEEDTEST_PERIOD["3"]="86400"
 fi
 
 
