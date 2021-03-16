@@ -17,7 +17,7 @@ fi
 if [ x"${FIBS4}" == x"" ]; then
  maxfibs=$(( $( sysctl -n net.fibs ) - 1 ))
  FIBS4="0"
- if [[ "${maxfibs}" >= "1" ]]; then
+ if [[ ! x"${maxfibs}" == x"0" ]]; then
   for FI in $( seq 1 ${maxfivs} ); do
    FIBS4="${FIBS4} ${FI}"
   done
@@ -26,7 +26,7 @@ fi
 if [ x"${FIBS6}" == x"" ]; then
  maxfibs=$(( $( sysctl -n net.fibs ) - 1 ))
  FIBS6="0"
- if [[ "${maxfibs}" >= "1" ]]; then
+ if [[ ! x"${maxfibs}" == x"0" ]]; then
   for FI in $( seq 1 ${maxfivs} ); do
    FIBS6="${FIBS6} ${FI}"
   done
