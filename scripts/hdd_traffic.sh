@@ -17,6 +17,7 @@ fi
 if [ x"${HDD_TRAFFIC_ENABLE}" == x"no" ]; then
  exit;
 fi
+
 TEMPFILE="${TEMPPATH}/hdd_traffic"
 ZBXFILE="${DATAPATH}/hdd_traffic"
 DISCOVERYFILE="${DATAPATH}/hdd_discovery"
@@ -42,5 +43,5 @@ for DISK in ${DISKS}; do
 done
 XYZ="[${XYZ::(-1)}]"
 echo "${XYZ}" > "${DISCOVERYFILE}"
-chmod 666 "${ZBXFILE}.*"
 chmod 666 "${DISCOVERYFILE}"
+chmod 666 ${ZBXFILE}.*
