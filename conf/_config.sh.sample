@@ -14,6 +14,7 @@ fi
 AUTOUPDATE="no"
 
 # Optional modules (on/off)
+ACPIBATT_ENABLE="yes"
 FREEBSD_UPDATE_ENABLE="yes"
 HDD_ENABLE="yes"
 IPFW_ENABLE="yes"
@@ -30,8 +31,8 @@ SSL_ENABLE="yes"
 ### IP addresses definitions
 ###
 # Multiple WANs supported in both stacks (IPv4/6)
-FIBS4="0"
-FIBS6="0"
+#FIBS4="0"
+#FIBS6="0"
 
 # IPv4 addresses of default gateway or a few next hops (leave empty for default - server GW)
 unset GW_ADDRS4; declare -A GW_ADDRS4;
