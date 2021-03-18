@@ -18,9 +18,9 @@ if [ x"${ACPIBATT_ENABLE}" == x"no" ]; then
  exit;
 fi
 
-ZBXFILE="${ZBXPATH}/acpi_battery"
+ZBXFILE="${DATAPATH}/acpi_battery"
 TEMPFILE="${TEMPPATH}/acpi_battery"
-SEMAPHOREFILE="${TEMPPATH}/.zabbix_battery"
+SEMAPHOREFILE="${TEMPPATH}/.zabbix_acpibatt"
 
 if [[ -e "${SEMAPHOREFILE}" ]]; then
  fts=`stat -f %m "${SEMAPHOREFILE}"`
@@ -39,4 +39,5 @@ if [[ ! -e "${SEMAPHOREFILE}" ]]; then
   chmod 666 "${ZBXFILE}"
  fi
 
+ rm -f "${SEMAPHOREFILE}" >> /dev/null 2>&1
 fi
