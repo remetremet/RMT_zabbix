@@ -23,7 +23,7 @@ ZBXFILE="${DATAPATH}/hdd_traffic"
 DISCOVERYFILE="${DATAPATH}/hdd_discovery"
 
 iostat  -x -w 50 -t da -c 2 | grep -v "device" > "${TEMPFILE}"
-DISKS=`/sbin/sysctl -n kern.disks | sed -E 's/(cd|ses).//g' | sed -E 's/ +/ /g'`
+DISKS=`/sbin/sysctl -n kern.disks | sed -E 's/ (cd|ses)./ /g' | sed -E 's/ +/ /g'`
 XYZ=""
 for DISK in ${DISKS}; do
  XYZ="${XYZ}{\"{#HDDNAME}\":\"${DISK}\"},"
