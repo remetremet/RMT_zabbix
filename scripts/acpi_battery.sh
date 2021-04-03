@@ -23,6 +23,7 @@ TEMPFILE="${TEMPPATH}/acpi_battery"
 SEMAPHOREFILE="${TEMPPATH}/.zabbix_acpibatt"
 
 if [[ -e "${SEMAPHOREFILE}" ]]; then
+ tts=`date +%s`
  fts=`stat -f %m "${SEMAPHOREFILE}"`
  fts=$((${fts}+85500))
  if [[ "${fts}" -lt "${tts}" ]]; then
