@@ -27,6 +27,7 @@ FIBS4="${FIBS4:-0}"
 FIBS6="${FIBS6:-0}"
 
 if [[ -e "${SEMAPHOREFILE}" ]]; then
+ tts=`date +%s`
  fts=`stat -f %m "${SEMAPHOREFILE}"`
  fts=$((${fts}+85500))
  if [[ "${fts}" -lt "${tts}" ]]; then
