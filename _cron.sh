@@ -11,7 +11,7 @@ HOUR=`date +%H`
 MINUTE=`date +%M`
 
 ### Get updates from Github repo every hour
-if [ x"${MINUTE}" == x"00" ]; then
+if [ x"${MINUTE}" == x"11" ]; then
  if [ -e "${ZBXPATH}/_update.sh" ]; then
   ${ZBXPATH}/_update.sh auto > /dev/null 2>&1 &
  fi
