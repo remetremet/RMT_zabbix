@@ -33,6 +33,9 @@ if [ x"${MINUTE}" == x"01" ]; then
   ${SCRIPTSPATH}/network_discovery.sh &
  fi
 fi
+if [ -e "${SCRIPTSPATH}/openports.sh" ]; then
+ ${SCRIPTSPATH}/openports.sh &
+fi
 if [ -e "${SCRIPTSPATH}/rping.sh" ]; then
  ${SCRIPTSPATH}/rping.sh &
 fi
