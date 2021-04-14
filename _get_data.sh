@@ -177,6 +177,14 @@ case ${FUNCTION} in
           echo ""
          fi
         ;;
+# OPENPORTS
+        openports)
+         if [ -e "${DATAPATH}/openports" ]; then
+          cat "${DATAPATH}/openports"
+         else
+          echo "0"
+         fi
+        ;;
 # PKG
         pkg)
          if [ -e "${DATAPATH}/pkg" ]; then
