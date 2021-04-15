@@ -63,14 +63,14 @@ for FIB in ${FIBS4}; do
   Sdown=""
   Sup=""
   Sserver=""
-  if [[ "${SPEEDTEST_RUN}" -eq "python" ]]; then
+  if [[ x"${SPEEDTEST_RUN}" == x"python" ]]; then
    setfib ${FIB} speedtest-cli --list > "${TEMPFILE}.${FIB}.serverlist"
    setfib ${FIB} speedtest-cli --csv --csv-delimiter ";" --timeout 15 ${SPEEDTEST_SERVER} > "${TEMPFILE}.${FIB}"
    err=$?
    Sdown=`cat "${TEMPFILE}.${FIB}" | awk -F ";" '{print $7}' | sed 's/\./ /g' | awk '{T=$1; if(T=="")T=0; print T;}'`
    Sup=`cat "${TEMPFILE}.${FIB}" | awk -F ";" '{print $8}' | sed 's/\./ /g' | awk '{T=$1; if(T=="")T=0; print T;}'`
    Sserver=`cat "${TEMPFILE}.${FIB}" | awk -F ";" '{print $2","$3" ["$1"]"}'`
-  elif [[ "${SPEEDTEST_RUN}" -eq "ookla" ]]; then
+  elif [[ x"${SPEEDTEST_RUN}" == x"ookla" ]]; then
    setfib ${FIB} speedtest -L > "${TEMPFILE}.${FIB}.serverlist"
    setfib ${FIB} speedtest -fcsv ${SPEEDTEST_SERVER} > "${TEMPFILE}.${FIB}"
    err=$?
