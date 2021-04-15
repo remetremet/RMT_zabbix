@@ -76,7 +76,7 @@ for FIB in ${FIBS4}; do
    err=$?
    Sdown=`cat "${TEMPFILE}.${FIB}" | awk -F "," '{ print $6}' | sed 's/"//g' | sed 's/$/*8/' | bc | awk '{T=$1; if(T=="")T=0; print T;}'`
    Sup=`cat "${TEMPFILE}.${FIB}" | awk -F "," '{ print $7}' | sed 's/"//g' | sed 's/$/*8/' | bc | awk '{T=$1; if(T=="")T=0; print T;}'`
-   Sserver=`cat "${TEMPFILE}.${FIB}" | awk -F "," '{ print $1" ["$2"]"}' | sed 's/"//g'
+   Sserver=`cat "${TEMPFILE}.${FIB}" | awk -F "," '{ print $1" ["$2"]"}' | sed 's/"//g'`
   fi
   if [[ "${err}" -gt "0" ]]; then
    /bin/rm -f "${TEMPFILE}.${FIB}" >> /dev/null 2>&1
