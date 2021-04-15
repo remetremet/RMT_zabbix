@@ -90,14 +90,16 @@ unset MFI_PORT; declare -A MFI_PORT;
 # Timeout to wake up sleeing disk to get SMART data (leave empty for default)
 #SMART_FORCE_PERIOD="86400"
 
-### Speedtest.Net settings
-# Speedtest.Net selected servers (leave empty for default = public DNS and peering ports)
-#SPEEDTEST_SERVERS=""
+### Speedtest settings
+# Speedtest engine selection (python = p37-speedtest-cli, ookla = official, libre = librespeed)
+#SPEEDTEST_RUN="ookla"
+# Speedtest selected server (leave empty for autoselection)
+#SPEEDTEST_SERVER=""
 # Proceed speedtest once a period (in seconds) (leave empty for default = 86400 seconds)
 unset SPEEDTEST_PERIOD; declare -A SPEEDTEST_PERIOD;
 #SPEEDTEST_PERIOD["0"]=""
 #SPEEDTEST_PERIOD["1"]=""
-#PEEDTEST_PERIOD["2"]=""
+#SPEEDTEST_PERIOD["2"]=""
 
 
 ###
