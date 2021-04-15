@@ -27,7 +27,7 @@ FIBS4="${FIBS4:-0}"
 FIBS6="${FIBS6:-0}"
 
 SPEEDTEST_RUN="${SPEEDTEST_RUN:-python}" # python = py37-speedtest-cli, ookla = ookla's speedtest
-if [ x"${SPEEDTEST_RUN}" == x"" ]; then
+if [ x"${SPEEDTEST_SERVER}" == x"" ]; then
  SPEEDTEST_SERVER=""
 else
  if [[ "${SPEEDTEST_RUN}" -eq "python" ]]; then
