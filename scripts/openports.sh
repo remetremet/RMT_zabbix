@@ -31,6 +31,7 @@ if [[ -e "${SEMAPHOREFILE}" ]]; then
 fi
 if [[ ! -e "${SEMAPHOREFILE}" ]]; then
  touch "${SEMAPHOREFILE}" >> /dev/null 2>&1
- netstat -na | grep "LISTEN" | awk '{ print $4; }' | sed -E 's/^.*\.([0-9]+)$/\1/' | uniq | sort | awk -vORS=, '{ print $1 }' | sed 's/,$/\n/' | sed 's/,/ /g' | sha256 > ${ZBXFILE}
+ netstat -na | grep "*.*" | grep -E "(tcp|udp)" | awk '{ print $4; }' | sed -E 's/^.*\.([0-9]+)$/\1/' | uniq | sort | awk -vORS=, '{ print $1 }' | sed 's/,$/\n/' | sed 's/,/ /g' > "${ZBXFILE}"
+ cat "${ZBXFILE}" | sha256 > "${ZBXFILE}.hash"
  /bin/rm -f "${SEMAPHOREFILE}" >> /dev/null 2>&1
 fi
