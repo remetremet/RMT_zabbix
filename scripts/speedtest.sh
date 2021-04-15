@@ -60,8 +60,8 @@ for FIB in ${FIBS4}; do
  fibtime=$(( ${now} - ${fibtime} ))
  if [[ "${fibtime}" -gt "${SPEEDTEST_PERIOD[$FIB]}" ]]; then
   echo -n > "${TEMPFILE}.${FIB}"
-  Sdown=""
-  Sup=""
+  Sdown="0"
+  Sup="0"
   Sserver=""
   if [[ x"${SPEEDTEST_RUN}" == x"python" ]]; then
    setfib ${FIB} speedtest-cli --list > "${TEMPFILE}.${FIB}.serverlist"
@@ -91,7 +91,7 @@ for FIB in ${FIBS4}; do
    else
     /bin/rm -f "${TEMPFILE}.${FIB}" >> /dev/null 2>&1
    fi
-   if [[ "${Sserver}" == "" ]]; then
+   if [[ x"${Sserver}" == x"" ]]; then
     /bin/rm -f "${TEMPFILE}.${FIB}" >> /dev/null 2>&1
    else
     echo "${Sserver}" > "${ZBXFILE}_${FIB}.server"
