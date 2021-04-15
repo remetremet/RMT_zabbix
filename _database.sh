@@ -124,21 +124,6 @@ if [ x"${SMART_FORCE_PERIOD}" == x"" ]; then
  SMART_FORCE_PERIOD="86400"
 fi
 
-# Speedtest.Net selected servers (default settings can be override in _config.sh)
-if [ x"${SPEEDTEST_SERVERS}" == x"" ]; then
- SPEEDTEST_SERVERS=""
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=21975"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=21429"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=20411"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=16913"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=4162"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=4010"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=30620"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=18718"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=5094"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=30193"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=16745"
-fi
 # Proceed speedtest once a period (in seconds) (default settings can be override in _config.sh)
 TEST=${SPEEDTEST_PERIOD["0"]}
 if [ x"${TEST}" == x"" ]; then
