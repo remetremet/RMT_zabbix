@@ -34,6 +34,7 @@ To download use `fetch https://raw.githubusercontent.com/remetremet/RMT_zabbix/m
  - `smartmontools` - (for **smart.sh** function)
  - `curl` - (for **network_discovery.sh** and **mfi_get.sh** function)
  - `py-speedtest-cli` - (for **speedtest.sh** function)
+ - `speedtest` - Official Ookla's client (for **speedtest.sh** function)
  - [RMT_ipfw](https://github.com/remetremet/RMT_ipfw) - (for **ipfw_traffic.sh** function)
 
 
