@@ -124,21 +124,6 @@ if [ x"${SMART_FORCE_PERIOD}" == x"" ]; then
  SMART_FORCE_PERIOD="86400"
 fi
 
-# Speedtest.Net selected servers (default settings can be override in _config.sh)
-if [ x"${SPEEDTEST_SERVERS}" == x"" ]; then
- SPEEDTEST_SERVERS=""
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=21975"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=21429"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=20411"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=16913"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=4162"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=4010"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=30620"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=18718"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=5094"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=30193"
- SPEEDTEST_SERVERS="${SPEEDTEST_SERVERS} --server=16745"
-fi
 # Proceed speedtest once a period (in seconds) (default settings can be override in _config.sh)
 TEST=${SPEEDTEST_PERIOD["0"]}
 if [ x"${TEST}" == x"" ]; then
@@ -187,7 +172,6 @@ ADDR_NAMES["10.17.161.1"]="Abak GW"
 ADDR_NAMES["10.96.1.1"]="Abak GW"
 ADDR_NAMES["2a00:1268:10:18f0::1"]="Abak GW (IPv6)"
 ADDR_NAMES["2a00:1268:15:13f0::1"]="Abak GW (IPv6)"
-ADDR_NAMES["2a00:1268:16:10f0::1"]="Abak GW (IPv6)"
 ADDR_NAMES["2a00:1268:16:13f0::1"]="Abak GW (IPv6)"
 ADDR_NAMES["80.250.15.1"]="WIA Strahov GW"
 ADDR_NAMES["80.250.15.126"]="WIA Nagano GW"
@@ -200,9 +184,7 @@ ADDR_NAMES["194.228.190.157"]="O2 GW"
 ADDR_NAMES["192.168.255.254"]="Remet GW"
 ADDR_NAMES["2a00:1268:10:1800::254"]="Remet GW (IPv6)"
 ADDR_NAMES["192.168.11.254"]="Radiomed GW"
-ADDR_NAMES["2a00:1268:15:1300:1"]="Radiomed GW (IPv6)"
-ADDR_NAMES["192.168.1.254"]="EPMS GW"
-ADDR_NAMES["2a00:1268:16:1000:ffff:ffff:ffff:fffe"]="EPMS GW (IPv6)"
+ADDR_NAMES["2a00:1268:15:1300::1"]="Radiomed GW (IPv6)"
 ADDR_NAMES["192.168.123.254"]="Garaz GW"
 ADDR_NAMES["2a00:1268:16:1300:ffff:ffff:ffff:fffe"]="Garaz GW (IPv6)"
 ADDR_NAMES["10.10.10.254"]="MGMT GW"
@@ -222,10 +204,10 @@ DIRS["vardbmysql2"]="/var/db/mysql2"
 unset DIRnames; declare -A DIRnames;
 DIRnames["varlog"]="Logs"
 DIRnames["varmail"]="Mails"
-DIRnames["md"]="Memory disc"
+DIRnames["md"]="Memory disk"
 DIRnames["dataSQL"]="SQL data"
 DIRnames["dataSQL2"]="SQL2 data"
-DIRnames["data"]="Data disc"
+DIRnames["data"]="Data disk"
 DIRnames["vardbmysql"]="SQL data"
 DIRnames["vardbmysql2"]="SQL2 data"
 unset DIRwarnings; declare -A DIRwarnings;

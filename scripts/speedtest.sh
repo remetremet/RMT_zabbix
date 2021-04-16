@@ -26,7 +26,19 @@ DISCOVERYFILE="${DATAPATH}/speedtest_discovery"
 FIBS4="${FIBS4:-0}"
 FIBS6="${FIBS6:-0}"
 
+SPEEDTEST_RUN="${SPEEDTEST_RUN:-python}" # python = py37-speedtest-cli, ookla = ookla's speedtest
+if [ x"${SPEEDTEST_SERVER}" == x"" ]; then
+ SPEEDTEST_SERVER=""
+else
+ if [[ "${SPEEDTEST_RUN}" -eq "python" ]]; then
+  SPEEDTEST_SERVER="--server=${SPEEDTEST_SERVER}"
+ elif [[ "${SPEEDTEST_RUN}" -eq "ookla" ]]; then
+  SPEEDTEST_SERVER="-s ${SPEEDTEST_SERVER}"
+ fi
+fi
+
 if [[ -e "${SEMAPHOREFILE}" ]]; then
+ tts=`date +%s`
  fts=`stat -f %m "${SEMAPHOREFILE}"`
  fts=$((${fts}+85500))
  if [[ "${fts}" -lt "${tts}" ]]; then
@@ -48,16 +60,27 @@ for FIB in ${FIBS4}; do
  fibtime=$(( ${now} - ${fibtime} ))
  if [[ "${fibtime}" -gt "${SPEEDTEST_PERIOD[$FIB]}" ]]; then
   echo -n > "${TEMPFILE}.${FIB}"
-  setfib ${FIB} speedtest-cli --list > "${TEMPFILE}.${FIB}.serverlist"
-  setfib ${FIB} speedtest-cli --csv --csv-delimiter ";" --timeout 15 ${SPEEDTEST_SERVERS} > "${TEMPFILE}.${FIB}"
-  err=$?
+  Sdown="0"
+  Sup="0"
+  Sserver=""
+  if [[ x"${SPEEDTEST_RUN}" == x"python" ]]; then
+   setfib ${FIB} speedtest-cli --list > "${TEMPFILE}.${FIB}.serverlist"
+   setfib ${FIB} speedtest-cli --csv --csv-delimiter ";" --timeout 15 ${SPEEDTEST_SERVER} > "${TEMPFILE}.${FIB}"
+   err=$?
+   Sdown=`cat "${TEMPFILE}.${FIB}" | awk -F ";" '{print $7}' | sed 's/\./ /g' | awk '{T=$1; if(T=="")T=0; print T;}'`
+   Sup=`cat "${TEMPFILE}.${FIB}" | awk -F ";" '{print $8}' | sed 's/\./ /g' | awk '{T=$1; if(T=="")T=0; print T;}'`
+   Sserver=`cat "${TEMPFILE}.${FIB}" | awk -F ";" '{print $2","$3" ["$1"]"}'`
+  elif [[ x"${SPEEDTEST_RUN}" == x"ookla" ]]; then
+   setfib ${FIB} speedtest -L > "${TEMPFILE}.${FIB}.serverlist"
+   setfib ${FIB} speedtest -fcsv ${SPEEDTEST_SERVER} > "${TEMPFILE}.${FIB}"
+   err=$?
+   Sdown=`cat "${TEMPFILE}.${FIB}" | awk -F "," '{ print $6}' | sed 's/"//g' | sed 's/$/*8/' | bc | awk '{T=$1; if(T=="")T=0; print T;}'`
+   Sup=`cat "${TEMPFILE}.${FIB}" | awk -F "," '{ print $7}' | sed 's/"//g' | sed 's/$/*8/' | bc | awk '{T=$1; if(T=="")T=0; print T;}'`
+   Sserver=`cat "${TEMPFILE}.${FIB}" | awk -F "," '{ print $1" ["$2"]"}' | sed 's/"//g'`
+  fi
   if [[ "${err}" -gt "0" ]]; then
    /bin/rm -f "${TEMPFILE}.${FIB}" >> /dev/null 2>&1
   else
-   Sdown=`cat "${TEMPFILE}.${FIB}" | awk -F ";" '{print $7}' | sed 's/\./ /g' | awk '{T=$1; if(T=="")T=0; print T;}'`
-   Sup=`cat "${TEMPFILE}.${FIB}" | awk -F ";" '{print $8}' | sed 's/\./ /g' | awk '{T=$1; if(T=="")T=0; print T;}'`
-   Sip=`cat "${TEMPFILE}.${FIB}" | awk -F ";" '{print $10}'`
-   Sserver=`cat "${TEMPFILE}.${FIB}" | awk -F ";" '{print $2","$3" ["$1"]"}'`
    if [[ "${Sdown}" -gt "0" ]]; then
     echo "${Sdown}" > "${ZBXFILE}_${FIB}.down"
    else
@@ -68,16 +91,11 @@ for FIB in ${FIBS4}; do
    else
     /bin/rm -f "${TEMPFILE}.${FIB}" >> /dev/null 2>&1
    fi
-   if [[ "${Sserver}" == "" ]]; then
+   if [[ x"${Sserver}" == x"" ]]; then
     /bin/rm -f "${TEMPFILE}.${FIB}" >> /dev/null 2>&1
    else
     echo "${Sserver}" > "${ZBXFILE}_${FIB}.server"
-   fi
-   if [[ "${Sip}" == "" ]]; then
-    /bin/rm -f "${TEMPFILE}.${FIB}" >> /dev/null 2>&1
-   else
-    echo "${Sip}" > "${ZBXFILE}_${FIB}.extip"
-    DISCOVERY="${DISCOVERY}{\"{#SPEEDTESTFIB}\":\"${FIB}\",\"{#SPEEDTESTFIBNAME}\":\"${FIB_NAMES[$FIB]}\",\"#SPEEDTESTIP\":\"${Sip}\"},"
+    DISCOVERY="${DISCOVERY}{\"{#SPEEDTESTFIB}\":\"${FIB}\",\"{#SPEEDTESTFIBNAME}\":\"${FIB_NAMES[$FIB]}\"},"
     D="1"
    fi
   fi

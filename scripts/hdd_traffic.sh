@@ -17,12 +17,13 @@ fi
 if [ x"${HDD_TRAFFIC_ENABLE}" == x"no" ]; then
  exit;
 fi
+
 TEMPFILE="${TEMPPATH}/hdd_traffic"
 ZBXFILE="${DATAPATH}/hdd_traffic"
 DISCOVERYFILE="${DATAPATH}/hdd_discovery"
 
 iostat  -x -w 50 -t da -c 2 | grep -v "device" > "${TEMPFILE}"
-DISKS=`/sbin/sysctl -n kern.disks | sed -E 's/(cd|ses).//g' | sed -E 's/ +/ /g'`
+DISKS=`/sbin/sysctl -n kern.disks | sed -E 's/(.*)/ \1/' | sed -E 's/ (cd|ses)./ /g' | sed -E 's/ +/ /g'`
 XYZ=""
 for DISK in ${DISKS}; do
  XYZ="${XYZ}{\"{#HDDNAME}\":\"${DISK}\"},"
@@ -42,5 +43,5 @@ for DISK in ${DISKS}; do
 done
 XYZ="[${XYZ::(-1)}]"
 echo "${XYZ}" > "${DISCOVERYFILE}"
-chmod 666 "${ZBXFILE}.*"
 chmod 666 "${DISCOVERYFILE}"
+chmod 666 ${ZBXFILE}.*

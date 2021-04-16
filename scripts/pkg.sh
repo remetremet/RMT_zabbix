@@ -25,6 +25,7 @@ PKG_PERIOD="${PKG_PERIOD:-86400}"
 
 # Check for one running instance only (with override after 24 hours)
 if [[ -e "${SEMAPHOREFILE}" ]]; then
+ tts=`date +%s`
  fts=`stat -f %m "${SEMAPHOREFILE}"`
  fts=$((${fts}+85500))
  if [[ "${fts}" -lt "${tts}" ]]; then

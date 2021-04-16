@@ -26,6 +26,7 @@ FREEBSD_UPDATE_CONF="${FREEBSD_UPDATE_CONF:-/etc/freebsd-update.conf}"
 FREEBSD_UPDATE_PUB_SSL="${FREEBSD_UPDATE_PUB_SSL:-${TEMPPATH}/freebsd-update-pub.ssl}"
 
 if [[ -e "${SEMAPHOREFILE}" ]]; then
+ tts=`date +%s`
  fts=`stat -f %m "${SEMAPHOREFILE}"`
  fts=$((${fts}+85500))
  if [[ "${fts}" -lt "${tts}" ]]; then
