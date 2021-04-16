@@ -204,10 +204,10 @@ DIRS["vardbmysql2"]="/var/db/mysql2"
 unset DIRnames; declare -A DIRnames;
 DIRnames["varlog"]="Logs"
 DIRnames["varmail"]="Mails"
-DIRnames["md"]="Memory disc"
+DIRnames["md"]="Memory disk"
 DIRnames["dataSQL"]="SQL data"
 DIRnames["dataSQL2"]="SQL2 data"
-DIRnames["data"]="Data disc"
+DIRnames["data"]="Data disk"
 DIRnames["vardbmysql"]="SQL data"
 DIRnames["vardbmysql2"]="SQL2 data"
 unset DIRwarnings; declare -A DIRwarnings;
