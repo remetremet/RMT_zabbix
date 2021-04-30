@@ -47,8 +47,10 @@ for i in ${IPFW_WANS_list}; do
  k="IPFW_oip${i}"
  m="IPFW_oip${i}_6"
  if [ -n "${!j}" ]; then
-  TEST=${IPFW_TRAFFIC_RESET[${i}]}
+  TEST=${IPFW_TRAFFIC_RESET["${i}"]}
+echo "${i} ${TODAY} ${TEST}"
   if [ x"${TODAY}" == x"${TEST}" ]; then
+echo "RESET"
    if [ ! -e "${TEMPFILE}.reset.${i}" ]; then
     echo "0" > "${TEMPFILE}.ip4_in${i}"
     echo "0" > "${TEMPFILE}.ip4_out${i}"
@@ -73,8 +75,12 @@ for i in ${IPFW_WANS_list}; do
    if [ ${ok} -eq 1 ]; then
     ways="in out"
     for way in ${ways}; do
+     LAST=0
+     OLD=0
+     DELTA=0
+     COUNT=0
      if [ -e "${TEMPFILE}.${proto}_last${way}${i}" ]; then
-     LAST=`cat "${TEMPFILE}.${proto}_last${way}${i}"`
+      LAST=`cat "${TEMPFILE}.${proto}_last${way}${i}"`
       LAST=${LAST:-0}
      else
       LAST=0;
