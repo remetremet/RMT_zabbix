@@ -17,10 +17,14 @@ fi
 if [ x"${IPFW_ENABLE}" == x"no" ]; then
  exit;
 fi
+if [ ! -e "/etc/rc.firewall.config" ]; then
+ exit;
+fi
 
 TEMPFILE="${TEMPPATH}/ipfw_traffic"
 ZBXFILE="${DATAPATH}/ipfw_traffic"
 
+COUNT=0
 IPV4=0
 IPV4IN=0
 IPV4OUT=0
@@ -28,50 +32,40 @@ IPV6=0
 IPV6IN=0
 IPV6OUT=0
 
-IPV4A=`/sbin/ipfw -a list | grep "count" | grep "^13000 " | /usr/bin/awk '{print $3}' `; IPV4A=${IPV4A:-0}
-echo "${IPV4A}" > ${TEMPFILE}.ipv4_in1
-IPV4IN=$(( $IPV4IN + $IPV4A ))
-IPV4A=`/sbin/ipfw -a list | grep "count" | grep "^13100 " | /usr/bin/awk '{print $3}' `; IPV4A=${IPV4A:-0}
-echo "${IPV4A}" > ${TEMPFILE}.ipv4_in2
-IPV4IN=$(( $IPV4IN + $IPV4A ))
-IPV4A=`/sbin/ipfw -a list | grep "count" | grep "^13200 " | /usr/bin/awk '{print $3}' `; IPV4A=${IPV4A:-0}
-echo "${IPV4A}" > ${TEMPFILE}.ipv4_in3
-IPV4IN=$(( $IPV4IN + $IPV4A ))
+XYZ="info"
+. /etc/rc.firewall.config
+XYZ=""
+
+# IPFW counters autodetect
+for i in ${IPFW_WANS_list}; do
+ j="IPFW_oif${i}"
+ k="IPFW_oip${i}"
+ m="IPFW_oip${i}_6"
+ if [ -n "${!j}" ]; then
+  if [ -n "${!k}" ]; then
+   COUNT=`ipfw -a list | grep "count ip4" | grep "via ${!j} in" | /usr/bin/awk '{s+=$3} END {print s}'`
+   echo "${COUNT}" > ${TEMPFILE}.ipv4_in${i}
+   IPV4IN=$(( ${IPV4IN} + ${COUNT} ))
+   COUNT=`ipfw -a list | grep "count ip4" | grep "via ${!j} out" | /usr/bin/awk '{s+=$3} END {print s}'`
+   echo "${COUNT}" > ${TEMPFILE}.ipv4_out${i}
+   IPV4OUT=$(( ${IPV4OUT} + ${COUNT} ))
+  fi
+  if [ -n "${!m}" ]; then
+   COUNT=`ipfw -a list | grep "count ip6" | grep "via ${!j} in" | /usr/bin/awk '{s+=$3} END {print s}'`
+   echo "${COUNT}" > ${TEMPFILE}.ipv6_in${i}
+   IPV6IN=$(( ${IPV6IN} + ${COUNT} ))
+   COUNT=`ipfw -a list | grep "count ip6" | grep "via ${!j} out" | /usr/bin/awk '{s+=$3} END {print s}'`
+   echo "${COUNT}" > ${TEMPFILE}.ipv6_out${i}
+   IPV6OUT=$(( ${IPV6OUT} + ${COUNT} ))
+  fi
+ fi
+done
 echo "${IPV4IN}" > ${ZBXFILE}.ipv4_in
-IPV4B=`/sbin/ipfw -a list | grep "count" | grep "^15000 " | /usr/bin/awk '{print $3}' `; IPV4B=${IPV4B:-0}
-echo "${IPV4B}" > ${TEMPFILE}.ipv4_out1
-IPV4OUT=$(( $IPV4OUT + $IPV4B ))
-IPV4B=`/sbin/ipfw -a list | grep "count" | grep "^15100 " | /usr/bin/awk '{print $3}' `; IPV4B=${IPV4B:-0}
-echo "${IPV4B}" > ${TEMPFILE}.ipv4_out2
-IPV4OUT=$(( $IPV4OUT + $IPV4B ))
-IPV4B=`/sbin/ipfw -a list | grep "count" | grep "^15200 " | /usr/bin/awk '{print $3}' `; IPV4B=${IPV4B:-0}
-echo "${IPV4B}" > ${TEMPFILE}.ipv4_out3
-IPV4OUT=$(( $IPV4OUT + $IPV4B ))
 echo "${IPV4OUT}" > ${ZBXFILE}.ipv4_out
-IPV4=$(( $IPV4 + $IPV4IN + $IPV4OUT ))
-echo "${IPV4}" > ${ZBXFILE}.ipv4
-
-IPV6A=`/sbin/ipfw -a list | grep "count" | grep "^09000 " | /usr/bin/awk '{print $3}' `; IPV6A=${IPV6A:-0}
-echo "${IPV6A}" > ${TEMPFILE}.ipv6_in1
-IPV6IN=$(( $IPV6IN + $IPV6A ))
-IPV6A=`/sbin/ipfw -a list | grep "count" | grep "^09100 " | /usr/bin/awk '{print $3}' `; IPV6A=${IPV6A:-0}
-echo "${IPV6A}" > ${TEMPFILE}.ipv6_in2
-IPV6IN=$(( $IPV6IN + $IPV6A ))
-IPV6A=`/sbin/ipfw -a list | grep "count" | grep "^09200 " | /usr/bin/awk '{print $3}' `; IPV6A=${IPV6A:-0}
-echo "${IPV6A}" > ${TEMPFILE}.ipv6_in3
-IPV6IN=$(( $IPV6IN + $IPV6A ))
 echo "${IPV6IN}" > ${ZBXFILE}.ipv6_in
-IPV6B=`/sbin/ipfw -a list | grep "count" | grep "^11000 " | /usr/bin/awk '{print $3}' `; IPV6B=${IPV6B:-0}
-echo "${IPV6B}" > ${TEMPFILE}.ipv6_out1
-IPV6OUT=$(( $IPV6OUT + $IPV6B ))
-IPV6B=`/sbin/ipfw -a list | grep "count" | grep "^11100 " | /usr/bin/awk '{print $3}' `; IPV6B=${IPV6B:-0}
-echo "${IPV6B}" > ${TEMPFILE}.ipv6_out2
-IPV6OUT=$(( $IPV6OUT + $IPV6B ))
-IPV6B=`/sbin/ipfw -a list | grep "count" | grep "^11200 " | /usr/bin/awk '{print $3}' `; IPV6B=${IPV6B:-0}
-echo "${IPV6B}" > ${TEMPFILE}.ipv6_out3
-IPV6OUT=$(( $IPV6OUT + $IPV6B ))
 echo "${IPV6OUT}" > ${ZBXFILE}.ipv6_out
-IPV6=$(( $IPV6 + $IPV6IN + $IPV6OUT ))
+IPV4=$(( ${IPV4OUT} + ${IPV4IN} ))
+echo "${IPV4}" > ${ZBXFILE}.ipv4
+IPV6=$(( ${IPV6OUT} + ${IPV6IN} ))
 echo "${IPV6}" > ${ZBXFILE}.ipv6
-
 chmod 666 ${ZBXFILE}.ip*
