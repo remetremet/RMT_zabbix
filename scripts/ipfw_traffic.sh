@@ -49,9 +49,7 @@ for i in ${IPFW_WANS_list}; do
  m="IPFW_oip${i}_6"
  if [ -n "${!j}" ]; then
   TEST=${IPFW_TRAFFIC_RESET["${i}"]}
-echo "${i} ${TODAY} ${TEST}"
   if [ ${TODAY} -eq ${TEST} ]; then
-echo "RESET"
    if [ ! -e "${TEMPFILE}.reset.${i}" ]; then
     echo "0" > "${TEMPFILE}.ip4_in${i}"
     echo "0" > "${TEMPFILE}.ip4_out${i}"

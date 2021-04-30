@@ -23,7 +23,7 @@ List of functions, scripts and templates to include:
 **FreeBSD packages updates**|available pkg updates|script|**done**
 **SSL certs**|SSL certs expiration|template|waiting
 **SSL certs**|SSL certs expiration|script|**done**
-**Network traffic**|FUP counting and reseting|script|waiting
+**Network traffic**|FUP counting and reseting|script|**done**
 **Network traffic**|IPFW2 monitoring count rules|script+template|**done**
 **mFI monitoring**|consumption per month|script+template|waiting
 **mFI monitoring**|basic monitoring|script+template|**done**
