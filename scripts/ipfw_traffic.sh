@@ -24,6 +24,7 @@ fi
 TEMPFILE="${TEMPPATH}/ipfw_traffic"
 ZBXFILE="${DATAPATH}/ipfw_traffic"
 TODAY=`date +%d`
+TODAY=$(( ${TODAY} + 0 ))
 COUNT=0
 IPV4=0
 IPV4IN=0
@@ -49,7 +50,7 @@ for i in ${IPFW_WANS_list}; do
  if [ -n "${!j}" ]; then
   TEST=${IPFW_TRAFFIC_RESET["${i}"]}
 echo "${i} ${TODAY} ${TEST}"
-  if [ x"${TODAY}" == x"${TEST}" ]; then
+  if [ ${TODAY} -eq ${TEST} ]; then
 echo "RESET"
    if [ ! -e "${TEMPFILE}.reset.${i}" ]; then
     echo "0" > "${TEMPFILE}.ip4_in${i}"
