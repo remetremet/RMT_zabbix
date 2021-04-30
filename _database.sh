@@ -1,5 +1,7 @@
 #!/usr/local/bin/bash
 
+maxfibs=$(( $( sysctl -n net.fibs ) - 1 ))
+
 ### DEFAULT SETTINGS
 # IPv4 addresses of default gateway or a few next hops (default settings can be override in _config.sh)
 TEST=${GW_ADDRS4["0"]}
@@ -14,7 +16,6 @@ if [ x"${TEST}" == x"" ]; then
 fi
 
 # Multiple WANs supported in both stacks (IPv4/6) (default settings can be override in _config.sh)
-maxfibs=$(( $( sysctl -n net.fibs ) - 1 ))
 if [[ ! x"${maxfibs}" == x"0" ]]; then
  if [ x"${FIBS4}" == x"" ]; then
   FIBS4="0"
@@ -28,6 +29,9 @@ if [[ ! x"${maxfibs}" == x"0" ]]; then
    FIBS6="${FIBS6} ${FI}"
   done
  fi
+else
+ FIBS4="0"
+ FIBS6="0"
 fi
 
 # IP addresses to ping check (default settings can be override in _config.sh)
@@ -55,15 +59,16 @@ for IN in ${IFNAMES_NAME}; do
 done
 
 # Human readable name of WANs (default settings can be override in _config.sh)
-for ifib in $( seq 0 1 19 ); do
- TEST=${FIB_NAMES["${ifib}"]}
+for FI in $( seq 0 1 ${maxfibs} ); do
+ TEST=${FIB_NAMES["${FI}"]}
  if [ x"${TEST}" == x"" ]; then
-  ISP=$(( ${ifib} + 1 ))
-  FIB_NAMES["${ifib}"]="ISP ${ISP}"
+  ISP=$(( ${FI} + 1 ))
+  FIB_NAMES["${FI}"]="ISP ${ISP}"
  fi
 done
 
-### FreeBSD OS updates check period in seconds (default settings can be override in _config.sh)
+### FreeBSD OS updates
+# Check period in seconds (default settings can be override in _config.sh)
 if [ x"${FREEBSD_UPDATE_PERIOD}" == x"" ]; then
  FREEBSD_UPDATE_PERIOD=86400
 fi
@@ -71,13 +76,20 @@ if [ x"${FREEBSD_UPDATE_CONF}" == x"" ]; then
  FREEBSD_UPDATE_CONF="/etc/freebsd-update.conf"
 fi
 
-### FreeBSD packages check period in seconds (default settings can be override in _config.sh)
+### FreeBSD packages check
+# Period in seconds (default settings can be override in _config.sh)
 if [ x"${PKG_PERIOD}" == x"" ]; then
  PKG_PERIOD=86400
 fi
 
 ### IPFW traffic
-
+# FUP renew day of month (per WAN) (default settings can be override in _config.sh)
+for WI in $( seq 1 1 20 ); do
+ TEST=${IPFW_TRAFFIC_RENEW[${WI}]}
+ if [ x"${TEST}" == x"" ]; then
+  IPFW_TRAFFIC_RENEW[${WI}]="1"
+ fi
+done
 
 ### Ubiquiti mFI sockets (default settings can be override in _config.sh)
 if [ x"${MFI_SESSIONID}" == x"" ]; then
@@ -101,36 +113,27 @@ if [ x"${TEST}" == x"" ]; then
 fi
 TEST=${MFI_PORT["1"]}
 if [ x"${TEST}" == x"" ]; then
- MFI_PORT["1"]="1 2 3 4 5 6"
+ MFI_PORT["1"]=$( seq 1 1 6)
 fi
 
 ### SMART monitoring of HDD/SSD
-# SMART check period in seconds
+# SMART check period (in seconds) (default settings can be override in _config.sh)
 if [ x"${SMART_PERIOD}" == x"" ]; then
  SMART_PERIOD="3600"
 fi
-# Timeout to wake up sleeing disk to get SMART data
+# Timeout to wake up sleeing disk to get SMART data (in seconds) (default settings can be override in _config.sh)
 if [ x"${SMART_FORCE_PERIOD}" == x"" ]; then
  SMART_FORCE_PERIOD="86400"
 fi
 
+### Speedtest monitoring
 # Proceed speedtest once a period (in seconds) (default settings can be override in _config.sh)
-TEST=${SPEEDTEST_PERIOD["0"]}
-if [ x"${TEST}" == x"" ]; then
- SPEEDTEST_PERIOD["0"]="86400"
-fi
-TEST=${SPEEDTEST_PERIOD["1"]}
-if [ x"${TEST}" == x"" ]; then
- SPEEDTEST_PERIOD["1"]="86400"
-fi
-TEST=${SPEEDTEST_PERIOD["2"]}
-if [ x"${TEST}" == x"" ]; then
- SPEEDTEST_PERIOD["2"]="86400"
-fi
-TEST=${SPEEDTEST_PERIOD["3"]}
-if [ x"${TEST}" == x"" ]; then
- SPEEDTEST_PERIOD["3"]="86400"
-fi
+for WI in $( seq 0 1 19 ); do
+ TEST=${SPEEDTEST_PERIOD[${WI}]}
+ if [ x"${TEST}" == x"" ]; then
+  SPEEDTEST_PERIOD[${WI}]="86400"
+ fi
+done
 
 
 
