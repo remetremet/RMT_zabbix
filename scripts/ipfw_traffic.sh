@@ -106,13 +106,13 @@ for i in ${IPFW_WANS_list}; do
   done
  fi
 done
-IPV4IN=`cat "${TEMPFILE}.ip4_in*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV4IN=`cat ${TEMPFILE}.ip4_in* | /usr/bin/awk '{s+=$1} END {print s}'`
 IPV4IN=${IPV4IN:-0}
-IPV4OUT=`cat "${TEMPFILE}.ip4_out*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV4OUT=`cat ${TEMPFILE}.ip4_out* | /usr/bin/awk '{s+=$1} END {print s}'`
 IPV4OUT=${IPV4OUT:-0}
-IPV6IN=`cat "${TEMPFILE}.ip6_in*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV6IN=`cat ${TEMPFILE}.ip6_in* | /usr/bin/awk '{s+=$1} END {print s}'`
 IPV6IN=${IPV6IN:-0}
-IPV6OUT=`cat "${TEMPFILE}.ip6_out*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV6OUT=`cat ${TEMPFILE}.ip6_out* | /usr/bin/awk '{s+=$1} END {print s}'`
 IPV6OUT=${IPV6OUT:-0}
 echo "${IPV4IN}" > ${ZBXFILE}.ipv4_in
 echo "${IPV4OUT}" > ${ZBXFILE}.ipv4_out
