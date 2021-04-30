@@ -14,20 +14,17 @@ if [ x"${TEST}" == x"" ]; then
 fi
 
 # Multiple WANs supported in both stacks (IPv4/6) (default settings can be override in _config.sh)
-if [ x"${FIBS4}" == x"" ]; then
- maxfibs=$(( $( sysctl -n net.fibs ) - 1 ))
- FIBS4="0"
- if [[ ! x"${maxfibs}" == x"0" ]]; then
-  for FI in $( seq 1 ${maxfivs} ); do
+maxfibs=$(( $( sysctl -n net.fibs ) - 1 ))
+if [[ ! x"${maxfibs}" == x"0" ]]; then
+ if [ x"${FIBS4}" == x"" ]; then
+  FIBS4="0"
+  for FI in $( seq 1 1 ${maxfibs} ); do
    FIBS4="${FIBS4} ${FI}"
   done
  fi
-fi
-if [ x"${FIBS6}" == x"" ]; then
- maxfibs=$(( $( sysctl -n net.fibs ) - 1 ))
- FIBS6="0"
- if [[ ! x"${maxfibs}" == x"0" ]]; then
-  for FI in $( seq 1 ${maxfivs} ); do
+ if [ x"${FIBS6}" == x"" ]; then
+  FIBS6="0"
+  for FI in $( seq 1 1 ${maxfibs} ); do
    FIBS6="${FIBS6} ${FI}"
   done
  fi
@@ -47,9 +44,8 @@ if [ x"${TEST}" == x"" ]; then
  IFNAMES["lo0"]="Loopback"
 fi
 IFNAMES_NAME="lagg wlan igb em bce bge bnxt bxe cxgb cxgbe fxp gem ixgbe ixl mlx4en mlx5en ue re ice"
-IFNAMES_CNT="0 1 2 3 4 5 6 7"
 for IN in ${IFNAMES_NAME}; do
- for IC in ${IFNAMES_CNT}; do
+ for IC in $( seq 0 1 7 ); do
   IFN="${IN}${IC}"
   TEST=${IFNAMES["${IFN}"]}
   if [ x"${TEST}" == x"" ]; then
@@ -59,22 +55,13 @@ for IN in ${IFNAMES_NAME}; do
 done
 
 # Human readable name of WANs (default settings can be override in _config.sh)
-TEST=${FIB_NAMES["0"]}
-if [ x"${TEST}" == x"" ]; then
- FIB_NAMES["0"]="ISP 1"
-fi
-TEST=${FIB_NAMES["1"]}
-if [ x"${TEST}" == x"" ]; then
- FIB_NAMES["1"]="ISP 2"
-fi
-TEST=${FIB_NAMES["2"]}
-if [ x"${TEST}" == x"" ]; then
- FIB_NAMES["2"]="ISP 3"
-fi
-TEST=${FIB_NAMES["3"]}
-if [ x"${TEST}" == x"" ]; then
- FIB_NAMES["3"]="ISP 4"
-fi
+for ifib in $( seq 0 1 19 ); do
+ TEST=${FIB_NAMES["${ifib}"]}
+ if [ x"${TEST}" == x"" ]; then
+  ISP=$(( ${ifib} + 1 ))
+  FIB_NAMES["${ifib}"]="ISP ${ISP}"
+ fi
+done
 
 ### FreeBSD OS updates check period in seconds (default settings can be override in _config.sh)
 if [ x"${FREEBSD_UPDATE_PERIOD}" == x"" ]; then
@@ -88,6 +75,9 @@ fi
 if [ x"${PKG_PERIOD}" == x"" ]; then
  PKG_PERIOD=86400
 fi
+
+### IPFW traffic
+
 
 ### Ubiquiti mFI sockets (default settings can be override in _config.sh)
 if [ x"${MFI_SESSIONID}" == x"" ]; then
