@@ -61,7 +61,8 @@ for i in ${IPFW_WANS_list}; do
     rm -f "${TEMPFILE}.reset.${i}"
    fi
   fi
-  for proto in "ip4 ip6"; do
+  protos="ip4 ip6"
+  for proto in ${protos}; do
    ok=0
    if [ x"${proto}" == x"ip4" -a -n "${!k}" ]; then
     ok=1
@@ -70,7 +71,8 @@ for i in ${IPFW_WANS_list}; do
     ok=1
    fi
    if [ ${ok} -eq 1 ]; then
-    for way in "in out"; do
+    ways="in out"
+    for way in ${ways}; do
      if [ -e "${TEMPFILE}.${proto}_last${way}${i}" ]; then
      LAST=`cat "${TEMPFILE}.${proto}_last${way}${i}"`
       LAST=${LAST:-0}
@@ -104,13 +106,13 @@ for i in ${IPFW_WANS_list}; do
   done
  fi
 done
-IPV4IN=`cat "${TEMPFILE}.ip4_in*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV4IN=`cat ${TEMPFILE}.ip4_in* | /usr/bin/awk '{s+=$1} END {print s}'`
 IPV4IN=${IPV4IN:-0}
-IPV4OUT=`cat "${TEMPFILE}.ip4_out*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV4OUT=`cat ${TEMPFILE}.ip4_out* | /usr/bin/awk '{s+=$1} END {print s}'`
 IPV4OUT=${IPV4OUT:-0}
-IPV6IN=`cat "${TEMPFILE}.ip6_in*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV6IN=`cat ${TEMPFILE}.ip6_in* | /usr/bin/awk '{s+=$1} END {print s}'`
 IPV6IN=${IPV6IN:-0}
-IPV6OUT=`cat "${TEMPFILE}.ip6_out*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV6OUT=`cat ${TEMPFILE}.ip6_out* | /usr/bin/awk '{s+=$1} END {print s}'`
 IPV6OUT=${IPV6OUT:-0}
 echo "${IPV4IN}" > ${ZBXFILE}.ipv4_in
 echo "${IPV4OUT}" > ${ZBXFILE}.ipv4_out
