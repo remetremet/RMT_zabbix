@@ -85,9 +85,9 @@ fi
 ### IPFW traffic
 # FUP renew day of month (per WAN) (default settings can be override in _config.sh)
 for WI in $( seq 1 1 20 ); do
- TEST=${IPFW_TRAFFIC_RESET[${WI}]}
+ TEST=${IPFW_TRAFFIC_RESET["${WI}"]}
  if [ x"${TEST}" == x"" ]; then
-  IPFW_TRAFFIC_RESET[${WI}]="1"
+  IPFW_TRAFFIC_RESET["${WI}"]="1"
  fi
 done
 
