@@ -61,7 +61,8 @@ for i in ${IPFW_WANS_list}; do
     rm -f "${TEMPFILE}.reset.${i}"
    fi
   fi
-  for proto in "ip4 ip6"; do
+  protos="ip4 ip6"
+  for proto in ${protos}; do
    ok=0
    if [ x"${proto}" == x"ip4" -a -n "${!k}" ]; then
     ok=1
@@ -70,7 +71,8 @@ for i in ${IPFW_WANS_list}; do
     ok=1
    fi
    if [ ${ok} -eq 1 ]; then
-    for way in "in out"; do
+    ways="in out"
+    for way in ${ways}; do
      if [ -e "${TEMPFILE}.${proto}_last${way}${i}" ]; then
      LAST=`cat "${TEMPFILE}.${proto}_last${way}${i}"`
       LAST=${LAST:-0}
