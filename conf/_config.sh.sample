@@ -72,6 +72,10 @@ unset FIB_NAMES; declare -A FIB_NAMES;
 ### FreeBSD packages check period in seconds (leave empty for default)
 #PKG_PERIOD=""
 
+### IPFW traffic
+# FUP renew day of month (per WAN) (leave empty for default)
+#IPFW_TRAFFIC_RENEW[1]=16  # WAN1 - FUP renew 16th day of month
+
 
 ### Ubiquiti mFI sockets (leave empty for default)
 unset MFI_IP; declare -A MFI_IP;
@@ -82,7 +86,7 @@ unset MFI_PORT; declare -A MFI_PORT;
 #MFI_KEYS="output voltage power powerfactor current"
 #MFI_IDS=""
 #MFI_IP["1"]="0.0.0.0"
-#MFI_PORT["1"]="1 2 3"
+#MFI_PORT["1"]=$( seq 1 1 3)
 
 ### SMART monitoring of HDD/SSD
 # SMART check period in seconds (leave empty for default)
