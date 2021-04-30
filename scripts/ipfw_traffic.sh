@@ -50,10 +50,10 @@ for i in ${IPFW_WANS_list}; do
   TEST=${IPFW_TRAFFIC_RESET[${i}]}
   if [ x"${TODAY}" == x"${TEST}" ]; then
    if [ ! -e "${TEMPFILE}.reset.${i}" ]; then
-    echo "0" > "${TEMPFILE}.ipv4_in${i}"
-    echo "0" > "${TEMPFILE}.ipv4_out${i}"
-    echo "0" > "${TEMPFILE}.ipv6_in${i}"
-    echo "0" > "${TEMPFILE}.ipv6_out${i}"
+    echo "0" > "${TEMPFILE}.ip4_in${i}"
+    echo "0" > "${TEMPFILE}.ip4_out${i}"
+    echo "0" > "${TEMPFILE}.ip6_in${i}"
+    echo "0" > "${TEMPFILE}.ip6_out${i}"
     touch "${TEMPFILE}.reset.${i}"
    fi
   else
@@ -105,9 +105,13 @@ for i in ${IPFW_WANS_list}; do
  fi
 done
 IPV4IN=`cat "${TEMPFILE}.ip4_in*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV4IN=${IPV4IN:-0}
 IPV4OUT=`cat "${TEMPFILE}.ip4_out*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV4OUT=${IPV4OUT:-0}
 IPV6IN=`cat "${TEMPFILE}.ip6_in*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV6IN=${IPV6IN:-0}
 IPV6OUT=`cat "${TEMPFILE}.ip6_out*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV6OUT=${IPV6OUT:-0}
 echo "${IPV4IN}" > ${ZBXFILE}.ipv4_in
 echo "${IPV4OUT}" > ${ZBXFILE}.ipv4_out
 echo "${IPV6IN}" > ${ZBXFILE}.ipv6_in
