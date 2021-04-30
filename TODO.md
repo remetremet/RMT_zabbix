@@ -5,6 +5,7 @@ List of functions, scripts and templates to include:
 
 | Name | Description | Parts | Status |
 |---|---|:---:|--:|
+**RabbitMQ**|broker monitoring|script+template|waiting
 **Sendmail**|queue and messages in/out|script+template|waiting
 **IPFW blacklist**|item count, denied packets|script+template|waiting
 **Spam stats**|Spamassassin and Clamd monitoring|script+template|waiting
@@ -27,6 +28,7 @@ List of functions, scripts and templates to include:
 **mFI monitoring**|consumption per month|script+template|waiting
 **mFI monitoring**|basic monitoring|script+template|**done**
 **SMART monitoring**|hours, temperatures, cycles, errors, SSD state|template|waiting
+**SMART monitoring**|support for official Ookla client|script|waiting
 **SMART monitoring**|fix Speedtest.Net bug with geolocation|script+template|**done**
 **SMART monitoring**|basic HDD and SSD monitoring|script+template|**done**
 **FreeBSD open ports**||template|**done**
