@@ -23,7 +23,7 @@ fi
 
 TEMPFILE="${TEMPPATH}/ipfw_traffic"
 ZBXFILE="${DATAPATH}/ipfw_traffic"
-
+TODAY=`date +%d`
 COUNT=0
 IPV4=0
 IPV4IN=0
@@ -31,6 +31,11 @@ IPV4OUT=0
 IPV6=0
 IPV6IN=0
 IPV6OUT=0
+IP=0
+OLD=0
+LAST=0
+DELTA=0
+MAXDELTA=3750000000 
 
 XYZ="info"
 . /etc/rc.firewall.config
@@ -42,24 +47,67 @@ for i in ${IPFW_WANS_list}; do
  k="IPFW_oip${i}"
  m="IPFW_oip${i}_6"
  if [ -n "${!j}" ]; then
-  if [ -n "${!k}" ]; then
-   COUNT=`ipfw -a list | grep "count ip4" | grep "via ${!j} in" | /usr/bin/awk '{s+=$3} END {print s}'`
-   echo "${COUNT}" > ${TEMPFILE}.ipv4_in${i}
-   IPV4IN=$(( ${IPV4IN} + ${COUNT} ))
-   COUNT=`ipfw -a list | grep "count ip4" | grep "via ${!j} out" | /usr/bin/awk '{s+=$3} END {print s}'`
-   echo "${COUNT}" > ${TEMPFILE}.ipv4_out${i}
-   IPV4OUT=$(( ${IPV4OUT} + ${COUNT} ))
+  TEST=${IPFW_TRAFFIC_RESET[${i}]}
+  if [ x"${TODAY}" == x"${TEST}" ]; then
+   if [ ! -e "${TEMPFILE}.reset.${i}" ]; then
+    echo "0" > "${TEMPFILE}.ipv4_in${i}"
+    echo "0" > "${TEMPFILE}.ipv4_out${i}"
+    echo "0" > "${TEMPFILE}.ipv6_in${i}"
+    echo "0" > "${TEMPFILE}.ipv6_out${i}"
+    touch "${TEMPFILE}.reset.${i}"
+   fi
+  else
+   if [ -e "${TEMPFILE}.reset.${i}" ]; then
+    rm -f "${TEMPFILE}.reset.${i}"
+   fi
   fi
-  if [ -n "${!m}" ]; then
-   COUNT=`ipfw -a list | grep "count ip6" | grep "via ${!j} in" | /usr/bin/awk '{s+=$3} END {print s}'`
-   echo "${COUNT}" > ${TEMPFILE}.ipv6_in${i}
-   IPV6IN=$(( ${IPV6IN} + ${COUNT} ))
-   COUNT=`ipfw -a list | grep "count ip6" | grep "via ${!j} out" | /usr/bin/awk '{s+=$3} END {print s}'`
-   echo "${COUNT}" > ${TEMPFILE}.ipv6_out${i}
-   IPV6OUT=$(( ${IPV6OUT} + ${COUNT} ))
-  fi
+  for proto in "ip4 ip6"; do
+   ok=0
+   if [ x"${proto}" == x"ip4" -a -n "${!k}" ]; then
+    ok=1
+   fi
+   if [ x"${proto}" == x"ip6" -a -n "${!m}" ]; then
+    ok=1
+   fi
+   if [ ${ok} -eq 1 ]; then
+    for way in "in out"; do
+     if [ -e "${TEMPFILE}.${proto}_last${way}${i}" ]; then
+     LAST=`cat "${TEMPFILE}.${proto}_last${way}${i}"`
+      LAST=${LAST:-0}
+     else
+      LAST=0;
+     fi
+     if [ -e "${TEMPFILE}.${proto}_${way}${i}" ]; then
+      OLD=`cat "${TEMPFILE}.${proto}_${way}${i}"`
+      OLD=${OLD:-0}
+     else
+      OLD=0;
+     fi
+     COUNT=`ipfw -a list | grep "count ${proto}" | grep "via ${!j} ${way}" | /usr/bin/awk '{s+=$3} END {print s}'`
+     COUNT=${COUNT:-0}
+     echo "${COUNT}" > ${TEMPFILE}.${proto}_last${way}${i}
+     if [ ${LAST} -le ${COUNT} ]; then
+      DELTA=$(( ${COUNT} - ${LAST} ))
+     else
+      DELTA="${COUNT}"
+     fi
+     if [ ${DELTA} -lt 0 ]; then
+      DELTA=0;
+     fi
+     if [ ${DELTA} -gt ${MAXDELTA} ]; then
+      DELTA=${MAXDELTA};
+     fi
+     OLD=$(( ${OLD} + ${DELTA} ))
+     echo "${OLD}" > ${TEMPFILE}.${proto}_${way}${i}
+    done
+   fi
+  done
  fi
 done
+IPV4IN=`cat "${TEMPFILE}.ip4_in*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV4OUT=`cat "${TEMPFILE}.ip4_out*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV6IN=`cat "${TEMPFILE}.ip6_in*" | /usr/bin/awk '{s+=$1} END {print s}'`
+IPV6OUT=`cat "${TEMPFILE}.ip6_out*" | /usr/bin/awk '{s+=$1} END {print s}'`
 echo "${IPV4IN}" > ${ZBXFILE}.ipv4_in
 echo "${IPV4OUT}" > ${ZBXFILE}.ipv4_out
 echo "${IPV6IN}" > ${ZBXFILE}.ipv6_in
@@ -68,4 +116,6 @@ IPV4=$(( ${IPV4OUT} + ${IPV4IN} ))
 echo "${IPV4}" > ${ZBXFILE}.ipv4
 IPV6=$(( ${IPV6OUT} + ${IPV6IN} ))
 echo "${IPV6}" > ${ZBXFILE}.ipv6
+IP=$(( ${IPV6} + ${IPV4} ))
+echo "${IP}" > ${ZBXFILE}.ip
 chmod 666 ${ZBXFILE}.ip*
