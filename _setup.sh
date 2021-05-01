@@ -37,7 +37,7 @@ git clone https://github.com/remetremet/RMT_zabbix.git ${ZBXPATH}/github
 cp -R ${ZBXPATH}/github/_*.sh ${ZBXPATH}/
 chmod 755 ${ZBXPATH}/_*.sh
 if [ ! -e "${ZBXPATH}/_config.sh" ]; then
- cp -f ${ZBXPATH}/github/conf/_config.sh.sample ${ZBXPATH}/_config.sh
+ cp -f ${ZBXPATH}/github/_config.sh.sample ${ZBXPATH}/_config.sh
 fi
 cp -R ${ZBXPATH}/github/scripts/*.sh ${SCRIPTSPATH}/
 chmod 755 ${SCRIPTSPATH}/*.sh
