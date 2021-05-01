@@ -74,8 +74,8 @@ unset FIB_NAMES; declare -A FIB_NAMES;
 
 ### IPFW traffic
 # FUP renew day of month (per WAN) (leave empty for default)
-#IPFW_TRAFFIC_RENEW[1]=16  # WAN1 - FUP renew 16th day of month
-
+unset IPFW_TRAFFIC_RENEW; declare -A IPFW_TRAFFIC_RENEW;
+#IPFW_TRAFFIC_RENEW[2]=16  # WAN2 - FUP renew 16th day of month
 
 ### Ubiquiti mFI sockets (leave empty for default)
 unset MFI_IP; declare -A MFI_IP;
