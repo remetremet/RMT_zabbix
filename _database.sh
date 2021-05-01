@@ -67,7 +67,7 @@ IFNAMES_NAME="lagg wlan igb em bce bge bnxt bxe cxgb cxgbe fxp gem ixgbe ixl mlx
 for IN in ${IFNAMES_NAME}; do
  for IC in $( seq 0 1 7 ); do
   IFN="${IN}${IC}"
-  IFNAMES[${IFN}]="${IFN}"
+  IFNAMES["${IFN}"]="${IFN}"
  done
 done
 
@@ -123,7 +123,7 @@ SPEEDTEST_SERVER=""
 # Proceed speedtest once a period (in seconds) (default settings can be override in _config.sh)
 unset SPEEDTEST_PERIOD; declare -A SPEEDTEST_PERIOD;
 for WI in $( seq 0 1 19 ); do
- SPEEDTEST_PERIOD[${WI}]="86400"
+ SPEEDTEST_PERIOD["${WI}"]="86400"
 done
 
 
