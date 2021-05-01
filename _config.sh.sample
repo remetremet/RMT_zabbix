@@ -6,57 +6,50 @@ else
  ZBXPATH="${ZBXPATH}"
 fi
 
-
 ###
 ### Basic definition
 ###
 # Automaticly update from Github repo
-AUTOUPDATE="no"
+#AUTOUPDATE="no"
 
 # Optional modules (on/off)
-ACPIBATT_ENABLE="yes"
-FREEBSD_UPDATE_ENABLE="yes"
-HDD_ENABLE="yes"
-IPFW_ENABLE="yes"
-MFI_ENABLE="yes"
-NETWORK_DISCOVERY_ENABLE="yes"
-OPENPORTS_ENABLE="yes"
-PKG_ENABLE="yes"
-RPING_ENABLE="yes"
-SMART_ENABLE="yes"
-SPEEDTEST_ENABLE="yes"
-SSL_ENABLE="yes"
+#ACPIBATT_ENABLE="yes"
+#FREEBSD_UPDATE_ENABLE="yes"
+#HDD_ENABLE="yes"
+#IPFW_ENABLE="yes"
+#MFI_ENABLE="yes"
+#NETWORK_DISCOVERY_ENABLE="yes"
+#OPENPORTS_ENABLE="yes"
+#PKG_ENABLE="yes"
+#RPING_ENABLE="yes"
+#SMART_ENABLE="yes"
+#SPEEDTEST_ENABLE="yes"
+#SSL_ENABLE="yes"
 
 
 ###
 ### IP addresses definitions
 ###
-# Multiple WANs supported in both stacks (IPv4/6)
-#FIBS4="0"
-#FIBS6="0"
-
 # IPv4 addresses of default gateway or a few next hops (leave empty for default - server GW)
-unset GW_ADDRS4; declare -A GW_ADDRS4;
-#GW_ADDRS4["0"]=""
-#GW_ADDRS4["0"]=$( netstat -nr4 | grep "default" | awk ' { print $2; } ' )
+#GW_ADDRS4["0"]=$( /usr/bin/netstat -nr4 | /usr/bin/grep "default" | /usr/bin/awk ' { print $2; } ' )
 
 # IPv6 addresses of default gateway or a few next hops (leave empty for default - server GW)
-unset GW_ADDRS6; declare -A GW_ADDRS6;
-#GW_ADDRS6["0"]=""
-#GW_ADDRS6["0"]=$( netstat -nr6 | grep "default" | awk ' { print $2; } ' )
+#GW_ADDRS6["0"]=$( /usr/bin/netstat -nr6 | /usr/bin/grep "default" | /usr/bin/awk ' { print $2; } ' )
+
+# Multiple WANs supported in both stacks (IPv4/6)
+#FIBS4="0 1 2 3"
+#FIBS6="0 1 2 3"
 
 # IP addresses to ping check (leave empty for default - public DNS and peering ports)
 #ADDRS4=""
 #ADDRS6=""
 
 # Human readable name of network interfaces (leave empty for default)
-unset IFNAMES; declare -A IFNAMES;
 #IFNAMES["lo0"]="Loopback"
 #IFNAMES["bce0"]="ISP"
 #IFNAMES["bce1"]="LAN"
 
 # Human readable name of WANs (leave empty for default)
-unset FIB_NAMES; declare -A FIB_NAMES;
 #FIB_NAMES["0"]="ISP 1"
 #FIB_NAMES["1"]="ISP 2"
 #FIB_NAMES["2"]="ISP 3"
@@ -74,12 +67,9 @@ unset FIB_NAMES; declare -A FIB_NAMES;
 
 ### IPFW traffic
 # FUP renew day of month (per WAN) (leave empty for default)
-unset IPFW_TRAFFIC_RESET; declare -A IPFW_TRAFFIC_RESET;
 #IPFW_TRAFFIC_RESET[2]=16  # WAN2 - FUP renew 16th day of month
 
 ### Ubiquiti mFI sockets (leave empty for default)
-unset MFI_IP; declare -A MFI_IP;
-unset MFI_PORT; declare -A MFI_PORT;
 #MFI_SESSIONID="00000000000000000000000000000000"
 #MFI_USERNAME="username"
 #MFI_PASSWORD="password"
@@ -100,15 +90,6 @@ unset MFI_PORT; declare -A MFI_PORT;
 # Speedtest selected server (leave empty for autoselection)
 #SPEEDTEST_SERVER=""
 # Proceed speedtest once a period (in seconds) (leave empty for default = 86400 seconds)
-unset SPEEDTEST_PERIOD; declare -A SPEEDTEST_PERIOD;
 #SPEEDTEST_PERIOD["0"]=""
 #SPEEDTEST_PERIOD["1"]=""
 #SPEEDTEST_PERIOD["2"]=""
-
-
-###
-### Additional path definitions
-###
-TEMPPATH="${ZBXPATH}/temp"
-SCRIPTSPATH="${ZBXPATH}/scripts"
-DATAPATH="${ZBXPATH}/data"
