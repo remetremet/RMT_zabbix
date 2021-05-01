@@ -5,14 +5,14 @@ if [[ -e "${ZBXPATH}/../_config.sh" ]]; then
 else
  ZBXPATH="${ZBXPATH}"
 fi
-if [[ ! -e "${ZBXPATH}/_config.sh" ]]; then
- exit;
-fi
-. "${ZBXPATH}/_config.sh"
 if [[ ! -e "${ZBXPATH}/_database.sh" ]]; then
  exit;
 fi
 . "${ZBXPATH}/_database.sh"
+if [[ ! -e "${ZBXPATH}/_config.sh" ]]; then
+ exit;
+fi
+. "${ZBXPATH}/_config.sh"
 
 FUNCTION=$1
 case ${FUNCTION} in
@@ -90,6 +90,13 @@ case ${FUNCTION} in
         ipfw_traffic.*)
          INDEX="${FUNCTION:13}"
          case ${INDEX} in
+                 ip)
+                  if [ -e "${DATAPATH}/ipfw_traffic.ip" ]; then
+                   cat "${DATAPATH}/ipfw_traffic.ip"
+                  else
+                   echo "0"
+                  fi
+                 ;;
                  ipv4)
                   if [ -e "${DATAPATH}/ipfw_traffic.ipv4" ]; then
                    cat "${DATAPATH}/ipfw_traffic.ipv4"
