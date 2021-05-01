@@ -1,19 +1,41 @@
 #!/usr/local/bin/bash
+ZBXPATH=$( dirname "$(realpath $0)" )
+if [[ -e "${ZBXPATH}/../_config.sh" ]]; then
+ ZBXPATH=$( dirname "${ZBXPATH}" )
+else
+ ZBXPATH="${ZBXPATH}"
+fi
 
 maxfibs=$(( $( sysctl -n net.fibs ) - 1 ))
 
+###
+### Basic definition
+###
+# Automaticly update from Github repo (default settings can be override in _config.sh)
+AUTOUPDATE="no"
+
+# Optional modules (on/off) (default settings can be override in _config.sh)
+ACPIBATT_ENABLE="yes"
+FREEBSD_UPDATE_ENABLE="yes"
+HDD_ENABLE="yes"
+IPFW_ENABLE="yes"
+MFI_ENABLE="yes"
+NETWORK_DISCOVERY_ENABLE="yes"
+OPENPORTS_ENABLE="yes"
+PKG_ENABLE="yes"
+RPING_ENABLE="yes"
+SMART_ENABLE="yes"
+SPEEDTEST_ENABLE="yes"
+SSL_ENABLE="yes"
+
 ### DEFAULT SETTINGS
 # IPv4 addresses of default gateway or a few next hops (default settings can be override in _config.sh)
-TEST=${GW_ADDRS4["0"]}
-if [ x"${TEST}" == x"" ]; then
- GW_ADDRS4["0"]=$( /usr/bin/netstat -nr4 | /usr/bin/grep "default" | /usr/bin/awk ' { print $2; } ' )
-fi
+unset GW_ADDRS4; declare -A GW_ADDRS4;
+GW_ADDRS4["0"]=$( /usr/bin/netstat -nr4 | /usr/bin/grep "default" | /usr/bin/awk ' { print $2; } ' )
 
 # IPv6 addresses of default gateway or a few next hops (default settings can be override in _config.sh)
-TEST=${GW_ADDRS6["0"]}
-if [ x"${TEST}" == x"" ]; then
- GW_ADDRS6["0"]=$( /usr/bin/netstat -nr6 | /usr/bin/grep "default" | /usr/bin/awk ' { print $2; } ' )
-fi
+unset GW_ADDRS6; declare -A GW_ADDRS6;
+GW_ADDRS6["0"]=$( /usr/bin/netstat -nr6 | /usr/bin/grep "default" | /usr/bin/awk ' { print $2; } ' )
 
 # Multiple WANs supported in both stacks (IPv4/6) (default settings can be override in _config.sh)
 if [[ ! x"${maxfibs}" == x"0" ]]; then
@@ -35,104 +57,73 @@ else
 fi
 
 # IP addresses to ping check (default settings can be override in _config.sh)
-if [ x"${ADDRS4}" == x"" ]; then
- ADDRS4="8.8.8.8 1.1.1.1 9.9.9.9 185.43.135.1 91.210.16.190"
-fi
-if [ x"${ADDRS6}" == x"" ]; then
- ADDRS6="2001:4860:4860::8844 2606:4700:4700::1111 2620:fe::fe 2001:148f:ffff::1 2001:7f8:14::1:1"
-fi
+ADDRS4="8.8.8.8 1.1.1.1 9.9.9.9 185.43.135.1 91.210.16.190"
+ADDRS6="2001:4860:4860::8844 2606:4700:4700::1111 2620:fe::fe 2001:148f:ffff::1 2001:7f8:14::1:1"
 
 # Human readable name of network interfaces (default settings can be override in _config.sh)
-TEST=${IFNAMES["lo0"]}
-if [ x"${TEST}" == x"" ]; then
- IFNAMES["lo0"]="Loopback"
-fi
+unset IFNAMES; declare -A IFNAMES;
+IFNAMES["lo0"]="Loopback"
 IFNAMES_NAME="lagg wlan igb em bce bge bnxt bxe cxgb cxgbe fxp gem ixgbe ixl mlx4en mlx5en ue re ice"
 for IN in ${IFNAMES_NAME}; do
  for IC in $( seq 0 1 7 ); do
   IFN="${IN}${IC}"
-  TEST=${IFNAMES["${IFN}"]}
-  if [ x"${TEST}" == x"" ]; then
-   IFNAMES[${IFN}]="${IFN}"
-  fi
+  IFNAMES[${IFN}]="${IFN}"
  done
 done
 
 # Human readable name of WANs (default settings can be override in _config.sh)
+unset FIB_NAMES; declare -A FIB_NAMES;
 for FI in $( seq 0 1 ${maxfibs} ); do
- TEST=${FIB_NAMES["${FI}"]}
- if [ x"${TEST}" == x"" ]; then
-  ISP=$(( ${FI} + 1 ))
-  FIB_NAMES["${FI}"]="ISP ${ISP}"
- fi
+ ISP=$(( ${FI} + 1 ))
+ FIB_NAMES["${FI}"]="ISP ${ISP}"
 done
 
+
+###
+### Script specific settings
+###
 ### FreeBSD OS updates
 # Check period in seconds (default settings can be override in _config.sh)
-if [ x"${FREEBSD_UPDATE_PERIOD}" == x"" ]; then
- FREEBSD_UPDATE_PERIOD=86400
-fi
-if [ x"${FREEBSD_UPDATE_CONF}" == x"" ]; then
- FREEBSD_UPDATE_CONF="/etc/freebsd-update.conf"
-fi
+FREEBSD_UPDATE_PERIOD=86400
+FREEBSD_UPDATE_CONF="/etc/freebsd-update.conf"
 
 ### FreeBSD packages check
 # Period in seconds (default settings can be override in _config.sh)
-if [ x"${PKG_PERIOD}" == x"" ]; then
- PKG_PERIOD=86400
-fi
+PKG_PERIOD=86400
 
 ### IPFW traffic
 # FUP renew day of month (per WAN) (default settings can be override in _config.sh)
+unset IPFW_TRAFFIC_RESET; declare -A IPFW_TRAFFIC_RESET;
 for WI in $( seq 1 1 20 ); do
- TEST=${IPFW_TRAFFIC_RESET["${WI}"]}
- if [ x"${TEST}" == x"" ]; then
-  IPFW_TRAFFIC_RESET["${WI}"]="1"
- fi
+ IPFW_TRAFFIC_RESET["${WI}"]="1"
 done
 
 ### Ubiquiti mFI sockets (default settings can be override in _config.sh)
-if [ x"${MFI_SESSIONID}" == x"" ]; then
- MFI_SESSIONID="00000000000000000000000000000000"
-fi
-if [ x"${MFI_USERNAME}" == x"" ]; then
- MFI_USERNAME="username"
-fi
-if [ x"${MFI_PASSWORD}" == x"" ]; then
- MFI_PASSWORD="password"
-fi
-if [ x"${MFI_KEYS}" == x"" ]; then
- MFI_KEYS="output voltage power powerfactor current"
-fi
-if [ x"${MFI_IDS}" == x"" ]; then
- MFI_IDS=""
-fi
-TEST=${MFI_IP["1"]}
-if [ x"${TEST}" == x"" ]; then
- MFI_IP["1"]="0.0.0.0"
-fi
-TEST=${MFI_PORT["1"]}
-if [ x"${TEST}" == x"" ]; then
- MFI_PORT["1"]=$( seq 1 1 6)
-fi
+unset MFI_IP; declare -A MFI_IP;
+unset MFI_PORT; declare -A MFI_PORT;
+MFI_SESSIONID="00000000000000000000000000000000"
+MFI_USERNAME="username"
+MFI_PASSWORD="password"
+MFI_KEYS="output voltage power powerfactor current"
+MFI_IDS=""
+MFI_IP["1"]="0.0.0.0"
+MFI_PORT["1"]=$( seq 1 1 6)
 
 ### SMART monitoring of HDD/SSD
 # SMART check period (in seconds) (default settings can be override in _config.sh)
-if [ x"${SMART_PERIOD}" == x"" ]; then
- SMART_PERIOD="3600"
-fi
+SMART_PERIOD="3600"
 # Timeout to wake up sleeing disk to get SMART data (in seconds) (default settings can be override in _config.sh)
-if [ x"${SMART_FORCE_PERIOD}" == x"" ]; then
- SMART_FORCE_PERIOD="86400"
-fi
+SMART_FORCE_PERIOD="86400"
 
 ### Speedtest monitoring
+# Speedtest engine selection (python = p37-speedtest-cli, ookla = official, libre = librespeed)
+SPEEDTEST_RUN="python"
+# Speedtest selected server (leave empty for autoselection)
+SPEEDTEST_SERVER=""
 # Proceed speedtest once a period (in seconds) (default settings can be override in _config.sh)
+unset SPEEDTEST_PERIOD; declare -A SPEEDTEST_PERIOD;
 for WI in $( seq 0 1 19 ); do
- TEST=${SPEEDTEST_PERIOD[${WI}]}
- if [ x"${TEST}" == x"" ]; then
-  SPEEDTEST_PERIOD[${WI}]="86400"
- fi
+ SPEEDTEST_PERIOD[${WI}]="86400"
 done
 
 
@@ -234,3 +225,11 @@ FPING_PROG="/usr/local/sbin/fping"
 NETSTAT_PROG="/usr/bin/netstat"
 AWK_PROG="/usr/bin/awk"
 GREP_PROG="/usr/bin/grep"
+
+
+###
+### Additional path definitions
+###
+TEMPPATH="${ZBXPATH}/temp"
+SCRIPTSPATH="${ZBXPATH}/scripts"
+DATAPATH="${ZBXPATH}/data"
