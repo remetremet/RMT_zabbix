@@ -26,12 +26,6 @@ ZBXFILE="${DATAPATH}/ipfw_traffic"
 TODAY=`date +%d`
 TODAY=$(( ${TODAY} + 0 ))
 COUNT=0
-IPV4=0
-IPV4IN=0
-IPV4OUT=0
-IPV6=0
-IPV6IN=0
-IPV6OUT=0
 IP=0
 OLD=0
 LAST=0
@@ -47,6 +41,18 @@ for i in ${IPFW_WANS_list}; do
  j="IPFW_oif${i}"
  k="IPFW_oip${i}"
  m="IPFW_oip${i}_6"
+ if [[ ! -e "${TEMPFILE}.ip4_in${i}" ]]; then
+  echo "0" > "${TEMPFILE}.ip4_in${i}"
+ fi
+ if [[ ! -e "${TEMPFILE}.ip4_out${i}" ]]; then
+  echo "0" > "${TEMPFILE}.ip4_out${i}"
+ fi
+ if [[ ! -e "${TEMPFILE}.ip6_in${i}" ]]; then
+  echo "0" > "${TEMPFILE}.ip6_in${i}"
+ fi
+ if [[ ! -e "${TEMPFILE}.ip6_out${i}" ]]; then
+  echo "0" > "${TEMPFILE}.ip6_out${i}"
+ fi
  if [ -n "${!j}" ]; then
   TEST=${IPFW_TRAFFIC_RESET["${i}"]}
   if [ ${TODAY} -eq ${TEST} ]; then
