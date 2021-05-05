@@ -59,14 +59,15 @@ fi
 ### Script specific settings
 ###
 ### FreeBSD OS updates check period in seconds (leave empty for default)
-#FREEBSD_UPDATE_PERIOD=""
+#FREEBSD_UPDATE_PERIOD="86400"
 #FREEBSD_UPDATE_CONF=""
 
 ### FreeBSD packages check period in seconds (leave empty for default)
-#PKG_PERIOD=""
+#PKG_PERIOD="86400"
 
 ### IPFW traffic
 # FUP renew day of month (per WAN) (leave empty for default)
+#IPFW_TRAFFIC_RESET[1]=1   # WAN1 - FUP renew 1st day of month
 #IPFW_TRAFFIC_RESET[2]=16  # WAN2 - FUP renew 16th day of month
 
 ### Ubiquiti mFI sockets (leave empty for default)
@@ -90,6 +91,4 @@ fi
 # Speedtest selected server (leave empty for autoselection)
 #SPEEDTEST_SERVER=""
 # Proceed speedtest once a period (in seconds) (leave empty for default = 86400 seconds)
-#SPEEDTEST_PERIOD["0"]=""
-#SPEEDTEST_PERIOD["1"]=""
-#SPEEDTEST_PERIOD["2"]=""
+#SPEEDTEST_PERIOD["0"]="3600"
