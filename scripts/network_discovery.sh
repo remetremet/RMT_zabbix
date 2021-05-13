@@ -40,7 +40,7 @@ for i in ${IPFW_WANS_list}; do
    XYZ="${XYZ}{\"{#IFNAME}\":\"${!j}\",\"{#IFALIAS}\":\"WAN${i}\",\"{#IFDESCR}\":\"${IFNAMES[${!j}]}\",\"{#IFMAC}\":\"${MAC}\"},"
    IFACES[${!j}]="1"
    if [ -n "${!k}" ]; then
-    IP4=`setfib ${!l} curl -s ipv4.icanhazip.com | xargs echo -n`
+    IP4=`setfib ${!l} curl -m 15 -s ipv4.icanhazip.com | xargs echo -n`
     echo "${!k}" > "${ZBXFILE}.${!j}.ipv4"
     echo "${IP4}" > "${ZBXFILE}.${!j}.ipv4ext"
    else
@@ -48,7 +48,7 @@ for i in ${IPFW_WANS_list}; do
     rm -f "${ZBXFILE}.${!j}.ipv4ext"
    fi
    if [ -n "${!m}" ]; then
-    IP6=`setfib ${!n} curl -s ipv6.icanhazip.com | xargs echo -n`
+    IP6=`setfib ${!n} curl -m 15 -s ipv6.icanhazip.com | xargs echo -n`
     echo "${IP6}" > "${ZBXFILE}.${!j}.ipv6"
    else
     rm -f "${ZBXFILE}.${!j}.ipv6"
