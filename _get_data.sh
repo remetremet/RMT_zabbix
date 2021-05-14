@@ -142,6 +142,30 @@ case ${FUNCTION} in
                  *)
                   echo "0"
                  ;;
+                 wan_in.*)
+                  INDEX2="${INDEX:7}"
+                  if [ -e "${DATAPATH}/ipfw_traffic.wan${INDEX2}_in" ]; then
+                   cat "${DATAPATH}/ipfw_traffic.wan${INDEX2}_in"
+                  else
+                   echo "0"
+                  fi
+                 ;;
+                 wan_out.*)
+                  INDEX2="${INDEX:8}"
+                  if [ -e "${DATAPATH}/ipfw_traffic.wan${INDEX2}_out" ]; then
+                   cat "${DATAPATH}/ipfw_traffic.wan${INDEX2}_out"
+                  else
+                   echo "0"
+                  fi
+                 ;;
+                 wan.*)
+                  INDEX2="${INDEX:4}"
+                  if [ -e "${DATAPATH}/ipfw_traffic.wan${INDEX2}" ]; then
+                   cat "${DATAPATH}/ipfw_traffic.wan${INDEX2}"
+                  else
+                   echo "0"
+                  fi
+                 ;;
          esac
         ;;
 # NETWORK_DISCOVERY
