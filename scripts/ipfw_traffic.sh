@@ -23,6 +23,7 @@ fi
 
 TEMPFILE="${TEMPPATH}/ipfw_traffic"
 ZBXFILE="${DATAPATH}/ipfw_traffic"
+DISCOVERYFILE="${DATAPATH}/ipfw_discovery"
 TODAY=`date +%d`
 TODAY=$(( ${TODAY} + 0 ))
 COUNT=0
@@ -55,6 +56,14 @@ for i in ${IPFW_WANS_list}; do
  fi
  if [ -n "${!j}" ]; then
   TEST=${IPFW_TRAFFIC_RESET["${i}"]}
+  XYZ="${XYZ}{\"{#WANID}\":\"${i}\",\"{#WANNAME}\":\"WAN${i}\",\"{#WANIF}\":\"${!j}\",\"{#WANRESET}\":\"${TEST}\""
+  if [ -n "${!k}" ]; then
+   XYZ="${XYZ},\"{#WANIP4}\":\"${!k}\""
+  fi
+  if [ -n "${!m}" ]; then
+   XYZ="${XYZ},\"{#WANIP6}\":\"${!m}\""
+  fi
+  XYZ="${XYZ}},"
   if [ ${TODAY} -eq ${TEST} ]; then
    if [ ! -e "${TEMPFILE}.reset.${i}" ]; then
     echo "0" > "${TEMPFILE}.ip4_in${i}"
@@ -150,3 +159,6 @@ echo "${IPV6}" > ${ZBXFILE}.ipv6
 IP=$(( ${IPV6} + ${IPV4} ))
 echo "${IP}" > ${ZBXFILE}.ip
 chmod 666 ${ZBXFILE}.ip*
+XYZ="[${XYZ::(-1)}]"
+echo "${XYZ}" > "${DISCOVERYFILE}"
+chmod 666 "${DISCOVERYFILE}"

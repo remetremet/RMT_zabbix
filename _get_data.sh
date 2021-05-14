@@ -87,6 +87,13 @@ case ${FUNCTION} in
          fi
         ;;
 # IPFW_TRAFFIC
+        discovery_ipfw)
+         if [ -e "${DATAPATH}/ipfw_discovery" ]; then
+          cat "${DATAPATH}/ipfw_discovery"
+         else
+          echo ""
+         fi
+        ;;
         ipfw_traffic.*)
          INDEX="${FUNCTION:13}"
          case ${INDEX} in
