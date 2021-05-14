@@ -146,9 +146,6 @@ case ${FUNCTION} in
                    echo "0"
                   fi
                  ;;
-                 *)
-                  echo "0"
-                 ;;
                  wan_in.*)
                   INDEX2="${INDEX:7}"
                   if [ -e "${DATAPATH}/ipfw_traffic.wan${INDEX2}_in" ]; then
@@ -172,6 +169,9 @@ case ${FUNCTION} in
                   else
                    echo "0"
                   fi
+                 ;;
+                 *)
+                  echo "0"
                  ;;
          esac
         ;;
