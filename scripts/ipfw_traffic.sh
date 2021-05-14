@@ -115,6 +115,20 @@ for i in ${IPFW_WANS_list}; do
     done
    fi
   done
+  IPV4IN=`cat "${TEMPFILE}.ip4_in${i}"`
+  IPV4IN=${IPV4IN:-0}
+  IPV4OUT=`cat "${TEMPFILE}.ip4_out${i}"`
+  IPV4OUT=${IPV4OUT:-0}
+  IPV6IN=`cat "${TEMPFILE}.ip6_in${i}"`
+  IPV6IN=${IPV6IN:-0}
+  IPV6OUT=`cat "${TEMPFILE}.ip6_out${i}"`
+  IPV6OUT=${IPV6OUT:-0}
+  IPV4=$(( ${IPV4OUT} + ${IPV4IN} ))
+  echo "${IPV4}" > "${ZBXFILE}.wan${i}_in"
+  IPV6=$(( ${IPV6OUT} + ${IPV6IN} ))
+  echo "${IPV6}" > "${ZBXFILE}.wan${i}_out"
+  IP=$(( ${IPV6} + ${IPV4} ))
+  echo "${IP}" > "${ZBXFILE}.wan${i}"
  fi
 done
 IPV4IN=`cat ${TEMPFILE}.ip4_in* | /usr/bin/awk '{s+=$1} END {print s}'`
