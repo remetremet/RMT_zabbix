@@ -30,7 +30,9 @@ for ID in ${MFI_IDS}; do
   curl -s -b "AIROS_SESSIONID=${MFI_SESSIONID}" ${IP}/sensors/${PORT} | python -mjson.tool | grep ":" | grep -v "status" | grep -v "sensors" > "${TEMPFILE}_${ID}_${PORT}"
   if [[ -e "${TEMPFILE}_${ID}_${PORT}" ]]; then
    for KEY in ${MFI_KEYS}; do
-    cat "${TEMPFILE}_${ID}_${PORT}" | grep "\"${KEY}\"" | cut -d ':' -f 2 | sed 's/.$//' | sed 's/^ *//' > "${ZBXFILE}_${ID}_${PORT}_${KEY}"
+    RES=`cat "${TEMPFILE}_${ID}_${PORT}" | grep "\"${KEY}\"" | cut -d ':' -f 2 | sed 's/.$//' | sed 's/^ *//'`
+    RES=${RES:-0}
+    echo "${RES}" > "${ZBXFILE}_${ID}_${PORT}_${KEY}"
    done
    XYZ="${XYZ}{\"{#MFIID}\":\"${ID}_${PORT}\",\"{#MFIDEVICE}\":\"${ID}\",\"{#MFIIP}\":\"${IP}\",\"{#MFIPORT}\":\"${PORT}\"},"
    /bin/rm -f "${TEMPFILE}_${ID}_${PORT}" 
