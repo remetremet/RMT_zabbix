@@ -175,6 +175,62 @@ case ${FUNCTION} in
                  ;;
          esac
         ;;
+# MFI_DISCOVERY
+        discovery_mfi)
+         if [ -e "${DATAPATH}/mfi_discovery" ]; then
+          cat "${DATAPATH}/mfi_discovery"
+         else
+          echo ""
+         fi
+        ;;
+        mfi_current.*)
+         INDEX="${FUNCTION:12}"
+         if [ -e "${DATAPATH}/mfi_${INDEX}_current" ]; then
+          cat "${DATAPATH}/mfi_${INDEX}_current"
+         else
+          echo "0"
+         fi
+        ;;
+        mfi_voltage.*)
+         INDEX="${FUNCTION:12}"
+         if [ -e "${DATAPATH}/mfi_${INDEX}_voltage" ]; then
+          cat "${DATAPATH}/mfi_${INDEX}_voltage"
+         else
+          echo "0"
+         fi
+        ;;
+        mfi_output.*)
+         INDEX="${FUNCTION:11}"
+         if [ -e "${DATAPATH}/mfi_${INDEX}_output" ]; then
+          cat "${DATAPATH}/mfi_${INDEX}_output"
+         else
+          echo "0"
+         fi
+        ;;
+        mfi_power.*)
+         INDEX="${FUNCTION:10}"
+         if [ -e "${DATAPATH}/mfi_${INDEX}_power" ]; then
+          cat "${DATAPATH}/mfi_${INDEX}_power"
+         else
+          echo "0"
+         fi
+        ;;
+        mfi_powerfactor.*)
+         INDEX="${FUNCTION:16}"
+         if [ -e "${DATAPATH}/mfi_${INDEX}_powerfactor" ]; then
+          cat "${DATAPATH}/mfi_${INDEX}_powerfactor"
+         else
+          echo "0"
+         fi
+        ;;
+        mfi_current.*)
+         INDEX="${FUNCTION:12}"
+         if [ -e "${DATAPATH}/mfi_${INDEX}_current" ]; then
+          cat "${DATAPATH}/mfi_${INDEX}_current"
+         else
+          echo "0"
+         fi
+        ;;
 # NETWORK_DISCOVERY
         discovery_network)
          if [ -e "${DATAPATH}/network_discovery" ]; then
