@@ -31,7 +31,7 @@ for ID in ${MFI_IDS}; do
   for KEY in ${MFI_KEYS}; do
    cat "${TEMPFILE}_${ID}_${PORT}" | grep "\"${KEY}\"" | cut -d ':' -f 2 | sed 's/.$//' | sed 's/^ *//' > "${ZBXFILE}_${ID}_${PORT}_${KEY}"
   done
-  XYZ="${XYZ}{\"{#MFIID}\":\"${ID}_${PORT}\",\"{#MFIIP}\":\"${IP}\",\"{#MFIPORT}\":\"${PORT}\"},"
+  XYZ="${XYZ}{\"{#MFIID}\":\"${ID}_${PORT}\",\"{#MFIDEVICE}\":\"${ID}\",\"{#MFIIP}\":\"${IP}\",\"{#MFIPORT}\":\"${PORT}\"},"
   /bin/rm -f "${TEMPFILE}_${ID}_${PORT}" 
  done
 done
