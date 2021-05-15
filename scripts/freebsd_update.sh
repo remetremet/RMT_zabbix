@@ -67,6 +67,8 @@ check_update(){
  rel="$3"
  patchlevel="$4"
  eol="$6"
+ now=`date "+%s"`
+ eol=$(( ${eol} - ${now} ))
  running=`uname -r`
  echo "${running}" > "${ZBXFILE}.running"
  echo "${rel}-p${patchlevel}" > "${ZBXFILE}.latest"
