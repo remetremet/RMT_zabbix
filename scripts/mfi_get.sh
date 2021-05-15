@@ -21,6 +21,7 @@ fi
 TEMPFILE="${TEMPPATH}/mfi"
 ZBXFILE="${DATAPATH}/mfi"
 
+XYZ2=""
 for ID in ${MFI_IDS}; do
  IP="${MFI_IP[$ID]}"
  PORTS="${MFI_PORT[$ID]}"
@@ -36,4 +37,7 @@ for ID in ${MFI_IDS}; do
  done
  XYZ="[${XYZ::(-1)}]"
  echo "${XYZ}" > "${ZBXFILE}_${ID}_discovery"
+ XYZ2="${XYZ2}{\"{#MFIID}\":\"${ID}\",\"{#MFIIP}\":\"${IP}\"},"
 done
+XYZ2="[${XYZ2::(-1)}]"
+echo "${XYZ2}" > "${ZBXFILE}_discovery"
