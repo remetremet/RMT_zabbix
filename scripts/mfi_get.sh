@@ -21,23 +21,19 @@ fi
 TEMPFILE="${TEMPPATH}/mfi"
 ZBXFILE="${DATAPATH}/mfi"
 
-XYZ2=""
+XYZ=""
 for ID in ${MFI_IDS}; do
  IP="${MFI_IP[$ID]}"
  PORTS="${MFI_PORT[$ID]}"
- XYZ=""
  curl -s -X POST -d "username=${MFI_USERNAME}&password=${MFI_PASSWORD}" -b "AIROS_SESSIONID=${MFI_SESSIONID}" ${IP}/login.cgi
  for PORT in ${PORTS}; do
   curl -s -b "AIROS_SESSIONID=${MFI_SESSIONID}" ${IP}/sensors/${PORT} | python -mjson.tool | grep ":" | grep -v "status" | grep -v "sensors" > "${TEMPFILE}_${ID}_${PORT}"
   for KEY in ${MFI_KEYS}; do
    cat "${TEMPFILE}_${ID}_${PORT}" | grep "\"${KEY}\"" | cut -d ':' -f 2 | sed 's/.$//' | sed 's/^ *//' > "${ZBXFILE}_${ID}_${PORT}_${KEY}"
   done
-  XYZ="${XYZ}{\"{#MFIPORT}\":\"${PORT}\"},"
+  XYZ="${XYZ}{\"{#MFIID}\":\"${ID}_${PORT}\",\"{#MFIIP}\":\"${IP}\",\"{#MFIPORT}\":\"${PORT}\"},"
   /bin/rm -f "${TEMPFILE}_${ID}_${PORT}" 
  done
- XYZ="[${XYZ::(-1)}]"
- echo "${XYZ}" > "${ZBXFILE}_${ID}_discovery"
- XYZ2="${XYZ2}{\"{#MFIID}\":\"${ID}\",\"{#MFIIP}\":\"${IP}\"},"
 done
-XYZ2="[${XYZ2::(-1)}]"
-echo "${XYZ2}" > "${ZBXFILE}_discovery"
+XYZ="[${XYZ::(-1)}]"
+echo "${XYZ}" > "${ZBXFILE}_discovery"
