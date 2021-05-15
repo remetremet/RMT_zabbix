@@ -223,14 +223,6 @@ case ${FUNCTION} in
           echo "0"
          fi
         ;;
-        mfi_current.*)
-         INDEX="${FUNCTION:12}"
-         if [ -e "${DATAPATH}/mfi_${INDEX}_current" ]; then
-          cat "${DATAPATH}/mfi_${INDEX}_current"
-         else
-          echo "0"
-         fi
-        ;;
 # NETWORK_DISCOVERY
         discovery_network)
          if [ -e "${DATAPATH}/network_discovery" ]; then
