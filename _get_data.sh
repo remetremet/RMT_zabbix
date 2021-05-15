@@ -223,6 +223,13 @@ case ${FUNCTION} in
           echo "0"
          fi
         ;;
+        openports.hash)
+         if [ -e "${DATAPATH}/openports.hash" ]; then
+          cat "${DATAPATH}/openports.hash"
+         else
+          echo "0"
+         fi
+        ;;
 # PKG
         pkg)
          if [ -e "${DATAPATH}/pkg" ]; then
