@@ -5,7 +5,7 @@ List of functions, scripts and templates to include:
 
 | Name | Description | Parts | Status |
 |---|---|:---:|--:|
-**RabbitMQ**|broker monitoring|script+template|_future_
+**RabbitMQ**|broker monitoring|script+template|_far future_
 **Sendmail**|queue and messages in/out|script+template|waiting
 **IPFW blacklist**|item count, denied packets|script+template|waiting
 **Spam stats**|Spamassassin and Clamd monitoring|script+template|waiting
