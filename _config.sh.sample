@@ -23,6 +23,7 @@ fi
 #PKG_ENABLE="yes"
 #RPING_ENABLE="yes"
 #SMART_ENABLE="yes"
+#SPAMD_ENABLE="no"
 #SPEEDTEST_ENABLE="yes"
 #SSL_ENABLE="yes"
 
@@ -85,10 +86,13 @@ fi
 # Timeout to wake up sleeing disk to get SMART data (leave empty for default)
 #SMART_FORCE_PERIOD="86400"
 
+### spamd running instances check period in seconds (leave empty for default)
+#SPAMD_PERIOD="840"
+
 ### Speedtest settings
 # Speedtest engine selection (python = p37-speedtest-cli, ookla = official, libre = librespeed)
 #SPEEDTEST_RUN="ookla"
-# Speedtest selected server (leave empty for autoselection)
+# Speedtest selected server (leave empty for autoselection !broken in python version!)
 #SPEEDTEST_SERVER=""
 # Proceed speedtest once a period (in seconds) (leave empty for default = 86400 seconds)
 #SPEEDTEST_PERIOD["0"]="3600"
