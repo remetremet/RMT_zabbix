@@ -47,7 +47,7 @@ if [[ "${ftime}" -gt "${SPAMD_PERIOD}" ]]; then
  echo -n > "${ZBXFILE}"
 
 # Get the number of running spamd instances
- ps ax | grep "spamd" | grep -v "grep" | wc -l > "${ZBXFILE}"
+ ps ax | grep "spamd" | grep -v "grep" | wc -l | sed 's/ //g' > "${ZBXFILE}"
 
 fi
 
