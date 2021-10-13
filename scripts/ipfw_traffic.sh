@@ -124,14 +124,30 @@ for i in ${IPFW_WANS_list}; do
     done
    fi
   done
-  IPV4IN=`cat "${TEMPFILE}.ip4_in${i}"`
-  IPV4IN=${IPV4IN:-0}
-  IPV4OUT=`cat "${TEMPFILE}.ip4_out${i}"`
-  IPV4OUT=${IPV4OUT:-0}
-  IPV6IN=`cat "${TEMPFILE}.ip6_in${i}"`
-  IPV6IN=${IPV6IN:-0}
-  IPV6OUT=`cat "${TEMPFILE}.ip6_out${i}"`
-  IPV6OUT=${IPV6OUT:-0}
+  if [[ -e "${TEMPFILE}.ip4_in${i}" ]]; then
+   IPV4IN=`cat "${TEMPFILE}.ip4_in${i}"`
+   IPV4IN=${IPV4IN:-0}
+  else
+   IPV4IN=0
+  fi
+  if [[ -e "${TEMPFILE}.ip4_out${i}" ]]; then
+   IPV4OUT=`cat "${TEMPFILE}.ip4_out${i}"`
+   IPV4OUT=${IPV4OUT:-0}
+  else
+   IPV4OUT=0
+  fi
+  if [[ -e "${TEMPFILE}.ip6_in${i}" ]]; then
+   IPV6IN=`cat "${TEMPFILE}.ip6_in${i}"`
+   IPV6IN=${IPV6IN:-0}
+  else
+   IPV6IN=0
+  fi
+  if [[ -e "${TEMPFILE}.ip6_out${i}" ]]; then
+   IPV6OUT=`cat "${TEMPFILE}.ip6_out${i}"`
+   IPV6OUT=${IPV6OUT:-0}
+  else
+   IPV6OUT=0
+  fi
   IPV4=$(( ${IPV4IN} + ${IPV6IN} ))
   echo "${IPV4}" > "${ZBXFILE}.wan${i}_in"
   IPV6=$(( ${IPV4OUT} + ${IPV6OUT} ))
