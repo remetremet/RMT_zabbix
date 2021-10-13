@@ -42,6 +42,9 @@ fi
 if [ -e "${SCRIPTSPATH}/speedtest.sh" ]; then
  ${SCRIPTSPATH}/speedtest.sh > /dev/null 2>&1 &
 fi
+if [ -e "${SCRIPTSPATH}/spamd.sh" ]; then
+ ${SCRIPTSPATH}/spamd.sh &
+fi
 if [ -e "${SCRIPTSPATH}/smart.sh" ]; then
  ${SCRIPTSPATH}/smart.sh &
 fi

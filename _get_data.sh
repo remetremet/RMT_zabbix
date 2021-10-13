@@ -326,6 +326,14 @@ case ${FUNCTION} in
           echo "0"
          fi
         ;;
+# SPAMD
+        spamd)
+         if [ -e "${DATAPATH}/spamd" ]; then
+          cat "${DATAPATH}/spamd"
+         else
+          echo "0"
+         fi
+        ;;
 # SPEEDTEST
         discovery_speedtest)
          if [ -e "${DATAPATH}/speedtest_discovery" ]; then
