@@ -23,12 +23,7 @@ See [templates/README.md](templates/README.md)
 
 
 ## Setup
-To download and install use
-```
-fetch https://raw.githubusercontent.com/remetremet/RMT_zabbix/master/_setup.sh
-chmod 755 _setup.sh
-./_setup.sh
-```
+To download and install use `bash -c "$(curl -fsSL https://raw.githubusercontent.com/remetremet/RMT_zabbix/master/_setup.sh)"`
 
 
 ## Requirements
