@@ -22,7 +22,7 @@ Zabbix templates and configuration plugin.
 See [templates/README.md](templates/README.md)
 
 
-## Setup
+## Install
 To download and install use `bash -c "$(curl -fsSL https://raw.githubusercontent.com/remetremet/RMT_zabbix/master/_setup.sh)"`
 
 
