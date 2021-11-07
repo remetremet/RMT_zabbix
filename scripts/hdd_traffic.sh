@@ -14,7 +14,7 @@ if [[ ! -e "${ZBXPATH}/_config.sh" ]]; then
 fi
 . ${ZBXPATH}/_config.sh
 
-if [ x"${HDD_TRAFFIC_ENABLE}" == x"no" ]; then
+if [ x"${HDD_ENABLE}" == x"no" ]; then
  exit;
 fi
 
