@@ -48,32 +48,40 @@ DISCOVERY6=""
 DISCOVERY=""
 
 for A in ${ADDRS4}; do
- echo ${A} >> "${TEMPFILE}4"
- DISCOVERY4="${DISCOVERY4}{\"{#PINGADDR}\":\"${A}\",\"{#PINGFAMILY}\":\"4\",\"{#PINGNAME}\":\"${ADDR_NAMES[$A]}\"%FIB%},"
+ if [ x"${A}" != x"" ]; then
+  echo ${A} >> "${TEMPFILE}4"
+  DISCOVERY4="${DISCOVERY4}{\"{#PINGADDR}\":\"${A}\",\"{#PINGFAMILY}\":\"4\",\"{#PINGNAME}\":\"${ADDR_NAMES[$A]}\"%FIB%},"
+ fi
 done
 for A in ${ADDRS6}; do
- echo ${A} >> "${TEMPFILE}6"
- DISCOVERY6="${DISCOVERY6}{\"{#PINGADDR}\":\"${A}\",\"{#PINGFAMILY}\":\"6\",\"{#PINGNAME}\":\"${ADDR_NAMES[$A]}\"%FIB%},"
+ if [ x"${A}" != x"" ]; then
+  echo ${A} >> "${TEMPFILE}6"
+  DISCOVERY6="${DISCOVERY6}{\"{#PINGADDR}\":\"${A}\",\"{#PINGFAMILY}\":\"6\",\"{#PINGNAME}\":\"${ADDR_NAMES[$A]}\"%FIB%},"
+ fi
 done
 
 for FIB in ${FIBS4}; do
  /bin/rm -f "${TEMPDIR}/rping_done${FIB}_4" >> /dev/null 2>&1
  D=`echo "${DISCOVERY4}" | sed "s/%FIB%/,\"{#PINGFIB}\":\"${FIB}\",\"{#PINGFIBNAME}\":\"${FIB_NAMES[$FIB]}\"/g"`
  DISCOVERY="${DISCOVERY}${D}"
- A=${GW_ADDRS4[$FIB]}
- DISCOVERY="${DISCOVERY}{\"{#PINGADDR}\":\"${A}\",\"{#PINGFAMILY}\":\"4\",\"{#PINGNAME}\":\"${ADDR_NAMES[$A]}\",\"{#PINGFIB}\":\"${FIB}\",\"{#PINGFIBNAME}\":\"${FIB_NAMES[$FIB]}\"},"
  cat "${TEMPFILE}4" > "${TEMPFILE}4${FIB}"
- echo "${A}" >> "${TEMPFILE}4${FIB}"
+ A=${GW_ADDRS4[$FIB]}
+ if [ x"${A}" != x"" ]; then
+  DISCOVERY="${DISCOVERY}{\"{#PINGADDR}\":\"${A}\",\"{#PINGFAMILY}\":\"4\",\"{#PINGNAME}\":\"${ADDR_NAMES[$A]}\",\"{#PINGFIB}\":\"${FIB}\",\"{#PINGFIBNAME}\":\"${FIB_NAMES[$FIB]}\"},"
+  echo "${A}" >> "${TEMPFILE}4${FIB}"
+ fi
  /usr/sbin/setfib ${FIB} fping -q4 -t 500 -p 100 -c 100 -f "${TEMPFILE}4${FIB}" 2>&1 | sed 's/\// /g' | awk '{T=$15; if(T=="")T=0; print $1" "T" "$9; }' | sed 's/%//' | sed 's/,//' > "${RESFILE}${FIB}_4" && echo "1" > "${TEMPDIR}/rping_done${FIB}_4" &
 done
 for FIB in ${FIBS6}; do
  /bin/rm -f "${TEMPDIR}/rping_done${FIB}_6" >> /dev/null 2>&1
  D=`echo "${DISCOVERY6}" | sed "s/%FIB%/,\"{#PINGFIB}\":\"${FIB}\",\"{#PINGFIBNAME}\":\"${FIB_NAMES[$FIB]}\"/g"`
  DISCOVERY="${DISCOVERY}${D}"
- A=${GW_ADDRS6[$FIB]}
  cat "${TEMPFILE}6" > "${TEMPFILE}6${FIB}"
- echo "${A}" >> "${TEMPFILE}6${FIB}"
- DISCOVERY="${DISCOVERY}{\"{#PINGADDR}\":\"${A}\",\"{#PINGFAMILY}\":\"6\",\"{#PINGNAME}\":\"${ADDR_NAMES[$A]}\",\"{#PINGFIB}\":\"${FIB}\",\"{#PINGFIBNAME}\":\"${FIB_NAMES[$FIB]}\"},"
+ A=${GW_ADDRS6[$FIB]}
+ if [ x"${A}" != x"" ]; then
+  DISCOVERY="${DISCOVERY}{\"{#PINGADDR}\":\"${A}\",\"{#PINGFAMILY}\":\"6\",\"{#PINGNAME}\":\"${ADDR_NAMES[$A]}\",\"{#PINGFIB}\":\"${FIB}\",\"{#PINGFIBNAME}\":\"${FIB_NAMES[$FIB]}\"},"
+  echo "${A}" >> "${TEMPFILE}6${FIB}"
+ fi
  /usr/sbin/setfib ${FIB} fping -q6 -t 500 -p 100 -c 100 -f "${TEMPFILE}6${FIB}" 2>&1 | sed 's/\// /g' | awk '{T=$15; if(T=="")T=0; print $1" "T" "$9; }' | sed 's/%//' | sed 's/,//' > "${RESFILE}${FIB}_6" && echo "1" > "${TEMPDIR}/rping_done${FIB}_6" &
 done
 DISCOVERY="[${DISCOVERY::(-1)}]"
@@ -92,8 +100,10 @@ done
 /bin/rm -f "${TEMPFILE}6" >> /dev/null 2>&1
 for FIB in ${FIBS4}; do
  for A in ${ADDRS4}; do
-  cat "${RESFILE}${FIB}_4" | grep "${A}" | awk '{ print $3; }' > "${RPLFILE}_${FIB}_${A}"
-  cat "${RESFILE}${FIB}_4" | grep "${A}" | awk '{ print $2; }' > "${RPINGFILE}_${FIB}_${A}"
+  if [ x"${A}" != x"" ]; then
+   cat "${RESFILE}${FIB}_4" | grep "${A}" | awk '{ print $3; }' > "${RPLFILE}_${FIB}_${A}"
+   cat "${RESFILE}${FIB}_4" | grep "${A}" | awk '{ print $2; }' > "${RPINGFILE}_${FIB}_${A}"
+  fi
  done
  cat "${RESFILE}${FIB}_4" | grep "${GW_ADDRS4[$FIB]}" | awk '{ print $3; }' > "${RPLFILE}_${FIB}_${GW_ADDRS4[$FIB]}"
  cat "${RESFILE}${FIB}_4" | grep "${GW_ADDRS4[$FIB]}" | awk '{ print $2; }' > "${RPINGFILE}_${FIB}_${GW_ADDRS4[$FIB]}"
@@ -103,8 +113,10 @@ for FIB in ${FIBS4}; do
 done
 for FIB in ${FIBS6}; do
  for A in ${ADDRS6}; do
-  cat "${RESFILE}${FIB}_6" | grep "${A}" | awk '{ print $3; }' > "${RPLFILE}_${FIB}_${A}"
-  cat "${RESFILE}${FIB}_6" | grep "${A}" | awk '{ print $2; }' > "${RPINGFILE}_${FIB}_${A}"
+  if [ x"${A}" != x"" ]; then
+   cat "${RESFILE}${FIB}_6" | grep "${A}" | awk '{ print $3; }' > "${RPLFILE}_${FIB}_${A}"
+   cat "${RESFILE}${FIB}_6" | grep "${A}" | awk '{ print $2; }' > "${RPINGFILE}_${FIB}_${A}"
+  fi
  done
  cat "${RESFILE}${FIB}_6" | grep "${GW_ADDRS6[$FIB]}" | awk '{ print $3; }' > "${RPLFILE}_${FIB}_${GW_ADDRS6[$FIB]}"
  cat "${RESFILE}${FIB}_6" | grep "${GW_ADDRS6[$FIB]}" | awk '{ print $2; }' > "${RPINGFILE}_${FIB}_${GW_ADDRS6[$FIB]}"
