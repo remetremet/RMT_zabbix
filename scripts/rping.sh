@@ -105,9 +105,12 @@ for FIB in ${FIBS4}; do
    cat "${RESFILE}${FIB}_4" | grep "${A}" | awk '{ print $2; }' > "${RPINGFILE}_${FIB}_${A}"
   fi
  done
- cat "${RESFILE}${FIB}_4" | grep "${GW_ADDRS4[$FIB]}" | awk '{ print $3; }' > "${RPLFILE}_${FIB}_${GW_ADDRS4[$FIB]}"
- cat "${RESFILE}${FIB}_4" | grep "${GW_ADDRS4[$FIB]}" | awk '{ print $2; }' > "${RPINGFILE}_${FIB}_${GW_ADDRS4[$FIB]}"
- /bin/rm -f "${RESFILE}${FIB}_4" >> /dev/null 2>&1
+ A=${GW_ADDRS4[$FIB]}
+ if [ x"${A}" != x"" ]; then
+  cat "${RESFILE}${FIB}_4" | grep "${A}" | awk '{ print $3; }' > "${RPLFILE}_${FIB}_${A}"
+  cat "${RESFILE}${FIB}_4" | grep "${A}" | awk '{ print $2; }' > "${RPINGFILE}_${FIB}_${A}"
+ fi
+/bin/rm -f "${RESFILE}${FIB}_4" >> /dev/null 2>&1
  /bin/rm -f "${TEMPDIR}/rping_done${FIB}_4" >> /dev/null 2>&1
  /bin/rm -f "${TEMPFILE}4${FIB}" >> /dev/null 2>&1
 done
@@ -118,8 +121,11 @@ for FIB in ${FIBS6}; do
    cat "${RESFILE}${FIB}_6" | grep "${A}" | awk '{ print $2; }' > "${RPINGFILE}_${FIB}_${A}"
   fi
  done
- cat "${RESFILE}${FIB}_6" | grep "${GW_ADDRS6[$FIB]}" | awk '{ print $3; }' > "${RPLFILE}_${FIB}_${GW_ADDRS6[$FIB]}"
- cat "${RESFILE}${FIB}_6" | grep "${GW_ADDRS6[$FIB]}" | awk '{ print $2; }' > "${RPINGFILE}_${FIB}_${GW_ADDRS6[$FIB]}"
+ A=${GW_ADDRS6[$FIB]}
+ if [ x"${A}" != x"" ]; then
+  cat "${RESFILE}${FIB}_6" | grep "${A}" | awk '{ print $3; }' > "${RPLFILE}_${FIB}_${A}"
+  cat "${RESFILE}${FIB}_6" | grep "${A}" | awk '{ print $2; }' > "${RPINGFILE}_${FIB}_${A}"
+ fi
  /bin/rm -f "${RESFILE}${FIB}_6" >> /dev/null 2>&1
  /bin/rm -f "${TEMPDIR}/rping_done${FIB}_6" >> /dev/null 2>&1
  /bin/rm -f "${TEMPFILE}6${FIB}" >> /dev/null 2>&1
